@@ -26,7 +26,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/staking"
 )
 
-// gaiad custom flags
+// hsdd custom flags
 const flagInvCheckPeriod = "inv-check-period"
 
 var invCheckPeriod uint
