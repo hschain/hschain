@@ -21,5 +21,5 @@ hsd gentx --name validator
 # Add the generated bonding transaction to the genesis file
 hsd collect-gentxs
 
-# Now its safe to start `gaiad`
+# Now its safe to start `hsd`
 hsd start
