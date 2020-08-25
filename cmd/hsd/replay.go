@@ -17,7 +17,7 @@ import (
 	tmstore "github.com/tendermint/tendermint/store"
 	tm "github.com/tendermint/tendermint/types"
 
-	"github.com/hschain/hschain/app"
+	"hschain/app"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/server"
