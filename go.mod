@@ -1,9 +1,10 @@
-module github.com/hschain/hschain
+module hschain
 
 go 1.14
 
 require (
 	github.com/cosmos/cosmos-sdk v0.37.13
+	github.com/gorilla/mux v1.7.0
 	github.com/otiai10/copy v1.2.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.6.3
