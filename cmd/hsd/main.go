@@ -15,15 +15,15 @@ import (
 
 	"hschain/app"
 
-	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/cosmos/cosmos-sdk/store"
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/cosmos/cosmos-sdk/x/genaccounts"
-	genaccscli "github.com/cosmos/cosmos-sdk/x/genaccounts/client/cli"
-	genutilcli "github.com/cosmos/cosmos-sdk/x/genutil/client/cli"
-	"github.com/cosmos/cosmos-sdk/x/staking"
+	"hschain/baseapp"
+	"hschain/client"
+	"hschain/server"
+	"hschain/store"
+	sdk "hschain/types"
+	"hschain/x/genaccounts"
+	genaccscli "hschain/x/genaccounts/client/cli"
+	genutilcli "hschain/x/genutil/client/cli"
+	"hschain/x/staking"
 )
 
 // hsdd custom flags

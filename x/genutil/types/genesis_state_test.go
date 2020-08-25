@@ -1,0 +1,61 @@
+package types
+
+import (
+	"encoding/json"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	"github.com/tendermint/tendermint/crypto/ed25519"
+
+	sdk "hschain/types"
+	authtypes "hschain/x/auth/types"
+	stakingtypes "hschain/x/staking/types"
+)
+
+var (
+	pk1 = ed25519.GenPrivKey().PubKey()
+	pk2 = ed25519.GenPrivKey().PubKey()
+)
+
+func TestNetGenesisState(t *testing.T) {
+	gen := NewGenesisState(nil)
+	assert.NotNil(t, gen.GenTxs) // https://hschain/issues/5086
+
+	gen = NewGenesisState(
+		[]json.RawMessage{
+			[]byte(`{"foo":"bar"}`),
+		},
+	)
+	assert.Equal(t, string(gen.GenTxs[0]), `{"foo":"bar"}`)
+}
+
+func TestValidateGenesisMultipleMessages(t *testing.T) {
+
+	desc := stakingtypes.NewDescription("testname", "", "", "")
+	comm := stakingtypes.CommissionRates{}
+
+	msg1 := stakingtypes.NewMsgCreateValidator(sdk.ValAddress(pk1.Address()), pk1,
+		sdk.NewInt64Coin(sdk.DefaultBondDenom, 50), desc, comm, sdk.OneInt())
+
+	msg2 := stakingtypes.NewMsgCreateValidator(sdk.ValAddress(pk2.Address()), pk2,
+		sdk.NewInt64Coin(sdk.DefaultBondDenom, 50), desc, comm, sdk.OneInt())
+
+	genTxs := authtypes.NewStdTx([]sdk.Msg{msg1, msg2}, authtypes.StdFee{}, nil, "")
+	genesisState := NewGenesisStateFromStdTx([]authtypes.StdTx{genTxs})
+
+	err := ValidateGenesis(genesisState)
+	require.Error(t, err)
+}
+
+func TestValidateGenesisBadMessage(t *testing.T) {
+	desc := stakingtypes.NewDescription("testname", "", "", "")
+
+	msg1 := stakingtypes.NewMsgEditValidator(sdk.ValAddress(pk1.Address()), desc, nil, nil)
+
+	genTxs := authtypes.NewStdTx([]sdk.Msg{msg1}, authtypes.StdFee{}, nil, "")
+	genesisState := NewGenesisStateFromStdTx([]authtypes.StdTx{genTxs})
+
+	err := ValidateGenesis(genesisState)
+	require.Error(t, err)
+}
