@@ -19,10 +19,10 @@ import (
 
 	"hschain/app"
 
-	"github.com/cosmos/cosmos-sdk/baseapp"
-	"github.com/cosmos/cosmos-sdk/server"
-	"github.com/cosmos/cosmos-sdk/store"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"hschain/baseapp"
+	"hschain/server"
+	"hschain/store"
+	sdk "hschain/types"
 )
 
 func replayCmd() *cobra.Command {
