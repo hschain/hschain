@@ -14,6 +14,7 @@ var (
 	KeyInflationMax        = []byte("InflationMax")
 	KeyInflationMin        = []byte("InflationMin")
 	KeyGoalBonded          = []byte("GoalBonded")
+	KeyBlocksPerDay        = []byte("BlocksPerDay")
 	KeyBlocksPerYear       = []byte("BlocksPerYear")
 )
 
@@ -24,6 +25,7 @@ type Params struct {
 	InflationMax        sdk.Dec `json:"inflation_max" yaml:"inflation_max"`                 // maximum inflation rate
 	InflationMin        sdk.Dec `json:"inflation_min" yaml:"inflation_min"`                 // minimum inflation rate
 	GoalBonded          sdk.Dec `json:"goal_bonded" yaml:"goal_bonded"`                     // goal of percent bonded atoms
+	BlocksPerDay        uint64  `json:"blocks_per_day" yaml:"blocks_per_day""`              // expected blocks per day
 	BlocksPerYear       uint64  `json:"blocks_per_year" yaml:"blocks_per_year"`             // expected blocks per year
 }
 
@@ -33,7 +35,7 @@ func ParamKeyTable() params.KeyTable {
 }
 
 func NewParams(mintDenom string, inflationRateChange, inflationMax,
-	inflationMin, goalBonded sdk.Dec, blocksPerYear uint64) Params {
+	inflationMin, goalBonded sdk.Dec, blocksPerDay uint64, blocksPerYear uint64) Params {
 
 	return Params{
 		MintDenom:           mintDenom,
@@ -42,6 +44,7 @@ func NewParams(mintDenom string, inflationRateChange, inflationMax,
 		InflationMin:        inflationMin,
 		GoalBonded:          goalBonded,
 		BlocksPerYear:       blocksPerYear,
+		BlocksPerDay:        blocksPerDay,
 	}
 }
 
@@ -54,6 +57,7 @@ func DefaultParams() Params {
 		InflationMin:        sdk.NewDecWithPrec(7, 2),
 		GoalBonded:          sdk.NewDecWithPrec(67, 2),
 		BlocksPerYear:       uint64(60 * 60 * 8766 / 5), // assuming 5 second block times
+		BlocksPerDay:        uint64(60 * 60 * 24 / 10),
 	}
 }
 
@@ -82,6 +86,7 @@ func (p Params) String() string {
   Inflation Min:          %s
   Goal Bonded:            %s
   Blocks Per Year:        %d
+  BlocksPerDay:			  %d
 `,
 		p.MintDenom, p.InflationRateChange, p.InflationMax,
 		p.InflationMin, p.GoalBonded, p.BlocksPerYear,

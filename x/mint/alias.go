@@ -48,4 +48,6 @@ type (
 	Keeper = keeper.Keeper
 	Minter = types.Minter
 	Params = types.Params
+
+	MintPlan = types.MintPlan
 )
