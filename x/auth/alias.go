@@ -13,6 +13,7 @@ const (
 	ModuleName                    = types.ModuleName
 	StoreKey                      = types.StoreKey
 	FeeCollectorName              = types.FeeCollectorName
+	FeeDistributorName            = types.FeeDistributorName
 	QuerierRoute                  = types.QuerierRoute
 	DefaultParamspace             = types.DefaultParamspace
 	DefaultMaxMemoCharacters      = types.DefaultMaxMemoCharacters

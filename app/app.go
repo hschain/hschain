@@ -66,6 +66,7 @@ var (
 	// module account permissions
 	maccPerms = map[string][]string{
 		auth.FeeCollectorName:     nil,
+		auth.FeeDistributorName:   nil,
 		distr.ModuleName:          nil,
 		mint.ModuleName:           {supply.Minter},
 		staking.BondedPoolName:    {supply.Burner, supply.Staking},
@@ -157,9 +158,9 @@ func NewApp(logger log.Logger, db dbm.DB, traceStore io.Writer, loadLatest bool,
 		app.cdc, keys[staking.StoreKey], tkeys[staking.TStoreKey],
 		app.supplyKeeper, stakingSubspace, staking.DefaultCodespace,
 	)
-	app.mintKeeper = mint.NewKeeper(app.cdc, keys[mint.StoreKey], mintSubspace, &stakingKeeper, app.supplyKeeper, auth.FeeCollectorName)
+	app.mintKeeper = mint.NewKeeper(app.cdc, keys[mint.StoreKey], mintSubspace, &stakingKeeper, app.supplyKeeper, auth.FeeCollectorName, auth.FeeDistributorName)
 	app.distrKeeper = distr.NewKeeper(app.cdc, keys[distr.StoreKey], distrSubspace, &stakingKeeper,
-		app.supplyKeeper, distr.DefaultCodespace, auth.FeeCollectorName, app.ModuleAccountAddrs())
+		app.supplyKeeper, distr.DefaultCodespace, auth.FeeCollectorName, auth.FeeDistributorName, app.ModuleAccountAddrs())
 	app.slashingKeeper = slashing.NewKeeper(
 		app.cdc, keys[slashing.StoreKey], &stakingKeeper, slashingSubspace, slashing.DefaultCodespace,
 	)
