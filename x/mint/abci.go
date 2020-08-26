@@ -3,6 +3,7 @@ package mint
 import (
 	sdk "hschain/types"
 	"hschain/x/mint/internal/types"
+	"log"
 )
 
 // BeginBlocker mints new tokens for the previous block.
@@ -11,15 +12,10 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	minter := k.GetMinter(ctx)
 	params := k.GetParams(ctx)
 
-	// recalculate inflation rate
 	totalStakingSupply := k.StakingTokenSupply(ctx)
-	bondedRatio := k.BondedRatio(ctx)
-	minter.Inflation = minter.NextInflationRate(params, bondedRatio)
-	minter.AnnualProvisions = minter.NextAnnualProvisions(params, totalStakingSupply)
-	k.SetMinter(ctx, minter)
 
 	// mint coins, update supply
-	mintedCoin := minter.BlockProvision(params)
+	mintedCoin := minter.BlockProvision(params, totalStakingSupply)
 	mintedCoins := sdk.NewCoins(mintedCoin)
 
 	err := k.MintCoins(ctx, mintedCoins)
@@ -33,12 +29,18 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
+	log.Printf("mint:totalStakingSupply:%s, DayProvisions:%s, PeriodProvisions:%s, mintedCoin: %s",
+		totalStakingSupply.String(),
+		minter.CurrentDayProvisions(totalStakingSupply).String(),
+		minter.NextPeriodProvisions(totalStakingSupply).String(),
+		mintedCoin.Amount.String(),
+	)
+
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(
 			types.EventTypeMint,
-			sdk.NewAttribute(types.AttributeKeyBondedRatio, bondedRatio.String()),
-			sdk.NewAttribute(types.AttributeKeyInflation, minter.Inflation.String()),
-			sdk.NewAttribute(types.AttributeKeyAnnualProvisions, minter.AnnualProvisions.String()),
+			sdk.NewAttribute(types.AttributeKeyDayProvisions, minter.CurrentDayProvisions(totalStakingSupply).String()),
+			sdk.NewAttribute(types.AttributeKeyPeriodProvisions, minter.NextPeriodProvisions(totalStakingSupply).String()),
 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),
 		),
 	)

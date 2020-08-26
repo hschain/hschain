@@ -18,13 +18,13 @@ func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router) {
 	).Methods("GET")
 
 	r.HandleFunc(
-		"/minting/inflation",
-		queryInflationHandlerFn(cliCtx),
+		"/minting/dayprovisons",
+		queryDayProvisionsHandlerFn(cliCtx),
 	).Methods("GET")
 
 	r.HandleFunc(
-		"/minting/annual-provisions",
-		queryAnnualProvisionsHandlerFn(cliCtx),
+		"/minting/next-peroid-provisions",
+		queryPeriodProvisionsHandlerFn(cliCtx),
 	).Methods("GET")
 }
 
@@ -48,9 +48,9 @@ func queryParamsHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 	}
 }
 
-func queryInflationHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
+func queryDayProvisionsHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryInflation)
+		route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryDayProvisions)
 
 		cliCtx, ok := rest.ParseQueryHeightOrReturnBadRequest(w, cliCtx, r)
 		if !ok {
@@ -68,9 +68,9 @@ func queryInflationHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 	}
 }
 
-func queryAnnualProvisionsHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
+func queryPeriodProvisionsHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryAnnualProvisions)
+		route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryPeriodProvisions)
 
 		cliCtx, ok := rest.ParseQueryHeightOrReturnBadRequest(w, cliCtx, r)
 		if !ok {

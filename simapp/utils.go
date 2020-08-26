@@ -295,56 +295,11 @@ func GenGovGenesisState(cdc *codec.Codec, r *rand.Rand, ap simulation.AppParams,
 func GenMintGenesisState(cdc *codec.Codec, r *rand.Rand, ap simulation.AppParams, genesisState map[string]json.RawMessage) {
 	mintGenesis := mint.NewGenesisState(
 		mint.InitialMinter(
-			func(r *rand.Rand) sdk.Dec {
-				var v sdk.Dec
-				ap.GetOrGenerate(cdc, simulation.Inflation, &v, r,
-					func(r *rand.Rand) {
-						v = simulation.ModuleParamSimulator[simulation.Inflation](r).(sdk.Dec)
-					})
-				return v
-			}(r),
-			[]mint.MintPlan{
-				{0, 325000000, 1300000},
-				{1, 325000000, 1300000 * 0.9},
-				{2, 325000000, 1300000 * 0.9 * 0.9},
-			},
+			mint.DefaultMintPlans(),
 		),
 		mint.NewParams(
 			sdk.DefaultBondDenom,
-			func(r *rand.Rand) sdk.Dec {
-				var v sdk.Dec
-				ap.GetOrGenerate(cdc, simulation.InflationRateChange, &v, r,
-					func(r *rand.Rand) {
-						v = simulation.ModuleParamSimulator[simulation.InflationRateChange](r).(sdk.Dec)
-					})
-				return v
-			}(r),
-			func(r *rand.Rand) sdk.Dec {
-				var v sdk.Dec
-				ap.GetOrGenerate(cdc, simulation.InflationMax, &v, r,
-					func(r *rand.Rand) {
-						v = simulation.ModuleParamSimulator[simulation.InflationMax](r).(sdk.Dec)
-					})
-				return v
-			}(r),
-			func(r *rand.Rand) sdk.Dec {
-				var v sdk.Dec
-				ap.GetOrGenerate(cdc, simulation.InflationMin, &v, r,
-					func(r *rand.Rand) {
-						v = simulation.ModuleParamSimulator[simulation.InflationMin](r).(sdk.Dec)
-					})
-				return v
-			}(r),
-			func(r *rand.Rand) sdk.Dec {
-				var v sdk.Dec
-				ap.GetOrGenerate(cdc, simulation.GoalBonded, &v, r,
-					func(r *rand.Rand) {
-						v = simulation.ModuleParamSimulator[simulation.GoalBonded](r).(sdk.Dec)
-					})
-				return v
-			}(r),
 			uint64(60*60*24/5),
-			uint64(60*60*8766/5),
 		),
 	)
 
