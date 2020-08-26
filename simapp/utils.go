@@ -303,6 +303,11 @@ func GenMintGenesisState(cdc *codec.Codec, r *rand.Rand, ap simulation.AppParams
 					})
 				return v
 			}(r),
+			[]mint.MintPlan{
+				{0, 325000000, 1300000},
+				{1, 325000000, 1300000 * 0.9},
+				{2, 325000000, 1300000 * 0.9 * 0.9},
+			},
 		),
 		mint.NewParams(
 			sdk.DefaultBondDenom,
@@ -338,6 +343,7 @@ func GenMintGenesisState(cdc *codec.Codec, r *rand.Rand, ap simulation.AppParams
 					})
 				return v
 			}(r),
+			uint64(60*60*24/5),
 			uint64(60*60*8766/5),
 		),
 	)

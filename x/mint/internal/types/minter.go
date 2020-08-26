@@ -6,26 +6,36 @@ import (
 	sdk "hschain/types"
 )
 
+//MintPlan output plan
+type MintPlan struct {
+	Period         uint   `json:"period" yaml:"period"`
+	TotalPerPeriod uint64 `json:"total_per_period" yaml:"total_per_period"`
+	TotalPerDay    uint64 `json:"total_per_day" yaml:"total_per_day"`
+}
+
 // Minter represents the minting state.
 type Minter struct {
-	Inflation        sdk.Dec `json:"inflation" yaml:"inflation"`                 // current annual inflation rate
-	AnnualProvisions sdk.Dec `json:"annual_provisions" yaml:"annual_provisions"` // current annual expected provisions
+	Inflation        sdk.Dec    `json:"inflation" yaml:"inflation"`                 // current annual inflation rate
+	AnnualProvisions sdk.Dec    `json:"annual_provisions" yaml:"annual_provisions"` // current annual expected provisions
+	MintPlans        []MintPlan `json:"mint_plans" yaml:"mint_plans"`               // mint plan
 }
 
 // NewMinter returns a new Minter object with the given inflation and annual
 // provisions values.
-func NewMinter(inflation, annualProvisions sdk.Dec) Minter {
+func NewMinter(inflation, annualProvisions sdk.Dec, mintPlans []MintPlan) Minter {
 	return Minter{
 		Inflation:        inflation,
 		AnnualProvisions: annualProvisions,
+		MintPlans:        mintPlans,
 	}
 }
 
 // InitialMinter returns an initial Minter object with a given inflation value.
-func InitialMinter(inflation sdk.Dec) Minter {
+func InitialMinter(inflation sdk.Dec, mintPlans []MintPlan) Minter {
 	return NewMinter(
 		inflation,
 		sdk.NewDec(0),
+		mintPlans,
 	)
 }
 
@@ -34,6 +44,11 @@ func InitialMinter(inflation sdk.Dec) Minter {
 func DefaultInitialMinter() Minter {
 	return InitialMinter(
 		sdk.NewDecWithPrec(13, 2),
+		[]MintPlan{
+			{0, 325000000, 1300000},
+			{1, 325000000, 1300000 * 0.9},
+			{2, 325000000, 1300000 * 0.9 * 0.9},
+		},
 	)
 }
 
