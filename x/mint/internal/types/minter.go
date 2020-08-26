@@ -77,7 +77,7 @@ func (m Minter) CurrentDayProvisions(totalSupply sdk.Int) sdk.Dec {
 
 	for i := range m.MintPlans {
 		if total.GTE(m.MintPlans[i].TotalPerPeriod) {
-			total.Sub(m.MintPlans[i].TotalPerPeriod)
+			total = total.Sub(m.MintPlans[i].TotalPerPeriod)
 		} else {
 			current = i
 			break
@@ -112,7 +112,7 @@ func (m Minter) CurrentDayProvisions(totalSupply sdk.Int) sdk.Dec {
 func (m Minter) NextPeriodProvisions(totalSupply sdk.Int) sdk.Dec {
 	for i := range m.MintPlans {
 		if totalSupply.GTE(m.MintPlans[i].TotalPerPeriod) {
-			totalSupply.Sub(m.MintPlans[i].TotalPerPeriod)
+			totalSupply = totalSupply.Sub(m.MintPlans[i].TotalPerPeriod)
 		} else {
 			if i < len(m.MintPlans)-1 {
 				return sdk.NewDecFromInt(m.MintPlans[i+1].TotalPerDay)
