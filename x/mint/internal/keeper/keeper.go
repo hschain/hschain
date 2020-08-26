@@ -88,6 +88,12 @@ func (k Keeper) StakingTokenSupply(ctx sdk.Context) sdk.Int {
 	return k.sk.StakingTokenSupply(ctx)
 }
 
+//未分配的供应量
+func (k Keeper) UndistStakingTokenSupply(ctx sdk.Context) sdk.Int {
+	feeCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.feeCollectorName)
+	return feeCollectorAcc.GetCoins().AmountOf(k.sk.BondDenom(ctx))
+}
+
 // BondedRatio implements an alias call to the underlying staking keeper's
 // BondedRatio to be used in BeginBlocker.
 func (k Keeper) BondedRatio(ctx sdk.Context) sdk.Dec {
