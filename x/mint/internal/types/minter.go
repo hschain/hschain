@@ -4,98 +4,127 @@ import (
 	"fmt"
 
 	sdk "hschain/types"
+	"math"
+)
+
+const (
+	defaultPeriodCount    = 32
+	defaultTotalPerPeriod = 325000000
+	defaultTotalPerDay    = 13000000
+	defaultDeflation      = 0.91
 )
 
 //MintPlan output plan
 type MintPlan struct {
-	Period         uint   `json:"period" yaml:"period"`
-	TotalPerPeriod uint64 `json:"total_per_period" yaml:"total_per_period"`
-	TotalPerDay    uint64 `json:"total_per_day" yaml:"total_per_day"`
+	Period         int     `json:"period" yaml:"period"`
+	TotalPerPeriod sdk.Int `json:"total_per_period" yaml:"total_per_period"`
+	TotalPerDay    sdk.Int `json:"total_per_day" yaml:"total_per_day"`
 }
 
 // Minter represents the minting state.
 type Minter struct {
-	Inflation        sdk.Dec    `json:"inflation" yaml:"inflation"`                 // current annual inflation rate
-	AnnualProvisions sdk.Dec    `json:"annual_provisions" yaml:"annual_provisions"` // current annual expected provisions
-	MintPlans        []MintPlan `json:"mint_plans" yaml:"mint_plans"`               // mint plan
+	MintPlans []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
+}
+
+//DefaultMintPlans create
+func DefaultMintPlans() []MintPlan {
+	var plans []MintPlan
+	for i := 0; i < defaultPeriodCount; i++ {
+		plan := MintPlan{
+			Period:         i,
+			TotalPerPeriod: sdk.NewInt(int64(defaultTotalPerPeriod)),
+			TotalPerDay:    sdk.NewInt(int64(math.Floor(defaultTotalPerDay*math.Pow(defaultDeflation, float64(i)) + 0.5))),
+		}
+		plans = append(plans, plan)
+	}
+	return plans
 }
 
 // NewMinter returns a new Minter object with the given inflation and annual
 // provisions values.
-func NewMinter(inflation, annualProvisions sdk.Dec, mintPlans []MintPlan) Minter {
+func NewMinter(mintPlans []MintPlan) Minter {
 	return Minter{
-		Inflation:        inflation,
-		AnnualProvisions: annualProvisions,
-		MintPlans:        mintPlans,
+		MintPlans: mintPlans,
 	}
 }
 
 // InitialMinter returns an initial Minter object with a given inflation value.
-func InitialMinter(inflation sdk.Dec, mintPlans []MintPlan) Minter {
+func InitialMinter(mintPlans []MintPlan) Minter {
 	return NewMinter(
-		inflation,
-		sdk.NewDec(0),
 		mintPlans,
 	)
 }
 
 // DefaultInitialMinter returns a default initial Minter object for a new chain
-// which uses an inflation rate of 13%.
 func DefaultInitialMinter() Minter {
 	return InitialMinter(
-		sdk.NewDecWithPrec(13, 2),
-		[]MintPlan{
-			{0, 325000000, 1300000},
-			{1, 325000000, 1300000 * 0.9},
-			{2, 325000000, 1300000 * 0.9 * 0.9},
-		},
+		DefaultMintPlans(),
 	)
 }
 
 // validate minter
 func ValidateMinter(minter Minter) error {
-	if minter.Inflation.LT(sdk.ZeroDec()) {
-		return fmt.Errorf("mint parameter Inflation should be positive, is %s",
-			minter.Inflation.String())
+	if len(minter.MintPlans) <= 0 {
+		return fmt.Errorf("mint parameter mintplan length should be greater than 0, is %d", len(minter.MintPlans))
 	}
 	return nil
 }
 
-// NextInflationRate returns the new inflation rate for the next hour.
-func (m Minter) NextInflationRate(params Params, bondedRatio sdk.Dec) sdk.Dec {
-	// The target annual inflation rate is recalculated for each previsions cycle. The
-	// inflation is also subject to a rate change (positive or negative) depending on
-	// the distance from the desired ratio (67%). The maximum rate change possible is
-	// defined to be 13% per year, however the annual inflation is capped as between
-	// 7% and 20%.
+//当日产量
+func (m Minter) CurrentDayProvisions(totalSupply sdk.Int) sdk.Dec {
+	total := totalSupply //当前期已产总量
+	current := -1        //当前期数
 
-	// (1 - bondedRatio/GoalBonded) * InflationRateChange
-	inflationRateChangePerYear := sdk.OneDec().
-		Sub(bondedRatio.Quo(params.GoalBonded)).
-		Mul(params.InflationRateChange)
-	inflationRateChange := inflationRateChangePerYear.Quo(sdk.NewDec(int64(params.BlocksPerYear)))
-
-	// adjust the new annual inflation for this next cycle
-	inflation := m.Inflation.Add(inflationRateChange) // note inflationRateChange may be negative
-	if inflation.GT(params.InflationMax) {
-		inflation = params.InflationMax
-	}
-	if inflation.LT(params.InflationMin) {
-		inflation = params.InflationMin
+	for i := range m.MintPlans {
+		if total.GTE(m.MintPlans[i].TotalPerPeriod) {
+			total.Sub(m.MintPlans[i].TotalPerPeriod)
+		} else {
+			current = i
+			break
+		}
 	}
 
-	return inflation
+	if current == -1 { //矿已完了
+		return sdk.ZeroDec()
+	}
+
+	//当前期剩余总量大于日产量
+	if m.MintPlans[current].TotalPerPeriod.Sub(total).GTE(m.MintPlans[current].TotalPerDay) {
+		return sdk.NewDecFromInt(m.MintPlans[current].TotalPerDay)
+	}
+
+	//如果当前期是最后一期的剩余, 全部挖完
+	if current == len(m.MintPlans)-1 {
+		return sdk.NewDecFromInt(m.MintPlans[current].TotalPerPeriod.Sub(total))
+	}
+
+	//可以从下一期借用
+	left := m.MintPlans[current].TotalPerPeriod.Sub(total)
+	leftRatio := float64(left.Int64()) / float64(m.MintPlans[current].TotalPerDay.Int64())
+
+	return sdk.NewDecFromInt(left.Add(sdk.NewInt(int64(float64(m.MintPlans[current+1].TotalPerDay.Int64()) * (1 - leftRatio)))))
+
 }
 
-// NextAnnualProvisions returns the annual provisions based on current total
-// supply and inflation rate.
-func (m Minter) NextAnnualProvisions(_ Params, totalSupply sdk.Int) sdk.Dec {
-	return m.Inflation.MulInt(totalSupply)
+// NextPeriodProvisions returns the period provisions based on current total
+// supply and mintplans.
+//下一次减产后的日产量
+func (m Minter) NextPeriodProvisions(totalSupply sdk.Int) sdk.Dec {
+	for i := range m.MintPlans {
+		if totalSupply.GTE(m.MintPlans[i].TotalPerPeriod) {
+			totalSupply.Sub(m.MintPlans[i].TotalPerPeriod)
+		} else {
+			if i < len(m.MintPlans)-1 {
+				return sdk.NewDecFromInt(m.MintPlans[i+1].TotalPerDay)
+			}
+		}
+	}
+	return sdk.ZeroDec()
 }
 
 // BlockProvision returns the provisions for a block based on the annual
 // provisions rate.
-func (m Minter) BlockProvision(params Params) sdk.Coin {
-	provisionAmt := m.AnnualProvisions.QuoInt(sdk.NewInt(int64(params.BlocksPerYear)))
+func (m Minter) BlockProvision(params Params, totalSupply sdk.Int) sdk.Coin {
+	provisionAmt := m.CurrentDayProvisions(totalSupply).QuoInt(sdk.NewInt(int64(params.BlocksPerDay)))
 	return sdk.NewCoin(params.MintDenom, provisionAmt.TruncateInt())
 }

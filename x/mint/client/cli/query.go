@@ -25,8 +25,8 @@ func GetQueryCmd(cdc *codec.Codec) *cobra.Command {
 	mintingQueryCmd.AddCommand(
 		client.GetCommands(
 			GetCmdQueryParams(cdc),
-			GetCmdQueryInflation(cdc),
-			GetCmdQueryAnnualProvisions(cdc),
+			GetCmdQueryDayProvisions(cdc),
+			GetCmdQueryPeriodProvisions(cdc),
 		)...,
 	)
 
@@ -61,15 +61,15 @@ func GetCmdQueryParams(cdc *codec.Codec) *cobra.Command {
 
 // GetCmdQueryInflation implements a command to return the current minting
 // inflation value.
-func GetCmdQueryInflation(cdc *codec.Codec) *cobra.Command {
+func GetCmdQueryDayProvisions(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "inflation",
-		Short: "Query the current minting inflation value",
+		Use:   "day-provisions",
+		Short: "Query the current day minting value",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryInflation)
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryDayProvisions)
 			res, _, err := cliCtx.QueryWithData(route, nil)
 			if err != nil {
 				return err
@@ -87,15 +87,15 @@ func GetCmdQueryInflation(cdc *codec.Codec) *cobra.Command {
 
 // GetCmdQueryAnnualProvisions implements a command to return the current minting
 // annual provisions value.
-func GetCmdQueryAnnualProvisions(cdc *codec.Codec) *cobra.Command {
+func GetCmdQueryPeriodProvisions(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "annual-provisions",
-		Short: "Query the current minting annual provisions value",
+		Use:   "next-perioid-provisions",
+		Short: "Query the minting next period provisions value",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryAnnualProvisions)
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryPeriodProvisions)
 			res, _, err := cliCtx.QueryWithData(route, nil)
 			if err != nil {
 				return err
