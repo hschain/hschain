@@ -29,8 +29,9 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
-	log.Printf("mint:totalStakingSupply:%s, DayProvisions:%s, PeriodProvisions:%s, mintedCoin: %s",
+	log.Printf("mint:totalStakingSupply:%s, undistSupply: %s, DayProvisions:%s, PeriodProvisions:%s, mintedCoin: %s",
 		totalStakingSupply.String(),
+		k.UndistStakingTokenSupply(ctx).String(),
 		minter.CurrentDayProvisions(totalStakingSupply).String(),
 		minter.NextPeriodProvisions(totalStakingSupply).String(),
 		mintedCoin.Amount.String(),

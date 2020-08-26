@@ -10,6 +10,18 @@ import (
 	"hschain/x/staking/exported"
 )
 
+func (k Keeper) DistributeCoins(ctx sdk.Context) {
+	feeCollector := k.supplyKeeper.GetModuleAccount(ctx, k.feeCollectorName)
+	// feeDistributor := k.supplyKeeper.GetModuleAccount(ctx, k.feeDistributorName)
+
+	feesCollectedInt := feeCollector.GetCoins()
+
+	err := k.supplyKeeper.SendCoinsFromModuleToModule(ctx, k.feeCollectorName, k.feeDistributorName, feesCollectedInt)
+	if err != nil {
+		panic(err)
+	}
+}
+
 // AllocateTokens handles distribution of the collected fees
 func (k Keeper) AllocateTokens(
 	ctx sdk.Context, sumPreviousPrecommitPower, totalPreviousPower int64,

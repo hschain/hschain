@@ -1,6 +1,8 @@
 // nolint:deadcode unused
+
 package keeper
 
+/*
 import (
 	"os"
 	"testing"
@@ -93,3 +95,4 @@ func newTestInput(t *testing.T) testInput {
 
 	return testInput{ctx, types.ModuleCdc, mintKeeper}
 }
+*/
