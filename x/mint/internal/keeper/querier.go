@@ -17,11 +17,11 @@ func NewQuerier(k Keeper) sdk.Querier {
 		case types.QueryParameters:
 			return queryParams(ctx, k)
 
-		case types.QueryInflation:
-			return queryInflation(ctx, k)
+		case types.QueryDayProvisions:
+			return queryDayProvisions(ctx, k)
 
-		case types.QueryAnnualProvisions:
-			return queryAnnualProvisions(ctx, k)
+		case types.QueryPeriodProvisions:
+			return queryPeriodProvisions(ctx, k)
 
 		default:
 			return nil, sdk.ErrUnknownRequest(fmt.Sprintf("unknown minting query endpoint: %s", path[0]))
@@ -40,10 +40,11 @@ func queryParams(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	return res, nil
 }
 
-func queryInflation(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
+func queryDayProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
+	supply := k.StakingTokenSupply(ctx)
 
-	res, err := codec.MarshalJSONIndent(k.cdc, minter.Inflation)
+	res, err := codec.MarshalJSONIndent(k.cdc, minter.CurrentDayProvisions(supply))
 	if err != nil {
 		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
 	}
@@ -51,10 +52,11 @@ func queryInflation(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	return res, nil
 }
 
-func queryAnnualProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
+func queryPeriodProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
+	supply := k.StakingTokenSupply(ctx)
 
-	res, err := codec.MarshalJSONIndent(k.cdc, minter.AnnualProvisions)
+	res, err := codec.MarshalJSONIndent(k.cdc, minter.NextPeriodProvisions(supply))
 	if err != nil {
 		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
 	}
