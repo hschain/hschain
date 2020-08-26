@@ -9,6 +9,7 @@ import (
 type StakingKeeper interface {
 	StakingTokenSupply(ctx sdk.Context) sdk.Int
 	BondedRatio(ctx sdk.Context) sdk.Dec
+	BondDenom(sdk.Context) string
 }
 
 // SupplyKeeper defines the expected supply keeper
@@ -17,6 +18,8 @@ type SupplyKeeper interface {
 
 	// TODO remove with genesis 2-phases refactor https://hschain/issues/2862
 	SetModuleAccount(sdk.Context, exported.ModuleAccountI)
+
+	GetModuleAccount(sdk.Context, string) exported.ModuleAccountI
 
 	SendCoinsFromModuleToAccount(ctx sdk.Context, senderModule string, recipientAddr sdk.AccAddress, amt sdk.Coins) sdk.Error
 	SendCoinsFromModuleToModule(ctx sdk.Context, senderModule, recipientModule string, amt sdk.Coins) sdk.Error

@@ -14,6 +14,8 @@ const (
 	// FeeCollectorName the root string for the fee collector account address
 	FeeCollectorName = "fee_collector"
 
+	FeeDistributorName = "fee_distributor"
+
 	// QuerierRoute is the querier route for acc
 	QuerierRoute = StoreKey
 )
