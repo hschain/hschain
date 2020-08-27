@@ -124,6 +124,7 @@ func handleMsgCreateValidator(ctx sdk.Context, msg types.MsgCreateValidator, k k
 
 	if ctx.ConsensusParams() != nil {
 		tmPubKey := tmtypes.TM2PB.PubKey(msg.PubKey)
+		//fmt.Printf("------tmPubKey is %+v\n", tmPubKey)
 		if !common.StringInSlice(tmPubKey.Type, ctx.ConsensusParams().Validator.PubKeyTypes) {
 			return ErrValidatorPubKeyTypeNotSupported(k.Codespace(),
 				tmPubKey.Type,

@@ -35,7 +35,7 @@ func NewParams(mintDenom string, blocksPerDay uint64) Params {
 // default minting module parameters
 func DefaultParams() Params {
 	return Params{
-		MintDenom:    sdk.DefaultBondDenom,
+		MintDenom:    sdk.DefaultMintDenom,
 		BlocksPerDay: uint64(60 * 60 * 24 / 5), // assuming 5 second block times
 	}
 }

@@ -35,8 +35,8 @@ func BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock, k keeper.Keeper) 
 
 	second := (ctx.BlockTime().Unix() + int64(60*60*8)) % 86400 //东八区零点
 
-	log.Printf("current timestamp(second): %d", second)
 	if second < 5 {
+		log.Printf("current timestamp(second): %d", second)
 		log.Printf("transfer coins from feeCollector to feeDistributor")
 		if ctx.BlockHeight() > 1 {
 			k.DistributeCoins(ctx)
