@@ -16,6 +16,8 @@ type StakingKeeper interface {
 type SupplyKeeper interface {
 	GetModuleAddress(name string) sdk.AccAddress
 
+	GetSupply(sdk.Context) exported.SupplyI
+
 	// TODO remove with genesis 2-phases refactor https://hschain/issues/2862
 	SetModuleAccount(sdk.Context, exported.ModuleAccountI)
 

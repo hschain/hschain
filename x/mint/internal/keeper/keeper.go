@@ -84,22 +84,16 @@ func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 
 //______________________________________________________________________
 
-// StakingTokenSupply implements an alias call to the underlying staking keeper's
-// StakingTokenSupply to be used in BeginBlocker.
-func (k Keeper) StakingTokenSupply(ctx sdk.Context) sdk.Int {
-	return k.sk.StakingTokenSupply(ctx)
+// MintingTokenSupply implements an alias call to the underlying supply keeper's
+// MintingTokenSupply to be used in BeginBlocker.
+func (k Keeper) MintingTokenSupply(ctx sdk.Context) sdk.Int {
+	return k.supplyKeeper.GetSupply(ctx).GetTotal().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
 //未分配的供应量
-func (k Keeper) UndistStakingTokenSupply(ctx sdk.Context) sdk.Int {
+func (k Keeper) UndistMintedTokenSupply(ctx sdk.Context) sdk.Int {
 	feeCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.feeCollectorName)
-	return feeCollectorAcc.GetCoins().AmountOf(k.sk.BondDenom(ctx))
-}
-
-// BondedRatio implements an alias call to the underlying staking keeper's
-// BondedRatio to be used in BeginBlocker.
-func (k Keeper) BondedRatio(ctx sdk.Context) sdk.Dec {
-	return k.sk.BondedRatio(ctx)
+	return feeCollectorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
 // MintCoins implements an alias call to the underlying supply keeper's

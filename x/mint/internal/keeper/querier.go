@@ -42,7 +42,7 @@ func queryParams(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 
 func queryDayProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
-	supply := k.StakingTokenSupply(ctx)
+	supply := k.MintingTokenSupply(ctx)
 
 	res, err := codec.MarshalJSONIndent(k.cdc, minter.CurrentDayProvisions(supply))
 	if err != nil {
@@ -54,7 +54,7 @@ func queryDayProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 
 func queryPeriodProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
-	supply := k.StakingTokenSupply(ctx)
+	supply := k.MintingTokenSupply(ctx)
 
 	res, err := codec.MarshalJSONIndent(k.cdc, minter.NextPeriodProvisions(supply))
 	if err != nil {

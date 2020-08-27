@@ -4,6 +4,10 @@ import (
 	"fmt"
 )
 
+const (
+	DefaultMintDenom = "hst"
+)
+
 // denomUnits contains a mapping of denomination mapped to their respective unit
 // multipliers (e.g. 1atom = 10^-6uatom).
 var denomUnits = map[string]Dec{}

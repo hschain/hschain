@@ -13,7 +13,7 @@ hscli keys add validator
 # Add that key into the genesis.app_state.accounts array in the genesis file
 # NOTE: this command lets you set the number of coins. Make sure this account has some coins
 # with the genesis.app_state.staking.params.bond_denom denom, the default is staking
-hsd add-genesis-account $(hscli keys show validator -a) 10000hst
+hsd add-genesis-account $(hscli keys show validator -a) 100000000000syscoin
 
 # Generate the transaction that creates your validator
 hsd gentx --name validator
