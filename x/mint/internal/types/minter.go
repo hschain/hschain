@@ -9,8 +9,8 @@ import (
 
 const (
 	defaultPeriodCount    = 32
-	defaultTotalPerPeriod = 325000000
-	defaultTotalPerDay    = 13000000
+	defaultTotalPerPeriod = 325000000000000
+	defaultTotalPerDay    = 13000000000000
 	defaultDeflation      = 0.91
 )
 

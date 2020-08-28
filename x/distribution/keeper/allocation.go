@@ -11,12 +11,12 @@ import (
 )
 
 func (k Keeper) DistributeCoins(ctx sdk.Context) {
-	feeCollector := k.supplyKeeper.GetModuleAccount(ctx, k.feeCollectorName)
+	coinsCollector := k.supplyKeeper.GetModuleAccount(ctx, k.coinsCollectorName)
 	// feeDistributor := k.supplyKeeper.GetModuleAccount(ctx, k.feeDistributorName)
 
-	feesCollectedInt := feeCollector.GetCoins()
+	coinsCollectedInt := coinsCollector.GetCoins()
 
-	err := k.supplyKeeper.SendCoinsFromModuleToModule(ctx, k.feeCollectorName, k.feeDistributorName, feesCollectedInt)
+	err := k.supplyKeeper.SendCoinsFromModuleToModule(ctx, k.coinsCollectorName, k.coinsDistributorName, coinsCollectedInt)
 	if err != nil {
 		panic(err)
 	}

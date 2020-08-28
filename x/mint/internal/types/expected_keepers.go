@@ -5,20 +5,12 @@ import (
 	"hschain/x/supply/exported"
 )
 
-// StakingKeeper defines the expected staking keeper
-type StakingKeeper interface {
-	StakingTokenSupply(ctx sdk.Context) sdk.Int
-	BondedRatio(ctx sdk.Context) sdk.Dec
-	BondDenom(sdk.Context) string
-}
-
 // SupplyKeeper defines the expected supply keeper
 type SupplyKeeper interface {
 	GetModuleAddress(name string) sdk.AccAddress
 
 	GetSupply(sdk.Context) exported.SupplyI
 
-	// TODO remove with genesis 2-phases refactor https://hschain/issues/2862
 	SetModuleAccount(sdk.Context, exported.ModuleAccountI)
 
 	GetModuleAccount(sdk.Context, string) exported.ModuleAccountI
