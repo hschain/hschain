@@ -102,6 +102,12 @@ func (k Keeper) DistrTokenSupply(ctx sdk.Context) sdk.Int {
 	return coinsDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
+//已销毁
+func (k Keeper) BurnTokenSupply(ctx sdk.Context) sdk.Coins {
+	coinsBurnerAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsBurnerName)
+	return coinsBurnerAcc.GetCoins()
+}
+
 // MintCoins implements an alias call to the underlying supply keeper's
 // MintCoins to be used in BeginBlocker.
 func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {

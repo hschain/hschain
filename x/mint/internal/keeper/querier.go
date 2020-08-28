@@ -17,11 +17,8 @@ func NewQuerier(k Keeper) sdk.Querier {
 		case types.QueryParameters:
 			return queryParams(ctx, k)
 
-		case types.QueryDayProvisions:
-			return queryDayProvisions(ctx, k)
-
-		case types.QueryPeriodProvisions:
-			return queryPeriodProvisions(ctx, k)
+		case types.QueryStatus:
+			return queryStatus(ctx, k)
 
 		default:
 			return nil, sdk.ErrUnknownRequest(fmt.Sprintf("unknown minting query endpoint: %s", path[0]))
@@ -40,23 +37,21 @@ func queryParams(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	return res, nil
 }
 
-func queryDayProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
+func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
-	supply := k.MintingTokenSupply(ctx)
 
-	res, err := codec.MarshalJSONIndent(k.cdc, minter.CurrentDayProvisions(supply))
-	if err != nil {
-		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
-	}
+	params := k.GetParams(ctx)
 
-	return res, nil
-}
+	minter.Status.TotalMintedSupply = k.MintedTokenSupply(ctx)
+	minter.Status.TotalMintingSupply = k.MintingTokenSupply(ctx)
+	minter.Status.TotalDistrSupply = k.DistrTokenSupply(ctx)
+	minter.Status.StatBurnCoins = k.BurnTokenSupply(ctx)
+	minter.Status.CurrentDayProvisions = minter.CurrentDayProvisions(minter.Status.TotalMintedSupply.Sub(minter.Status.TotalMintingSupply))
+	minter.Status.NextPeriodDayProvisions = minter.NextPeriodDayProvisions(minter.Status.TotalMintedSupply)
+	minter.Status.NextPeroidStartTime = minter.NextPeroidStartTime(params, minter.Status.TotalMintedSupply)
+	minter.Status.BlockProvision = minter.BlockProvision(params, minter.Status.TotalMintedSupply)
 
-func queryPeriodProvisions(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
-	minter := k.GetMinter(ctx)
-	supply := k.MintingTokenSupply(ctx)
-
-	res, err := codec.MarshalJSONIndent(k.cdc, minter.NextPeriodProvisions(supply))
+	res, err := codec.MarshalJSONIndent(k.cdc, minter)
 	if err != nil {
 		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
 	}

@@ -13,12 +13,15 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	params := k.GetParams(ctx)
 
 	totalMintedSupply := k.MintedTokenSupply(ctx)
-	totalMintingSupply := k.MintingTokenSupply(ctx)
-
-	totalSupply := totalMintedSupply.Sub(totalMintingSupply)
 
 	// mint coins, update supply
-	mintedCoin := minter.BlockProvision(params, totalSupply)
+	mintedCoin := minter.BlockProvision(params, totalMintedSupply)
+
+	if mintedCoin.IsZero() {
+		ctx.Logger().Info("no coins mint")
+		return
+	}
+
 	mintedCoins := sdk.NewCoins(mintedCoin)
 
 	err := k.MintCoins(ctx, mintedCoins)
@@ -32,20 +35,23 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
-	ctx.Logger().Info(fmt.Sprintf("mint:totalSupply:%s, totalMintingSupply: %s, DistrTokenSupply:%s, DayProvisions:%s, PeriodProvisions:%s, mintedCoin: %s",
-		totalSupply.String(),
+	totalMintingSupply := k.MintingTokenSupply(ctx)
+
+	ctx.Logger().Info(fmt.Sprintf("mint:TotalSupply:%s, TotalMintingSupply: %s, DistrTokenSupply:%s, CurrentDayProvisions:%s, NextPeroidStartTime:%d, NextPeriodDayProvisions:%s, mintedCoin: %s",
+		totalMintedSupply.String(),
 		totalMintingSupply.String(),
 		k.DistrTokenSupply(ctx).String(),
-		minter.CurrentDayProvisions(totalSupply).String(),
-		minter.NextPeriodProvisions(totalSupply).String(),
+		minter.CurrentDayProvisions(totalMintedSupply.Sub(totalMintingSupply)).String(),
+		minter.NextPeroidStartTime(params, totalMintedSupply),
+		minter.NextPeriodDayProvisions(totalMintedSupply).String(),
 		mintedCoin.Amount.String(),
 	))
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(
 			types.EventTypeMint,
-			sdk.NewAttribute(types.AttributeKeyDayProvisions, minter.CurrentDayProvisions(totalSupply).String()),
-			sdk.NewAttribute(types.AttributeKeyPeriodProvisions, minter.NextPeriodProvisions(totalSupply).String()),
+			sdk.NewAttribute(types.AttributeKeyCurrentDayProvisions, minter.CurrentDayProvisions(totalMintedSupply.Sub(totalMintingSupply)).String()),
+			sdk.NewAttribute(types.AttributeKeyNextPeriodDayProvisions, minter.NextPeriodDayProvisions(totalMintedSupply).String()),
 			sdk.NewAttribute(sdk.AttributeKeyAmount, mintedCoin.Amount.String()),
 		),
 	)

@@ -300,6 +300,7 @@ func GenMintGenesisState(cdc *codec.Codec, r *rand.Rand, ap simulation.AppParams
 		mint.NewParams(
 			sdk.DefaultBondDenom,
 			uint64(60*60*24/5),
+			0,
 		),
 	)
 

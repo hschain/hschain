@@ -8,7 +8,6 @@ import (
 	"hschain/client"
 	"hschain/client/context"
 	"hschain/codec"
-	sdk "hschain/types"
 	"hschain/x/mint/internal/types"
 )
 
@@ -25,8 +24,7 @@ func GetQueryCmd(cdc *codec.Codec) *cobra.Command {
 	mintingQueryCmd.AddCommand(
 		client.GetCommands(
 			GetCmdQueryParams(cdc),
-			GetCmdQueryDayProvisions(cdc),
-			GetCmdQueryPeriodProvisions(cdc),
+			GetCmdQueryStatus(cdc),
 		)...,
 	)
 
@@ -59,54 +57,28 @@ func GetCmdQueryParams(cdc *codec.Codec) *cobra.Command {
 	}
 }
 
-// GetCmdQueryInflation implements a command to return the current minting
+// GetCmdQueryStatus implements a command to return the current minting
 // inflation value.
-func GetCmdQueryDayProvisions(cdc *codec.Codec) *cobra.Command {
+func GetCmdQueryStatus(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "day-provisions",
-		Short: "Query the current day minting value",
+		Use:   "status",
+		Short: "Query minting status",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
-			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryDayProvisions)
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryStatus)
 			res, _, err := cliCtx.QueryWithData(route, nil)
 			if err != nil {
 				return err
 			}
 
-			var inflation sdk.Dec
-			if err := cdc.UnmarshalJSON(res, &inflation); err != nil {
+			var minter types.Minter
+			if err := cdc.UnmarshalJSON(res, &minter); err != nil {
 				return err
 			}
 
-			return cliCtx.PrintOutput(inflation)
-		},
-	}
-}
-
-// GetCmdQueryAnnualProvisions implements a command to return the current minting
-// annual provisions value.
-func GetCmdQueryPeriodProvisions(cdc *codec.Codec) *cobra.Command {
-	return &cobra.Command{
-		Use:   "next-perioid-provisions",
-		Short: "Query the minting next period provisions value",
-		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			cliCtx := context.NewCLIContext().WithCodec(cdc)
-
-			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryPeriodProvisions)
-			res, _, err := cliCtx.QueryWithData(route, nil)
-			if err != nil {
-				return err
-			}
-
-			var inflation sdk.Dec
-			if err := cdc.UnmarshalJSON(res, &inflation); err != nil {
-				return err
-			}
-
-			return cliCtx.PrintOutput(inflation)
+			return cliCtx.PrintOutput(minter)
 		},
 	}
 }

@@ -21,9 +21,21 @@ type MintPlan struct {
 	TotalPerDay    sdk.Int `json:"total_per_day" yaml:"total_per_day"`
 }
 
+type Status struct {
+	TotalMintedSupply       sdk.Int   `json:"total_minted_supply" yaml:"total_minted_supply"`
+	TotalMintingSupply      sdk.Int   `json:"total_minting_supply" yaml:"total_minting_supply"`
+	TotalDistrSupply        sdk.Int   `json:"total_distr_supply" yaml:"total_distr_supply"`
+	StatBurnCoins           sdk.Coins `json:"stat_burn_coins" yaml:"stat_burn_coins"`
+	CurrentDayProvisions    sdk.Dec   `json:"current_day_provisions" yaml:"current_day_provisions"`
+	NextPeriodDayProvisions sdk.Dec   `json:"next_period_day_provisions" yaml:"next_period_day_provisions"`
+	NextPeroidStartTime     int64     `json:"next_peroid_startTime" yaml:"next_peroid_startTime"`
+	BlockProvision          sdk.Coin  `json:"block_provision" yaml:"block_provision"`
+}
+
 // Minter represents the minting state.
 type Minter struct {
 	MintPlans []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
+	Status    Status     `json:"status" yaml:"status"`         // mint status
 }
 
 //DefaultMintPlans create
@@ -108,11 +120,11 @@ func (m Minter) CurrentDayProvisions(totalSupply sdk.Int) sdk.Dec {
 
 // NextPeriodProvisions returns the period provisions based on current total
 // supply and mintplans.
-//下一次减产后的日产量
-func (m Minter) NextPeriodProvisions(totalSupply sdk.Int) sdk.Dec {
+//下一次减产日产量
+func (m Minter) NextPeriodDayProvisions(totalMintedSupply sdk.Int) sdk.Dec {
 	for i := range m.MintPlans {
-		if totalSupply.GTE(m.MintPlans[i].TotalPerPeriod) {
-			totalSupply = totalSupply.Sub(m.MintPlans[i].TotalPerPeriod)
+		if totalMintedSupply.GTE(m.MintPlans[i].TotalPerPeriod) {
+			totalMintedSupply = totalMintedSupply.Sub(m.MintPlans[i].TotalPerPeriod)
 		} else {
 			if i < len(m.MintPlans)-1 {
 				return sdk.NewDecFromInt(m.MintPlans[i+1].TotalPerDay)
@@ -122,9 +134,41 @@ func (m Minter) NextPeriodProvisions(totalSupply sdk.Int) sdk.Dec {
 	return sdk.ZeroDec()
 }
 
-// BlockProvision returns the provisions for a block based on the annual
-// provisions rate.
-func (m Minter) BlockProvision(params Params, totalSupply sdk.Int) sdk.Coin {
-	provisionAmt := m.CurrentDayProvisions(totalSupply).QuoInt(sdk.NewInt(int64(params.BlocksPerDay)))
-	return sdk.NewCoin(params.MintDenom, provisionAmt.TruncateInt())
+//下一次减产时间多少秒之后
+func (m Minter) NextPeroidStartTime(params Params, totalMintedSupply sdk.Int) int64 {
+	total := totalMintedSupply
+	for i := range m.MintPlans {
+		if total.GTE(m.MintPlans[i].TotalPerPeriod) {
+			total = total.Sub(m.MintPlans[i].TotalPerPeriod)
+		} else {
+			left := m.MintPlans[i].TotalPerPeriod.Sub(total)
+			provisionAmt := m.MintPlans[i].TotalPerDay.Quo(sdk.NewInt(int64(params.BlocksPerDay)))
+			return left.Quo(provisionAmt).Int64() * (60 * 60 * 24 / int64(params.BlocksPerDay))
+		}
+
+	}
+	return 0
+}
+
+// BlockProvision returns the provisions for a block based on the MintPlans.
+func (m Minter) BlockProvision(params Params, totalMintedSupply sdk.Int) sdk.Coin {
+
+	for i := range m.MintPlans {
+		if totalMintedSupply.GTE(m.MintPlans[i].TotalPerPeriod) {
+			totalMintedSupply = totalMintedSupply.Sub(m.MintPlans[i].TotalPerPeriod)
+		} else {
+			provisionAmt := m.MintPlans[i].TotalPerDay.Quo(sdk.NewInt(int64(params.BlocksPerDay)))
+			return sdk.NewCoin(params.MintDenom, provisionAmt)
+		}
+	}
+	return sdk.NewCoin(params.MintDenom, sdk.NewInt(0))
+
+}
+
+func (m Minter) String() string {
+	return fmt.Sprintf(`Minting Status:
+	%+v
+`,
+		m.Status,
+	)
 }
