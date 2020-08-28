@@ -4,11 +4,17 @@ import (
 	"hschain/codec"
 )
 
-// generic sealed codec to be used throughout this module
+// Register concrete types on codec codec
+func RegisterCodec(cdc *codec.Codec) {
+	cdc.RegisterConcrete(MsgBurn{}, "cosmos-sdk/MsgBurn", nil)
+}
+
+// module codec
 var ModuleCdc *codec.Codec
 
 func init() {
 	ModuleCdc = codec.New()
+	RegisterCodec(ModuleCdc)
 	codec.RegisterCrypto(ModuleCdc)
 	ModuleCdc.Seal()
 }

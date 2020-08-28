@@ -15,6 +15,7 @@ const (
 	FeeCollectorName              = types.FeeCollectorName
 	CoinsCollectorName            = types.CoinsCollectorName
 	CoinsDistributorName          = types.CoinsDistributorName
+	CoinsBurnerName               = types.CoinsBurnerName
 	QuerierRoute                  = types.QuerierRoute
 	DefaultParamspace             = types.DefaultParamspace
 	DefaultMaxMemoCharacters      = types.DefaultMaxMemoCharacters

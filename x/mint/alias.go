@@ -12,6 +12,7 @@ import (
 
 const (
 	ModuleName            = types.ModuleName
+	RouterKey             = types.RouterKey
 	DefaultParamspace     = types.DefaultParamspace
 	StoreKey              = types.StoreKey
 	QuerierRoute          = types.QuerierRoute
@@ -36,13 +37,15 @@ var (
 
 	// variable aliases
 	ModuleCdc       = types.ModuleCdc
+	RegisterCodec   = types.RegisterCodec
 	MinterKey       = types.MinterKey
 	KeyMintDenom    = types.KeyMintDenom
 	KeyBlocksPerDay = types.KeyBlocksPerDay
 )
 
 type (
-	Keeper = keeper.Keeper
-	Minter = types.Minter
-	Params = types.Params
+	Keeper  = keeper.Keeper
+	Minter  = types.Minter
+	Params  = types.Params
+	MsgBurn = types.MsgBurn
 )

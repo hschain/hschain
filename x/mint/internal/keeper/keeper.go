@@ -19,12 +19,13 @@ type Keeper struct {
 	supplyKeeper         types.SupplyKeeper
 	coinsCollectorName   string
 	coinsDistributorName string
+	coinsBurnerName      string
 }
 
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
-	supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName string) Keeper {
+	supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName string) Keeper {
 
 	// ensure mint module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -38,6 +39,7 @@ func NewKeeper(
 		supplyKeeper:         supplyKeeper,
 		coinsCollectorName:   coinsCollectorName,
 		coinsDistributorName: coinsDistributorName,
+		coinsBurnerName:      coinsBurnerName,
 	}
 }
 
@@ -90,14 +92,14 @@ func (k Keeper) MintedTokenSupply(ctx sdk.Context) sdk.Int {
 
 //已挖不可分配
 func (k Keeper) MintingTokenSupply(ctx sdk.Context) sdk.Int {
-	feeCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsCollectorName)
-	return feeCollectorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
+	coinsCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsCollectorName)
+	return coinsCollectorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
 //已挖等待分配
 func (k Keeper) DistrTokenSupply(ctx sdk.Context) sdk.Int {
-	feeDistributorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsDistributorName)
-	return feeDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
+	coinsDistributorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsDistributorName)
+	return coinsDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
 // MintCoins implements an alias call to the underlying supply keeper's
@@ -110,8 +112,12 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {
 	return k.supplyKeeper.MintCoins(ctx, types.ModuleName, newCoins)
 }
 
+func (k Keeper) BurnCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coins) sdk.Error {
+	return k.supplyKeeper.SendCoinsFromAccountToModule(ctx, fromAddr, k.coinsBurnerName, amt)
+}
+
 // AddMintingCoins implements an alias call to the underlying supply keeper's
 // AddMintingCoins to be used in BeginBlocker.
-func (k Keeper) AddMintingCoins(ctx sdk.Context, fees sdk.Coins) sdk.Error {
-	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, fees)
+func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, amt)
 }
