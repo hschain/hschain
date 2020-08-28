@@ -32,7 +32,7 @@ func (AppModuleBasic) Name() string {
 }
 
 // register module codec
-func (AppModuleBasic) RegisterCodec(cdc *codec.Codec) {}
+func (AppModuleBasic) RegisterCodec(cdc *codec.Codec) { RegisterCodec(cdc) }
 
 // default genesis state
 func (AppModuleBasic) DefaultGenesis() json.RawMessage {
@@ -55,7 +55,9 @@ func (AppModuleBasic) RegisterRESTRoutes(ctx context.CLIContext, rtr *mux.Router
 }
 
 // get the root tx command of this module
-func (AppModuleBasic) GetTxCmd(_ *codec.Codec) *cobra.Command { return nil }
+func (AppModuleBasic) GetTxCmd(cdc *codec.Codec) *cobra.Command {
+	return cli.GetTxCmd(cdc)
+}
 
 // get the root query command of this module
 func (AppModuleBasic) GetQueryCmd(cdc *codec.Codec) *cobra.Command {
@@ -86,10 +88,12 @@ func (AppModule) Name() string {
 func (am AppModule) RegisterInvariants(_ sdk.InvariantRegistry) {}
 
 // module message route name
-func (AppModule) Route() string { return "" }
+func (AppModule) Route() string {
+	return RouterKey
+}
 
 // module handler
-func (am AppModule) NewHandler() sdk.Handler { return nil }
+func (am AppModule) NewHandler() sdk.Handler { return NewHandler(am.keeper) }
 
 // module querier route name
 func (AppModule) QuerierRoute() string {

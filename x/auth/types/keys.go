@@ -17,6 +17,7 @@ const (
 	//coinsCollectorName minted denom collector
 	CoinsCollectorName   = "coins_collector"
 	CoinsDistributorName = "coins_distributor"
+	CoinsBurnerName      = "coins_burner"
 
 	// QuerierRoute is the querier route for acc
 	QuerierRoute = StoreKey
