@@ -14,7 +14,9 @@ const (
 	// FeeCollectorName the root string for the fee collector account address
 	FeeCollectorName = "fee_collector"
 
-	FeeDistributorName = "fee_distributor"
+	//coinsCollectorName minted denom collector
+	CoinsCollectorName   = "coins_collector"
+	CoinsDistributorName = "coins_distributor"
 
 	// QuerierRoute is the querier route for acc
 	QuerierRoute = StoreKey

@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	DefaultMintDenom = "hst"
+	DefaultMintDenom = "uhst" //1hst=1,000,000uhst
 )
 
 // denomUnits contains a mapping of denomination mapped to their respective unit

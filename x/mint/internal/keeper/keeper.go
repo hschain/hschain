@@ -13,19 +13,18 @@ import (
 
 // Keeper of the mint store
 type Keeper struct {
-	cdc                *codec.Codec
-	storeKey           sdk.StoreKey
-	paramSpace         params.Subspace
-	sk                 types.StakingKeeper
-	supplyKeeper       types.SupplyKeeper
-	feeCollectorName   string
-	feeDistributorName string
+	cdc                  *codec.Codec
+	storeKey             sdk.StoreKey
+	paramSpace           params.Subspace
+	supplyKeeper         types.SupplyKeeper
+	coinsCollectorName   string
+	coinsDistributorName string
 }
 
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
-	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, feeCollectorName, feeDistributorName string) Keeper {
+	supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName string) Keeper {
 
 	// ensure mint module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -33,13 +32,12 @@ func NewKeeper(
 	}
 
 	return Keeper{
-		cdc:                cdc,
-		storeKey:           key,
-		paramSpace:         paramSpace.WithKeyTable(types.ParamKeyTable()),
-		sk:                 sk,
-		supplyKeeper:       supplyKeeper,
-		feeCollectorName:   feeCollectorName,
-		feeDistributorName: feeDistributorName,
+		cdc:                  cdc,
+		storeKey:             key,
+		paramSpace:           paramSpace.WithKeyTable(types.ParamKeyTable()),
+		supplyKeeper:         supplyKeeper,
+		coinsCollectorName:   coinsCollectorName,
+		coinsDistributorName: coinsDistributorName,
 	}
 }
 
@@ -84,16 +82,22 @@ func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 
 //______________________________________________________________________
 
-// MintingTokenSupply implements an alias call to the underlying supply keeper's
-// MintingTokenSupply to be used in BeginBlocker.
-func (k Keeper) MintingTokenSupply(ctx sdk.Context) sdk.Int {
+// MintedTokenSupply implements an alias call to the underlying supply keeper's
+// MintedTokenSupply to be used in BeginBlocker.
+func (k Keeper) MintedTokenSupply(ctx sdk.Context) sdk.Int {
 	return k.supplyKeeper.GetSupply(ctx).GetTotal().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
-//未分配的供应量
-func (k Keeper) UndistMintedTokenSupply(ctx sdk.Context) sdk.Int {
-	feeCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.feeCollectorName)
+//已挖不可分配
+func (k Keeper) MintingTokenSupply(ctx sdk.Context) sdk.Int {
+	feeCollectorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsCollectorName)
 	return feeCollectorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
+}
+
+//已挖等待分配
+func (k Keeper) DistrTokenSupply(ctx sdk.Context) sdk.Int {
+	feeDistributorAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsDistributorName)
+	return feeDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
 // MintCoins implements an alias call to the underlying supply keeper's
@@ -106,8 +110,8 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {
 	return k.supplyKeeper.MintCoins(ctx, types.ModuleName, newCoins)
 }
 
-// AddCollectedFees implements an alias call to the underlying supply keeper's
-// AddCollectedFees to be used in BeginBlocker.
-func (k Keeper) AddCollectedFees(ctx sdk.Context, fees sdk.Coins) sdk.Error {
-	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.feeCollectorName, fees)
+// AddMintingCoins implements an alias call to the underlying supply keeper's
+// AddMintingCoins to be used in BeginBlocker.
+func (k Keeper) AddMintingCoins(ctx sdk.Context, fees sdk.Coins) sdk.Error {
+	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, fees)
 }

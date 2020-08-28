@@ -23,14 +23,15 @@ type Keeper struct {
 
 	blacklistedAddrs map[string]bool
 
-	feeCollectorName   string // name of the FeeCollector ModuleAccount
-	feeDistributorName string
+	feeCollectorName     string // name of the FeeCollector ModuleAccount
+	coinsCollectorName   string
+	coinsDistributorName string
 }
 
 // NewKeeper creates a new distribution Keeper instance
 func NewKeeper(cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
 	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, codespace sdk.CodespaceType,
-	feeCollectorName, feeDistributorName string, blacklistedAddrs map[string]bool) Keeper {
+	feeCollectorName, coinsCollectorName, coinsDistributorName string, blacklistedAddrs map[string]bool) Keeper {
 
 	// ensure distribution module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -38,15 +39,16 @@ func NewKeeper(cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
 	}
 
 	return Keeper{
-		storeKey:           key,
-		cdc:                cdc,
-		paramSpace:         paramSpace.WithKeyTable(ParamKeyTable()),
-		stakingKeeper:      sk,
-		supplyKeeper:       supplyKeeper,
-		codespace:          codespace,
-		feeCollectorName:   feeCollectorName,
-		feeDistributorName: feeDistributorName,
-		blacklistedAddrs:   blacklistedAddrs,
+		storeKey:             key,
+		cdc:                  cdc,
+		paramSpace:           paramSpace.WithKeyTable(ParamKeyTable()),
+		stakingKeeper:        sk,
+		supplyKeeper:         supplyKeeper,
+		codespace:            codespace,
+		feeCollectorName:     feeCollectorName,
+		coinsCollectorName:   coinsCollectorName,
+		coinsDistributorName: coinsDistributorName,
+		blacklistedAddrs:     blacklistedAddrs,
 	}
 }
 
