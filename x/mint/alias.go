@@ -11,14 +11,13 @@ import (
 )
 
 const (
-	ModuleName            = types.ModuleName
-	RouterKey             = types.RouterKey
-	DefaultParamspace     = types.DefaultParamspace
-	StoreKey              = types.StoreKey
-	QuerierRoute          = types.QuerierRoute
-	QueryParameters       = types.QueryParameters
-	QueryDayProvisions    = types.QueryDayProvisions
-	QueryPeriodProvisions = types.QueryPeriodProvisions
+	ModuleName        = types.ModuleName
+	RouterKey         = types.RouterKey
+	DefaultParamspace = types.DefaultParamspace
+	StoreKey          = types.StoreKey
+	QuerierRoute      = types.QuerierRoute
+	QueryParameters   = types.QueryParameters
+	QueryStatus       = types.QueryStatus
 )
 
 var (

@@ -4,8 +4,8 @@ package types
 const (
 	EventTypeMint = ModuleName
 
-	AttributeKeyDayProvisions    = "day_provisions"
-	AttributeKeyPeriodProvisions = "period_provisions"
+	AttributeKeyCurrentDayProvisions    = "current_day_provisions"
+	AttributeKeyNextPeriodDayProvisions = "next_period_day_provisions"
 
 	EventTypeTransfer = "burn"
 
