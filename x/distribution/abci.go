@@ -1,6 +1,8 @@
 package distribution
 
 import (
+	"time"
+
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	sdk "hschain/types"
@@ -11,35 +13,21 @@ import (
 // set the proposer for determining distribution during endblock
 // and distribute rewards for the previous block
 func BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock, k keeper.Keeper) {
-	/*
-		// determine the total power signing the block
-		var previousTotalPower, sumPreviousPrecommitPower int64
-		for _, voteInfo := range req.LastCommitInfo.GetVotes() {
-			previousTotalPower += voteInfo.Validator.Power
-			if voteInfo.SignedLastBlock {
-				sumPreviousPrecommitPower += voteInfo.Validator.Power
-			}
-		}
+	latestBlockTime, err := k.GetLatestBlockTime(ctx)
+	now := ctx.BlockTime().Add(8 * time.Hour) //change to shanghai timezone
+	if err != nil {
+		log.Printf("err: %s", err)
+		k.SetLatestBlockTime(ctx, now)
+		return
+	}
 
-		// TODO this is Tendermint-dependent
-		// ref https://hschain/issues/3095
-		if ctx.BlockHeight() > 1 {
-			previousProposer := k.GetPreviousProposerConsAddr(ctx)
-			k.AllocateTokens(ctx, sumPreviousPrecommitPower, previousTotalPower, previousProposer, req.LastCommitInfo.GetVotes())
-		}
-
-		// record the proposer for when we payout on the next block
-		consAddr := sdk.ConsAddress(req.Header.ProposerAddress)
-		k.SetPreviousProposerConsAddr(ctx, consAddr)
-	*/
-
-	second := (ctx.BlockTime().Unix() + int64(60*60*8)) % 86400 //东八区零点
-
-	if second < 5 {
-		log.Printf("current timestamp(second): %d", second)
+	if now.Year() != latestBlockTime.Year() || now.YearDay() != latestBlockTime.YearDay() {
+		log.Printf("latest block time %s, current block time %s", latestBlockTime.String(), now.String())
 		log.Printf("transfer coins from feeCollector to feeDistributor")
 		if ctx.BlockHeight() > 1 {
 			k.DistributeCoins(ctx)
 		}
 	}
+
+	k.SetLatestBlockTime(ctx, now)
 }
