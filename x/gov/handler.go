@@ -71,6 +71,12 @@ func handleMsgSubmitProposal(ctx sdk.Context, keeper Keeper, msg MsgSubmitPropos
 }
 
 func handleMsgDeposit(ctx sdk.Context, keeper Keeper, msg MsgDeposit) sdk.Result {
+	//must be bondDenom
+	if msg.Amount.AmountOf(keeper.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("deposit denom must be: %s", keeper.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
 	err, votingStarted := keeper.AddDeposit(ctx, msg.ProposalID, msg.Depositor, msg.Amount)
 	if err != nil {
 		return err.Result()
