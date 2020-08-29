@@ -1,8 +1,10 @@
 package keeper
 
 import (
+	"fmt"
 	sdk "hschain/types"
 	"hschain/x/distribution/types"
+	"time"
 )
 
 // get the delegator withdraw address, defaulting to the delegator address
@@ -376,4 +378,22 @@ func (k Keeper) DeleteAllValidatorSlashEvents(ctx sdk.Context) {
 	for ; iter.Valid(); iter.Next() {
 		store.Delete(iter.Key())
 	}
+}
+
+// get the latest blocktime
+func (k Keeper) GetLatestBlockTime(ctx sdk.Context) (t time.Time, err error) {
+	store := ctx.KVStore(k.storeKey)
+	b := store.Get(LatestBlockTimeKey)
+	if b == nil {
+		return time.Now(), fmt.Errorf("hschain init, no lastest block found")
+	}
+	k.cdc.MustUnmarshalBinaryLengthPrefixed(b, &t)
+	return
+}
+
+// set the latest blocktime
+func (k Keeper) SetLatestBlockTime(ctx sdk.Context, t time.Time) {
+	store := ctx.KVStore(k.storeKey)
+	b := k.cdc.MustMarshalBinaryLengthPrefixed(t)
+	store.Set(LatestBlockTimeKey, b)
 }

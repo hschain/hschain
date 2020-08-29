@@ -2,7 +2,7 @@
 swagger: "2.0"
 info:
   version: "3.0"
-  title: Gaia-Lite for Cosmos
+  title: HSD-Lite for HSChain
   description: A REST interface for state queries, transaction generation and broadcasting.
 tags:
   - name: Transactions
@@ -30,7 +30,7 @@ tags:
     description: Query app version
 schemes:
   - https
-host: stargate.cosmos.network
+host: scan.hschain.io
 securityDefinitions:
   kms:
     type: basic
