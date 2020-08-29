@@ -84,6 +84,11 @@ func (keeper Keeper) GetGovernanceAccount(ctx sdk.Context) exported.ModuleAccoun
 
 // Params
 
+//return system BondDenom
+func (keeper Keeper) BondDenom(ctx sdk.Context) string {
+	return keeper.sk.BondDenom(ctx)
+}
+
 // Returns the current DepositParams from the global param store
 func (keeper Keeper) GetDepositParams(ctx sdk.Context) DepositParams {
 	var depositParams DepositParams
