@@ -29,4 +29,6 @@ type StakingKeeper interface {
 
 	IterateDelegations(ctx sdk.Context, delegator sdk.AccAddress,
 		fn func(index int64, delegation stakingexported.DelegationI) (stop bool))
+
+	BondDenom(sdk.Context) string
 }

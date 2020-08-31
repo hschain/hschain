@@ -59,3 +59,12 @@ func (k Keeper) GetModuleAccount(ctx sdk.Context, moduleName string) exported.Mo
 func (k Keeper) SetModuleAccount(ctx sdk.Context, macc exported.ModuleAccountI) {
 	k.ak.SetAccount(ctx, macc)
 }
+
+//GetBalance get balance of addr
+func (k Keeper) GetBalance(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins {
+	acc := k.ak.GetAccount(ctx, addr)
+	if acc == nil {
+		return sdk.Coins{}
+	}
+	return acc.GetCoins()
+}

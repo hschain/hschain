@@ -30,6 +30,13 @@ func NewHandler(keeper Keeper) sdk.Handler {
 }
 
 func handleMsgSubmitProposal(ctx sdk.Context, keeper Keeper, msg MsgSubmitProposal) sdk.Result {
+
+	//must be bondDenom
+	if msg.InitialDeposit.AmountOf(keeper.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("deposit denom must be: %s", keeper.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
 	proposal, err := keeper.SubmitProposal(ctx, msg.Content)
 	if err != nil {
 		return err.Result()
@@ -64,6 +71,12 @@ func handleMsgSubmitProposal(ctx sdk.Context, keeper Keeper, msg MsgSubmitPropos
 }
 
 func handleMsgDeposit(ctx sdk.Context, keeper Keeper, msg MsgDeposit) sdk.Result {
+	//must be bondDenom
+	if msg.Amount.AmountOf(keeper.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("deposit denom must be: %s", keeper.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
 	err, votingStarted := keeper.AddDeposit(ctx, msg.ProposalID, msg.Depositor, msg.Amount)
 	if err != nil {
 		return err.Result()

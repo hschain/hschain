@@ -16,6 +16,7 @@ type Keeper struct {
 	cdc                  *codec.Codec
 	storeKey             sdk.StoreKey
 	paramSpace           params.Subspace
+	sk                   types.StakingKeeper
 	supplyKeeper         types.SupplyKeeper
 	coinsCollectorName   string
 	coinsDistributorName string
@@ -25,7 +26,7 @@ type Keeper struct {
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
-	supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName string) Keeper {
+	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName string) Keeper {
 
 	// ensure mint module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -36,6 +37,7 @@ func NewKeeper(
 		cdc:                  cdc,
 		storeKey:             key,
 		paramSpace:           paramSpace.WithKeyTable(types.ParamKeyTable()),
+		sk:                   sk,
 		supplyKeeper:         supplyKeeper,
 		coinsCollectorName:   coinsCollectorName,
 		coinsDistributorName: coinsDistributorName,
@@ -83,11 +85,15 @@ func (k Keeper) SetParams(ctx sdk.Context, params types.Params) {
 }
 
 //______________________________________________________________________
+//GetDenomSupply get supply of spec denom
+func (k Keeper) GetDenomSupply(ctx sdk.Context, denom string) sdk.Int {
+	return k.supplyKeeper.GetSupply(ctx).GetTotal().AmountOf(denom)
+}
 
 // MintedTokenSupply implements an alias call to the underlying supply keeper's
 // MintedTokenSupply to be used in BeginBlocker.
 func (k Keeper) MintedTokenSupply(ctx sdk.Context) sdk.Int {
-	return k.supplyKeeper.GetSupply(ctx).GetTotal().AmountOf(k.GetParams(ctx).MintDenom)
+	return k.GetDenomSupply(ctx, k.GetParams(ctx).MintDenom)
 }
 
 //已挖不可分配
@@ -126,4 +132,21 @@ func (k Keeper) BurnCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coin
 // AddMintingCoins to be used in BeginBlocker.
 func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, amt)
+}
+
+//IssueCoins
+func (k Keeper) IssueCoins(ctx sdk.Context, toAddress sdk.AccAddress, amt sdk.Coins) sdk.Error {
+	if err := k.supplyKeeper.MintCoins(ctx, types.ModuleName, amt); err != nil {
+		return err
+	}
+
+	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, toAddress, amt)
+}
+
+func (k Keeper) GetBalance(ctx sdk.Context, acc sdk.AccAddress) sdk.Coins {
+	return k.supplyKeeper.GetBalance(ctx, acc)
+}
+
+func (k Keeper) BondDenom(ctx sdk.Context) string {
+	return k.sk.BondDenom(ctx)
 }

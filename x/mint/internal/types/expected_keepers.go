@@ -11,6 +11,8 @@ type SupplyKeeper interface {
 
 	GetSupply(sdk.Context) exported.SupplyI
 
+	GetBalance(sdk.Context, sdk.AccAddress) sdk.Coins
+
 	SetModuleAccount(sdk.Context, exported.ModuleAccountI)
 
 	GetModuleAccount(sdk.Context, string) exported.ModuleAccountI
@@ -19,4 +21,9 @@ type SupplyKeeper interface {
 	SendCoinsFromModuleToAccount(ctx sdk.Context, senderModule string, recipientAddr sdk.AccAddress, amt sdk.Coins) sdk.Error
 	SendCoinsFromModuleToModule(ctx sdk.Context, senderModule, recipientModule string, amt sdk.Coins) sdk.Error
 	MintCoins(ctx sdk.Context, name string, amt sdk.Coins) sdk.Error
+}
+
+// StakingKeeper expected staking keeper (Validator and Delegator sets)
+type StakingKeeper interface {
+	BondDenom(sdk.Context) string
 }

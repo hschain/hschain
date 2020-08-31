@@ -13,11 +13,13 @@ import (
 // set the proposer for determining distribution during endblock
 // and distribute rewards for the previous block
 func BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock, k keeper.Keeper) {
-	latestBlockTime, err := k.GetLatestBlockTime(ctx)
+
 	now := ctx.BlockTime().Add(8 * time.Hour) //change to shanghai timezone
+	defer k.SetLatestBlockTime(ctx, now)
+
+	latestBlockTime, err := k.GetLatestBlockTime(ctx)
 	if err != nil {
 		log.Printf("err: %s", err)
-		k.SetLatestBlockTime(ctx, now)
 		return
 	}
 
@@ -29,5 +31,4 @@ func BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock, k keeper.Keeper) 
 		}
 	}
 
-	k.SetLatestBlockTime(ctx, now)
 }
