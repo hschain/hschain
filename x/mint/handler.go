@@ -17,6 +17,9 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgBurn:
 			return handleMsgBurn(ctx, k, msg)
 
+		case types.MsgIssue:
+			return handleMsgIssue(ctx, k, msg)
+
 		default:
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -24,10 +27,44 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 	}
 }
 
-// handleMsgBurn MsgSend.
+// handleMsgBurn MsgBurn.
 func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Result {
 	err := k.BurnCoins(ctx, msg.FromAddress, msg.Amount)
 	if err != nil {
+		return err.Result()
+	}
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+// handleMsgIssue MsgIssue.
+func handleMsgIssue(ctx sdk.Context, k keeper.Keeper, msg types.MsgIssue) sdk.Result {
+
+	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	if msg.Amount.Empty() {
+		// skip as no coins need to be issue
+		errMsg := fmt.Sprintf("no denom found")
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+	for _, coin := range msg.Amount {
+		if !k.GetDenomSupply(ctx, coin.Denom).IsZero() {
+			errMsg := fmt.Sprintf("denom %s is exist", coin.Denom)
+			return sdk.ErrUnknownRequest(errMsg).Result()
+		}
+	}
+
+	if err := k.IssueCoins(ctx, msg.ToAddress, msg.Amount); err != nil {
 		return err.Result()
 	}
 

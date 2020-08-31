@@ -7,6 +7,7 @@ import (
 // Register concrete types on codec codec
 func RegisterCodec(cdc *codec.Codec) {
 	cdc.RegisterConcrete(MsgBurn{}, "cosmos-sdk/MsgBurn", nil)
+	cdc.RegisterConcrete(MsgIssue{}, "cosmos-sdk/MsgIssue", nil)
 }
 
 // module codec
