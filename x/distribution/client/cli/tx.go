@@ -43,6 +43,8 @@ func GetTxCmd(storeKey string, cdc *codec.Codec) *cobra.Command {
 	}
 
 	distTxCmd.AddCommand(client.PostCommands(
+		GetCmdSetDistrAddr(cdc),
+		GetCmdDistrCoins(cdc),
 		GetCmdWithdrawRewards(cdc),
 		GetCmdSetWithdrawAddr(cdc),
 		GetCmdWithdrawAllRewards(cdc, storeKey),
@@ -93,8 +95,8 @@ func GetCmdWithdrawRewards(cdc *codec.Codec) *cobra.Command {
 and optionally withdraw validator commission if the delegation address given is a validator operator.
 
 Example:
-$ %s tx distr withdraw-rewards cosmosvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey
-$ %s tx distr withdraw-rewards cosmosvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey --commission
+$ %s tx distr withdraw-rewards hscvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey
+$ %s tx distr withdraw-rewards hscvaloper1gghjut3ccd8ay0zduzj64hwre2fxs9ldmqhffj --from mykey --commission
 `,
 				version.ClientName, version.ClientName,
 			),
@@ -172,7 +174,7 @@ func GetCmdSetWithdrawAddr(cdc *codec.Codec) *cobra.Command {
 			fmt.Sprintf(`Set the withdraw address for rewards associated with a delegator address.
 
 Example:
-$ %s tx set-withdraw-addr cosmos1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p --from mykey
+$ %s tx set-withdraw-addr hsc1gghjut3ccd8ay0zduzj64hwre2fxs9ld75ru9p --from mykey
 `,
 				version.ClientName,
 			),
@@ -212,17 +214,17 @@ Where proposal.json contains:
 
 {
   "title": "Community Pool Spend",
-  "description": "Pay me some Atoms!",
-  "recipient": "cosmos1s5afhd6gxevu37mkqcvvsj8qeylhn0rz46zdlq",
+  "description": "Pay me some HSTs!",
+  "recipient": "hsc1s5afhd6gxevu37mkqcvvsj8qeylhn0rz46zdlq",
   "amount": [
     {
-      "denom": "stake",
+      "denom": "hst",
       "amount": "10000"
     }
   ],
   "deposit": [
     {
-      "denom": "stake",
+      "denom": "hst",
       "amount": "10000"
     }
   ]
@@ -251,6 +253,64 @@ Where proposal.json contains:
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}
+
+	return cmd
+}
+
+// command to set distr addr
+func GetCmdSetDistrAddr(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "set-distr-addr [distr-addr]",
+		Short: "set the distr operator address",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			distrAddr, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			msgs := []sdk.Msg{types.NewMsgSetDistrAddress(cliCtx.GetFromAddress(), distrAddr)}
+
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, msgs)
+		},
+	}
+
+	//cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+// command to set distr addr
+func GetCmdDistrCoins(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "distr-coins [distr-addr] [amt]",
+		Short: "distr coin",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			to, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[1])
+			if err != nil {
+				return err
+			}
+
+			msgs := []sdk.Msg{types.NewMsgDistrCoins(cliCtx.GetFromAddress(), to, coins)}
+
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, msgs)
+		},
+	}
+
+	//cmd = client.PostCommands(cmd)[0]
 
 	return cmd
 }

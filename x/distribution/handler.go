@@ -23,6 +23,13 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgWithdrawValidatorCommission:
 			return handleMsgWithdrawValidatorCommission(ctx, msg, k)
 
+		//hs chain added
+		case types.MsgSetDistrAddress:
+			return handleMsgModifyDistrAddress(ctx, msg, k)
+
+		case types.MsgDistrCoins:
+			return handleMsgDistrCoins(ctx, msg, k)
+
 		default:
 			errMsg := fmt.Sprintf("unrecognized distribution message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -31,6 +38,44 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 }
 
 // These functions assume everything has been authenticated (ValidateBasic passed, and signatures checked)
+func handleMsgModifyDistrAddress(ctx sdk.Context, msg types.MsgSetDistrAddress, k keeper.Keeper) sdk.Result {
+	err := k.ModifyDistrAddr(ctx, msg.DistrAddress)
+	if err != nil {
+		return err.Result()
+	}
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+			sdk.NewAttribute(sdk.AttributeKeySender, msg.Sender.String()),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+func handleMsgDistrCoins(ctx sdk.Context, msg types.MsgDistrCoins, k keeper.Keeper) sdk.Result {
+
+	if !msg.Sender.Equals(k.GetDistrAddr(ctx)) {
+		errMsg := fmt.Sprintf("distr tx send must be: %s", k.GetDistrAddr(ctx).String())
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	err := k.DistrCoins(ctx, msg.ToAddress, msg.Amount)
+	if err != nil {
+		return err.Result()
+	}
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
 
 func handleMsgModifyWithdrawAddress(ctx sdk.Context, msg types.MsgSetWithdrawAddress, k keeper.Keeper) sdk.Result {
 	err := k.SetWithdrawAddr(ctx, msg.DelegatorAddress, msg.WithdrawAddress)

@@ -45,6 +45,7 @@ var (
 	ValidatorSlashEventPrefix            = []byte{0x08} // key for validator slash fraction
 
 	LatestBlockTimeKey = []byte("latestblocktime")
+	DistrAddressKey    = []byte("distraddress")
 
 	ParamStoreKeyCommunityTax        = []byte("communitytax")
 	ParamStoreKeyBaseProposerReward  = []byte("baseproposerreward")

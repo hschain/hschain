@@ -57,6 +57,25 @@ func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
 
+//ModifyDistrAddr
+func (k Keeper) ModifyDistrAddr(ctx sdk.Context, distrAddr sdk.AccAddress) sdk.Error {
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			types.EventTypeSetDistrAddress,
+			sdk.NewAttribute(types.AttributeKeyDistrAddress, distrAddr.String()),
+		),
+	)
+
+	k.SetDistrAddr(ctx, distrAddr)
+	return nil
+}
+
+//DistrCoins
+func (k Keeper) DistrCoins(ctx sdk.Context, to sdk.AccAddress, amt sdk.Coins) sdk.Error {
+	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, k.coinsDistributorName, to, amt)
+}
+
 // SetWithdrawAddr sets a new address that will receive the rewards upon withdrawal
 func (k Keeper) SetWithdrawAddr(ctx sdk.Context, delegatorAddr sdk.AccAddress, withdrawAddr sdk.AccAddress) sdk.Error {
 	if k.blacklistedAddrs[withdrawAddr.String()] {
