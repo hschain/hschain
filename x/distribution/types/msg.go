@@ -116,3 +116,90 @@ func (msg MsgWithdrawValidatorCommission) ValidateBasic() sdk.Error {
 	}
 	return nil
 }
+
+/////////////////////////////////////hs chain added////////////////////////////////////////////////
+type MsgSetDistrAddress struct {
+	Sender       sdk.AccAddress `json:"sender" yaml:"sender"`
+	DistrAddress sdk.AccAddress `json:"distr_address" yaml:"distr_address"`
+}
+
+func NewMsgSetDistrAddress(sender, distrAddr sdk.AccAddress) MsgSetDistrAddress {
+	return MsgSetDistrAddress{
+		Sender:       sender,
+		DistrAddress: distrAddr,
+	}
+}
+
+func (msg MsgSetDistrAddress) Route() string { return ModuleName }
+func (msg MsgSetDistrAddress) Type() string  { return "set_distr_address" }
+
+// Return address that must sign over msg.GetSignBytes()
+func (msg MsgSetDistrAddress) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.AccAddress(msg.Sender)}
+}
+
+// get the bytes for the message signer to sign on
+func (msg MsgSetDistrAddress) GetSignBytes() []byte {
+	bz := ModuleCdc.MustMarshalJSON(msg)
+	return sdk.MustSortJSON(bz)
+}
+
+// quick validity check
+func (msg MsgSetDistrAddress) ValidateBasic() sdk.Error {
+	if msg.Sender.String() != ROOTUSER {
+		errMsg := "only root user can set distr address"
+		return sdk.ErrUnknownRequest(errMsg)
+	}
+	if msg.Sender.Empty() {
+		return ErrNilDelegatorAddr(DefaultCodespace)
+	}
+	if msg.DistrAddress.Empty() {
+		return ErrNilWithdrawAddr(DefaultCodespace)
+	}
+	return nil
+}
+
+type MsgDistrCoins struct {
+	Sender    sdk.AccAddress `json:"sender" yaml:"sender"`
+	ToAddress sdk.AccAddress `json:"to_address" yaml:"to_address"`
+	Amount    sdk.Coins      `json:"amount" yaml:"amount"`
+}
+
+func NewMsgDistrCoins(sender, toAddress sdk.AccAddress, amt sdk.Coins) MsgDistrCoins {
+	return MsgDistrCoins{
+		Sender:    sender,
+		ToAddress: toAddress,
+		Amount:    amt,
+	}
+}
+
+func (msg MsgDistrCoins) Route() string { return ModuleName }
+func (msg MsgDistrCoins) Type() string  { return "distr_coins" }
+
+// Return address that must sign over msg.GetSignBytes()
+func (msg MsgDistrCoins) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{sdk.AccAddress(msg.Sender)}
+}
+
+// get the bytes for the message signer to sign on
+func (msg MsgDistrCoins) GetSignBytes() []byte {
+	bz := ModuleCdc.MustMarshalJSON(msg)
+	return sdk.MustSortJSON(bz)
+}
+
+// quick validity check
+func (msg MsgDistrCoins) ValidateBasic() sdk.Error {
+	if msg.Sender.Empty() {
+		return ErrNilDelegatorAddr(DefaultCodespace)
+	}
+	if msg.ToAddress.Empty() {
+		return ErrNilWithdrawAddr(DefaultCodespace)
+	}
+	if !msg.Amount.IsValid() {
+		return sdk.ErrInvalidCoins("send amount is invalid: " + msg.Amount.String())
+	}
+	if !msg.Amount.IsAllPositive() {
+		return sdk.ErrInsufficientCoins("send amount must be positive")
+	}
+	return nil
+}

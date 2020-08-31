@@ -397,3 +397,18 @@ func (k Keeper) SetLatestBlockTime(ctx sdk.Context, t time.Time) {
 	b := k.cdc.MustMarshalBinaryLengthPrefixed(t)
 	store.Set(LatestBlockTimeKey, b)
 }
+
+func (k Keeper) GetDistrAddr(ctx sdk.Context) sdk.AccAddress {
+	store := ctx.KVStore(k.storeKey)
+	b := store.Get(DistrAddressKey)
+	if b == nil {
+		return sdk.AccAddress{}
+	}
+	return sdk.AccAddress(b)
+}
+
+// set the distr address
+func (k Keeper) SetDistrAddr(ctx sdk.Context, distrAddr sdk.AccAddress) {
+	store := ctx.KVStore(k.storeKey)
+	store.Set(DistrAddressKey, distrAddr.Bytes())
+}

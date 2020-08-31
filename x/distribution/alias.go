@@ -87,22 +87,26 @@ var (
 	NewGenesisState                            = types.NewGenesisState
 	DefaultGenesisState                        = types.DefaultGenesisState
 	ValidateGenesis                            = types.ValidateGenesis
-	NewMsgSetWithdrawAddress                   = types.NewMsgSetWithdrawAddress
-	NewMsgWithdrawDelegatorReward              = types.NewMsgWithdrawDelegatorReward
-	NewMsgWithdrawValidatorCommission          = types.NewMsgWithdrawValidatorCommission
-	NewCommunityPoolSpendProposal              = types.NewCommunityPoolSpendProposal
-	NewQueryValidatorOutstandingRewardsParams  = types.NewQueryValidatorOutstandingRewardsParams
-	NewQueryValidatorCommissionParams          = types.NewQueryValidatorCommissionParams
-	NewQueryValidatorSlashesParams             = types.NewQueryValidatorSlashesParams
-	NewQueryDelegationRewardsParams            = types.NewQueryDelegationRewardsParams
-	NewQueryDelegatorParams                    = types.NewQueryDelegatorParams
-	NewQueryDelegatorWithdrawAddrParams        = types.NewQueryDelegatorWithdrawAddrParams
-	NewQueryDelegatorTotalRewardsResponse      = types.NewQueryDelegatorTotalRewardsResponse
-	NewDelegationDelegatorReward               = types.NewDelegationDelegatorReward
-	NewValidatorHistoricalRewards              = types.NewValidatorHistoricalRewards
-	NewValidatorCurrentRewards                 = types.NewValidatorCurrentRewards
-	InitialValidatorAccumulatedCommission      = types.InitialValidatorAccumulatedCommission
-	NewValidatorSlashEvent                     = types.NewValidatorSlashEvent
+
+	NewMsgSetDistrAddress = types.NewMsgSetDistrAddress
+	NewMsgDistrCoins      = types.NewMsgDistrCoins
+
+	NewMsgSetWithdrawAddress                  = types.NewMsgSetWithdrawAddress
+	NewMsgWithdrawDelegatorReward             = types.NewMsgWithdrawDelegatorReward
+	NewMsgWithdrawValidatorCommission         = types.NewMsgWithdrawValidatorCommission
+	NewCommunityPoolSpendProposal             = types.NewCommunityPoolSpendProposal
+	NewQueryValidatorOutstandingRewardsParams = types.NewQueryValidatorOutstandingRewardsParams
+	NewQueryValidatorCommissionParams         = types.NewQueryValidatorCommissionParams
+	NewQueryValidatorSlashesParams            = types.NewQueryValidatorSlashesParams
+	NewQueryDelegationRewardsParams           = types.NewQueryDelegationRewardsParams
+	NewQueryDelegatorParams                   = types.NewQueryDelegatorParams
+	NewQueryDelegatorWithdrawAddrParams       = types.NewQueryDelegatorWithdrawAddrParams
+	NewQueryDelegatorTotalRewardsResponse     = types.NewQueryDelegatorTotalRewardsResponse
+	NewDelegationDelegatorReward              = types.NewDelegationDelegatorReward
+	NewValidatorHistoricalRewards             = types.NewValidatorHistoricalRewards
+	NewValidatorCurrentRewards                = types.NewValidatorCurrentRewards
+	InitialValidatorAccumulatedCommission     = types.InitialValidatorAccumulatedCommission
+	NewValidatorSlashEvent                    = types.NewValidatorSlashEvent
 
 	// variable aliases
 	FeePoolKey                           = keeper.FeePoolKey
