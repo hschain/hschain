@@ -12,13 +12,16 @@ import (
 
 // NewQuerier returns a minting Querier handler.
 func NewQuerier(k Keeper) sdk.Querier {
-	return func(ctx sdk.Context, path []string, _ abci.RequestQuery) ([]byte, sdk.Error) {
+	return func(ctx sdk.Context, path []string, query abci.RequestQuery) ([]byte, sdk.Error) {
 		switch path[0] {
 		case types.QueryParameters:
 			return queryParams(ctx, k)
 
 		case types.QueryStatus:
 			return queryStatus(ctx, k)
+
+		case types.QueryBonus:
+			return queryBonus(ctx, k, query.Height)
 
 		default:
 			return nil, sdk.ErrUnknownRequest(fmt.Sprintf("unknown minting query endpoint: %s", path[0]))
@@ -52,6 +55,19 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter.Status.BlockProvision = minter.BlockProvision(params, minter.Status.TotalMintedSupply)
 
 	res, err := codec.MarshalJSONIndent(k.cdc, minter)
+	if err != nil {
+		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
+	}
+
+	return res, nil
+}
+
+func queryBonus(ctx sdk.Context, k Keeper, height int64) ([]byte, sdk.Error) {
+
+	//log.Printf("query bonus at height %d", height)
+	coin := k.GetBonus(ctx, height)
+
+	res, err := codec.MarshalJSONIndent(k.cdc, coin)
 	if err != nil {
 		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
 	}

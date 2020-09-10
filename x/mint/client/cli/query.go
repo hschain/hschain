@@ -8,6 +8,7 @@ import (
 	"hschain/client"
 	"hschain/client/context"
 	"hschain/codec"
+	sdk "hschain/types"
 	"hschain/x/mint/internal/types"
 )
 
@@ -25,6 +26,7 @@ func GetQueryCmd(cdc *codec.Codec) *cobra.Command {
 		client.GetCommands(
 			GetCmdQueryParams(cdc),
 			GetCmdQueryStatus(cdc),
+			GetCmdQueryBonus(cdc),
 		)...,
 	)
 
@@ -79,6 +81,32 @@ func GetCmdQueryStatus(cdc *codec.Codec) *cobra.Command {
 			}
 
 			return cliCtx.PrintOutput(minter)
+		},
+	}
+}
+
+// GetCmdQueryBonus implements a command to return the current minting
+// inflation value.
+func GetCmdQueryBonus(cdc *codec.Codec) *cobra.Command {
+	return &cobra.Command{
+		Use:   "bonus",
+		Short: "Query minting bonus for a block",
+		Args:  cobra.NoArgs,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryBonus)
+			res, _, err := cliCtx.QueryWithData(route, nil)
+			if err != nil {
+				return err
+			}
+
+			var coin sdk.Coin
+			if err := cdc.UnmarshalJSON(res, &coin); err != nil {
+				return err
+			}
+
+			return cliCtx.PrintOutput(coin)
 		},
 	}
 }

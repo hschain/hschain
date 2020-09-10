@@ -35,7 +35,7 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
-	k.SetBonus(ctx, ctx.BlockHeight(), mintedCoins)
+	k.SetBonus(ctx, ctx.BlockHeight(), mintedCoin)
 
 	totalMintingSupply := k.MintingTokenSupply(ctx)
 
