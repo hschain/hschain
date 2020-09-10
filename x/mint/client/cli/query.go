@@ -89,14 +89,14 @@ func GetCmdQueryStatus(cdc *codec.Codec) *cobra.Command {
 // inflation value.
 func GetCmdQueryBonus(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
-		Use:   "bonus",
+		Use:   "bonus [bheight]",
 		Short: "Query minting bonus for a block",
-		Args:  cobra.NoArgs,
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
 			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryBonus)
-			res, _, err := cliCtx.QueryWithData(route, nil)
+			res, _, err := cliCtx.QueryWithData(route, []byte(args[0]))
 			if err != nil {
 				return err
 			}

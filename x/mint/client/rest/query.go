@@ -23,7 +23,7 @@ func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router) {
 	).Methods("GET")
 
 	r.HandleFunc(
-		"/minting/bonus",
+		"/minting/bonus/{bheight}",
 		queryBonusHandlerFn(cliCtx),
 	).Methods("GET")
 
@@ -71,6 +71,14 @@ func queryStatusHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 
 func queryBonusHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+
+		vars := mux.Vars(r)
+		bheight := vars["bheight"]
+
+		if bheight == "" {
+			return
+		}
+
 		route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryBonus)
 
 		cliCtx, ok := rest.ParseQueryHeightOrReturnBadRequest(w, cliCtx, r)
@@ -78,7 +86,7 @@ func queryBonusHandlerFn(cliCtx context.CLIContext) http.HandlerFunc {
 			return
 		}
 
-		res, height, err := cliCtx.QueryWithData(route, nil)
+		res, height, err := cliCtx.QueryWithData(route, []byte(bheight))
 		if err != nil {
 			rest.WriteErrorResponse(w, http.StatusInternalServerError, err.Error())
 			return
