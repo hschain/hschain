@@ -71,6 +71,12 @@ func (k Keeper) SetMinter(ctx sdk.Context, minter types.Minter) {
 	store.Set(types.MinterKey, b)
 }
 
+func (k Keeper) SetBonus(ctx sdk.Context, height int64, coins sdk.Coins) {
+	store := ctx.KVStore(k.storeKey)
+	b := k.cdc.MustMarshalBinaryLengthPrefixed(coins)
+	store.Set([]byte(fmt.Sprintf("%d", height)), b)
+}
+
 //______________________________________________________________________
 
 // GetParams returns the total set of minting parameters.
