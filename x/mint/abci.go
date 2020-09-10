@@ -35,6 +35,8 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
+	k.SetBonus(ctx, ctx.BlockHeight(), mintedCoin)
+
 	totalMintingSupply := k.MintingTokenSupply(ctx)
 
 	ctx.Logger().Info(fmt.Sprintf("mint:TotalSupply:%s, TotalMintingSupply: %s, DistrTokenSupply:%s, CurrentDayProvisions:%s, NextPeroidStartTime:%d, NextPeriodDayProvisions:%s, mintedCoin: %s",
