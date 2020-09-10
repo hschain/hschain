@@ -21,7 +21,7 @@ func NewQuerier(k Keeper) sdk.Querier {
 			return queryStatus(ctx, k)
 
 		case types.QueryBonus:
-			return queryBonus(ctx, k, query.Height)
+			return queryBonus(ctx, k, string(query.Data))
 
 		default:
 			return nil, sdk.ErrUnknownRequest(fmt.Sprintf("unknown minting query endpoint: %s", path[0]))
@@ -62,9 +62,9 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	return res, nil
 }
 
-func queryBonus(ctx sdk.Context, k Keeper, height int64) ([]byte, sdk.Error) {
+func queryBonus(ctx sdk.Context, k Keeper, height string) ([]byte, sdk.Error) {
 
-	//log.Printf("query bonus at height %d", height)
+	//log.Printf("query bonus at height %s", height)
 	coin := k.GetBonus(ctx, height)
 
 	res, err := codec.MarshalJSONIndent(k.cdc, coin)
