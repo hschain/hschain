@@ -33,9 +33,12 @@ import (
 )
 
 const (
-	appName          = "hsc"
+	appName       = "hsc"
+	Bip44CoinType = 532 // see https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+)
+
+var (
 	Bech32MainPrefix = "hsc"
-	Bip44CoinType    = 532 // see https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 )
 
 var (
@@ -269,6 +272,10 @@ func (app *App) ModuleAccountAddrs() map[string]bool {
 	}
 
 	return modAccAddrs
+}
+
+func SetBech32Prefix(prefix string) {
+	Bech32MainPrefix = prefix
 }
 
 // SetBech32AddressPrefixes sets the global prefix to be used when serializing addresses to bech32 strings.

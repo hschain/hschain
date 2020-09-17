@@ -60,6 +60,7 @@ const (
 	OutputFormatText       = keys.OutputFormatText
 	OutputFormatJSON       = keys.OutputFormatJSON
 	MinPassLength          = input.MinPassLength
+	FlagSubchain           = flags.FlagSubchain
 )
 
 var (
