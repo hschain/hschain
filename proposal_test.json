@@ -1,0 +1,17 @@
+{
+	"title": "Staking Param Change",
+	"description": "Update max validators",
+	"changes": [
+	  {
+		"subspace": "staking",
+		"key": "MaxValidators",
+		"value": 10
+	  }
+	],
+	"deposit": [
+	  {
+		"denom": "uhst",
+		"amount": "10000"
+	  }
+	]
+  }
