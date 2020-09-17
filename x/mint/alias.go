@@ -43,8 +43,10 @@ var (
 )
 
 type (
-	Keeper  = keeper.Keeper
-	Minter  = types.Minter
-	Params  = types.Params
-	MsgBurn = types.MsgBurn
+	Keeper            = keeper.Keeper
+	Minter            = types.Minter
+	Params            = types.Params
+	MsgBurn           = types.MsgBurn
+	MsgDestory        = types.MsgDestory
+	MsgConversionRate = types.MsgConversionRate
 )

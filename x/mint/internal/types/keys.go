@@ -8,6 +8,11 @@ const (
 	// module name
 	ModuleName = "mint"
 
+	// Power Denom
+	PowerDenom = "ut"
+
+	// Denom Begin
+	DenomBegin = "u"
 	// default paramspace for params keeper
 	DefaultParamspace = ModuleName
 

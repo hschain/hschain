@@ -20,6 +20,12 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgIssue:
 			return handleMsgIssue(ctx, k, msg)
 
+		case types.MsgDestory:
+			return handleMsgDestory(ctx, k, msg)
+
+		case types.MsgConversionRate:
+			return handleMsgConversionRate(ctx, k, msg)
+
 		default:
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -30,6 +36,50 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 // handleMsgBurn MsgBurn.
 func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Result {
 	err := k.BurnCoins(ctx, msg.FromAddress, msg.Amount)
+	if err != nil {
+		return err.Result()
+	}
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+// MsgConversionRate MsgConversionRate.
+func handleMsgConversionRate(ctx sdk.Context, k keeper.Keeper, msg types.MsgConversionRate) sdk.Result {
+
+	if k.GetBalance(ctx, msg.FromAddress).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	params := k.GetParams(ctx)
+
+	rate := msg.Rate.AmountOf(params.MintDenom)
+	if rate.IsZero() {
+		return sdk.ErrInvalidAddress("rate must be >0 number").Result()
+	}
+
+	k.SetConversionRates(ctx, params.MintDenom, sdk.NewCoin(params.MintDenom, rate))
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+// MsgDestory MsgDestory.
+func handleMsgDestory(ctx sdk.Context, k keeper.Keeper, msg types.MsgDestory) sdk.Result {
+	err := k.DestoryCoins(ctx, msg.FromAddress, msg.Amount)
 	if err != nil {
 		return err.Result()
 	}

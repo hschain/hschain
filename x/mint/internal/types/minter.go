@@ -34,8 +34,10 @@ type Status struct {
 
 // Minter represents the minting state.
 type Minter struct {
-	MintPlans []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
-	Status    Status     `json:"status" yaml:"status"`         // mint status
+	MintPlans       []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
+	Status          Status     `json:"status" yaml:"status"`         // mint status
+	BurnAmount      sdk.Coins  `json:"burn_amount" yaml:"burn_amount"`
+	ConversionRates sdk.Coins  `json:"conversion_rates" yaml:"conversion_rates"`
 }
 
 //DefaultMintPlans create
