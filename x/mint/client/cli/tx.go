@@ -21,7 +21,6 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		SuggestionsMinimumDistance: 2,
 		RunE:                       client.ValidateCmd,
 	}
-<<<<<<< HEAD
 
 	burnCmd := BurnTxCmd(cdc)
 	burnCmd.AddCommand(
@@ -32,11 +31,6 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		burnCmd,
 		IssueTxCmd(cdc),
 		DestoryTxCmd(cdc),
-=======
-	txCmd.AddCommand(
-		BurnTxCmd(cdc),
-		IssueTxCmd(cdc),
->>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 	)
 	return txCmd
 }
@@ -68,7 +62,6 @@ func BurnTxCmd(cdc *codec.Codec) *cobra.Command {
 	return cmd
 }
 
-<<<<<<< HEAD
 func ConversionRateTxCmd(cdc *codec.Codec) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "conversion-rate [from_key_or_address] [rate]",
@@ -122,8 +115,6 @@ func DestoryTxCmd(cdc *codec.Codec) *cobra.Command {
 	return cmd
 }
 
-=======
->>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 //IssueTxCmd will ipo new coins if no exist
 func IssueTxCmd(cdc *codec.Codec) *cobra.Command {
 	cmd := &cobra.Command{

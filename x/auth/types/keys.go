@@ -18,11 +18,7 @@ const (
 	CoinsCollectorName   = "coins_collector"
 	CoinsDistributorName = "coins_distributor"
 	CoinsBurnerName      = "coins_burner"
-<<<<<<< HEAD
 	CoinsDestoriserName  = "coins_destoriser"
-=======
-
->>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 	// QuerierRoute is the querier route for acc
 	QuerierRoute = StoreKey
 )

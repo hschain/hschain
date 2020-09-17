@@ -96,7 +96,6 @@ func (msg MsgIssue) GetSignBytes() []byte {
 func (msg MsgIssue) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.Sender}
 }
-<<<<<<< HEAD
 
 // MsgDistory - high level transaction of the coin module
 type MsgDestory struct {
@@ -182,5 +181,3 @@ func (msg MsgConversionRate) GetSignBytes() []byte {
 func (msg MsgConversionRate) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.FromAddress}
 }
-=======
->>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
