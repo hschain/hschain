@@ -20,12 +20,15 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgIssue:
 			return handleMsgIssue(ctx, k, msg)
 
+<<<<<<< HEAD
 		case types.MsgDestory:
 			return handleMsgDestory(ctx, k, msg)
 
 		case types.MsgConversionRate:
 			return handleMsgConversionRate(ctx, k, msg)
 
+=======
+>>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 		default:
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -35,7 +38,10 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 
 // handleMsgBurn MsgBurn.
 func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Result {
+<<<<<<< HEAD
 
+=======
+>>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 	err := k.BurnCoins(ctx, msg.FromAddress, msg.Amount)
 	if err != nil {
 		return err.Result()
@@ -51,6 +57,7 @@ func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Resu
 	return sdk.Result{Events: ctx.EventManager().Events()}
 }
 
+<<<<<<< HEAD
 // MsgConversionRate MsgConversionRate.
 func handleMsgConversionRate(ctx sdk.Context, k keeper.Keeper, msg types.MsgConversionRate) sdk.Result {
 
@@ -95,6 +102,8 @@ func handleMsgDestory(ctx sdk.Context, k keeper.Keeper, msg types.MsgDestory) sd
 	return sdk.Result{Events: ctx.EventManager().Events()}
 }
 
+=======
+>>>>>>> df41a681ebe3047d8be9520b9858e17a9bf418c1
 // handleMsgIssue MsgIssue.
 func handleMsgIssue(ctx sdk.Context, k keeper.Keeper, msg types.MsgIssue) sdk.Result {
 
