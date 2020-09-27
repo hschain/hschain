@@ -18,7 +18,7 @@ const (
 	CoinsCollectorName   = "coins_collector"
 	CoinsDistributorName = "coins_distributor"
 	CoinsBurnerName      = "coins_burner"
-	CoinsDestoriserName  = "coins_destoriser"
+	CoinsDestoryerName  = "coins_destoriser"
 	// QuerierRoute is the querier route for acc
 	QuerierRoute = StoreKey
 )

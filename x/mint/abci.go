@@ -29,7 +29,6 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 		panic(err)
 	}
 
-	BurnAmount := k.BurnTokenSupply(ctx)
 	// send the minted coins to the fee collector account
 	err = k.AddMintingCoins(ctx, mintedCoins)
 	if err != nil {
@@ -39,6 +38,8 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	k.SetBonus(ctx, ctx.BlockHeight(), mintedCoin)
 
 	totalMintingSupply := k.MintingTokenSupply(ctx)
+
+	BurnAmount := k.BurnTokenSupply(ctx)
 
 	ctx.Logger().Info(fmt.Sprintf("mint:TotalSupply:%s, TotalMintingSupply: %s, DistrTokenSupply:%s, CurrentDayProvisions:%s, NextPeroidStartTime:%d, NextPeriodDayProvisions:%s, mintedCoin: %s, BurnAmount: %s",
 		totalMintedSupply.String(),

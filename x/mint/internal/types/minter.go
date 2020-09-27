@@ -30,14 +30,16 @@ type Status struct {
 	NextPeriodDayProvisions sdk.Dec   `json:"next_period_day_provisions" yaml:"next_period_day_provisions"`
 	NextPeroidStartTime     int64     `json:"next_peroid_startTime" yaml:"next_peroid_startTime"`
 	BlockProvision          sdk.Coin  `json:"block_provision" yaml:"block_provision"`
+	BurnAmount              sdk.Coins `json:"burn_amount" yaml:"burn_amount"`
+	DestoryAmount           sdk.Coins `json:"destory_amount" yaml:"destory_amount"`
+	ConversionRates         sdk.Coins `json:"conversion_rates" yaml:"conversion_rates"`
 }
 
 // Minter represents the minting state.
 type Minter struct {
-	MintPlans       []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
-	Status          Status     `json:"status" yaml:"status"`         // mint status
-	BurnAmount      sdk.Coins  `json:"burn_amount" yaml:"burn_amount"`
-	ConversionRates sdk.Coins  `json:"conversion_rates" yaml:"conversion_rates"`
+	MintPlans []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
+	Status    Status     `json:"status" yaml:"status"`         // mint status
+
 }
 
 //DefaultMintPlans create
