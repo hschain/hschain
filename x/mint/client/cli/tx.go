@@ -64,15 +64,15 @@ func BurnTxCmd(cdc *codec.Codec) *cobra.Command {
 
 func ConversionRateTxCmd(cdc *codec.Codec) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "conversion-rate [from_key_or_address] [rate]",
+		Use:   "conversion-rate [rate] --from=[name]",
 		Short: "Create and sign a burn conversion-rate tx,the rate is *uhst = 1t",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
-			cliCtx := context.NewCLIContextWithFrom(args[0]).WithCodec(cdc)
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
 			// parse coins trying to be sent
-			coins, err := sdk.ParseCoins(args[1])
+			coins, err := sdk.ParseCoins(args[0])
 			if err != nil {
 				return err
 			}

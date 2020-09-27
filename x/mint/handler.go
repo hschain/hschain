@@ -53,7 +53,7 @@ func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Resu
 // MsgConversionRate MsgConversionRate.
 func handleMsgConversionRate(ctx sdk.Context, k keeper.Keeper, msg types.MsgConversionRate) sdk.Result {
 
-	if k.GetBalance(ctx, msg.FromAddress).AmountOf(k.BondDenom(ctx)).IsZero() {
+	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
 		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
 		return sdk.ErrUnknownRequest(errMsg).Result()
 	}

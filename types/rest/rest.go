@@ -20,8 +20,8 @@ import (
 )
 
 const (
-	DefaultPage  = 1
-	DefaultLimit = 30 // should be consistent with tendermint/tendermint/rpc/core/pipe.go:19
+	DefaultPage    = 1
+	DefaultLimit   = 30             // should be consistent with tendermint/tendermint/rpc/core/pipe.go:19
 	TxMinHeightKey = "tx.minheight" // Inclusive minimum height filter
 	TxMaxHeightKey = "tx.maxheight" // Inclusive maximum height filter
 )
@@ -127,7 +127,7 @@ func ReadRESTReq(w http.ResponseWriter, r *http.Request, cdc *codec.Codec, req i
 		WriteErrorResponse(w, http.StatusBadRequest, err.Error())
 		return false
 	}
-
+	fmt.Printf("-------------------------%s", body)
 	err = cdc.UnmarshalJSON(body, req)
 	if err != nil {
 		WriteErrorResponse(w, http.StatusBadRequest, fmt.Sprintf("failed to decode JSON payload: %s", err))

@@ -4,12 +4,18 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/gorilla/mux"
-
 	"hschain/client/context"
+	sdk "hschain/types"
 	"hschain/types/rest"
 	"hschain/x/mint/internal/types"
+
+	"github.com/gorilla/mux"
 )
+
+type SendReq struct {
+	BaseReq rest.BaseReq `json:"base_req" yaml:"base_req"`
+	Amount  sdk.Coins    `json:"amount" yaml:"amount"`
+}
 
 func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router) {
 	r.HandleFunc(

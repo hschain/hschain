@@ -53,8 +53,9 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter.Status.NextPeriodDayProvisions = minter.NextPeriodDayProvisions(minter.Status.TotalMintedSupply)
 	minter.Status.NextPeroidStartTime = minter.NextPeroidStartTime(params, minter.Status.TotalMintedSupply)
 	minter.Status.BlockProvision = minter.BlockProvision(params, minter.Status.TotalMintedSupply)
-	minter.BurnAmount = k.BurnTokenSupply(ctx)
-	minter.ConversionRates = sdk.NewCoins(k.GetConversionRates(ctx, params.MintDenom))
+	minter.Status.BurnAmount = k.BurnTokenSupply(ctx)
+	minter.Status.DestoryAmount = k.DestoryTokenSupply(ctx)
+	minter.Status.ConversionRates = sdk.NewCoins(k.GetConversionRates(ctx, params.MintDenom))
 	res, err := codec.MarshalJSONIndent(k.cdc, minter)
 	if err != nil {
 		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))

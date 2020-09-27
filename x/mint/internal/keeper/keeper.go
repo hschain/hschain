@@ -21,13 +21,13 @@ type Keeper struct {
 	coinsCollectorName   string
 	coinsDistributorName string
 	coinsBurnerName      string
-	coinsDestoriserName  string
+	coinsDestoryerName   string
 }
 
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
-	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName, coinsDestoriserName string) Keeper {
+	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName, coinsDestoryerName string) Keeper {
 
 	// ensure mint module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -43,7 +43,7 @@ func NewKeeper(
 		coinsCollectorName:   coinsCollectorName,
 		coinsDistributorName: coinsDistributorName,
 		coinsBurnerName:      coinsBurnerName,
-		coinsDestoriserName:  coinsDestoriserName,
+		coinsDestoryerName:   coinsDestoryerName,
 	}
 }
 
@@ -146,15 +146,15 @@ func (k Keeper) DistrTokenSupply(ctx sdk.Context) sdk.Int {
 	return coinsDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
-//已销毁
+//已燃烧
 func (k Keeper) BurnTokenSupply(ctx sdk.Context) sdk.Coins {
 	coinsBurnerAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsBurnerName)
 	return coinsBurnerAcc.GetCoins()
 }
 
 //已销毁
-func (k Keeper) destoryTokenSupply(ctx sdk.Context) sdk.Coins {
-	coinsdestoriserAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsDestoriserName)
+func (k Keeper) DestoryTokenSupply(ctx sdk.Context) sdk.Coins {
+	coinsdestoriserAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsDestoryerName)
 	return coinsdestoriserAcc.GetCoins()
 }
 
@@ -168,7 +168,7 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {
 	return k.supplyKeeper.MintCoins(ctx, types.ModuleName, newCoins)
 }
 
-func (k Keeper) BurnCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coins) sdk.Error {
+func (k Keeper) BurnCoins(ctx sdk.Context, sender sdk.AccAddress, amt sdk.Coins) sdk.Error {
 
 	params := k.GetParams(ctx)
 	if amt.AmountOf(params.MintDenom).IsZero() {
@@ -176,13 +176,7 @@ func (k Keeper) BurnCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coin
 		return sdk.ErrUnknownRequest(errMsg)
 	}
 
-	if amt.Empty() {
-		// skip as no coins need to be issue
-		errMsg := fmt.Sprintf("no denom found")
-		return sdk.ErrUnknownRequest(errMsg)
-	}
-
-	if err := k.supplyKeeper.SendCoinsFromAccountToModule(ctx, fromAddr, k.coinsBurnerName, amt); err != nil {
+	if err := k.supplyKeeper.SendCoinsFromAccountToModule(ctx, sender, k.coinsBurnerName, amt); err != nil {
 		return err
 	}
 
@@ -198,27 +192,18 @@ func (k Keeper) BurnCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coin
 		return err
 	}
 
-	// send the minted coins to the fee collector account
-	if err := k.AddBurnCoins(ctx, mintedCoins); err != nil {
-		return err
-	}
-
-	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, k.coinsBurnerName, fromAddr, mintedCoins)
+	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, sender, mintedCoins)
 }
 
 func (k Keeper) DestoryCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.Coins) sdk.Error {
 
-	return k.supplyKeeper.SendCoinsFromAccountToModule(ctx, fromAddr, k.coinsDestoriserName, amt)
+	return k.supplyKeeper.SendCoinsFromAccountToModule(ctx, fromAddr, k.coinsDestoryerName, amt)
 }
 
 // AddMintingCoins implements an alias call to the underlying supply keeper's
 // AddMintingCoins to be used in BeginBlocker.
 func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, amt)
-}
-
-func (k Keeper) AddBurnCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
-	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsBurnerName, amt)
 }
 
 //IssueCoins

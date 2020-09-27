@@ -141,15 +141,15 @@ func (msg MsgDestory) GetSigners() []sdk.AccAddress {
 }
 
 type MsgConversionRate struct {
-	FromAddress sdk.AccAddress `json:"from_address" yaml:"from_address"`
-	Rate        sdk.Coins      `json:"amount" yaml:"amount"`
+	Sender sdk.AccAddress `json:"from_address" yaml:"from_address"`
+	Rate   sdk.Coins      `json:"amount" yaml:"amount"`
 }
 
 var _ sdk.Msg = MsgConversionRate{}
 
 // NewMsgSend - construct arbitrary multi-in, multi-out send msg.
-func NewMsgConversionRate(fromAddr sdk.AccAddress, Rate sdk.Coins) MsgConversionRate {
-	return MsgConversionRate{FromAddress: fromAddr, Rate: Rate}
+func NewMsgConversionRate(Sender sdk.AccAddress, Rate sdk.Coins) MsgConversionRate {
+	return MsgConversionRate{Sender: Sender, Rate: Rate}
 }
 
 // Route Implements Msg.
@@ -160,7 +160,7 @@ func (msg MsgConversionRate) Type() string { return "destory" }
 
 // ValidateBasic Implements Msg.
 func (msg MsgConversionRate) ValidateBasic() sdk.Error {
-	if msg.FromAddress.Empty() {
+	if msg.Sender.Empty() {
 		return sdk.ErrInvalidAddress("missing sender address")
 	}
 	if !msg.Rate.IsValid() {
@@ -179,5 +179,5 @@ func (msg MsgConversionRate) GetSignBytes() []byte {
 
 // GetSigners Implements Msg.
 func (msg MsgConversionRate) GetSigners() []sdk.AccAddress {
-	return []sdk.AccAddress{msg.FromAddress}
+	return []sdk.AccAddress{msg.Sender}
 }

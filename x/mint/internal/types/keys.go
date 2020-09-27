@@ -13,6 +13,7 @@ const (
 
 	// Denom Begin
 	DenomBegin = "u"
+
 	// default paramspace for params keeper
 	DefaultParamspace = ModuleName
 
