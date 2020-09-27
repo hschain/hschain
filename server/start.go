@@ -28,6 +28,7 @@ const (
 	FlagMinGasPrices   = "minimum-gas-prices"
 	FlagHaltHeight     = "halt-height"
 	FlagHaltTime       = "halt-time"
+	FlagSubchain       = "subchain"
 )
 
 // StartCmd runs the service passed in, either stand-alone or in-process with
@@ -80,6 +81,8 @@ which accepts a path for the resulting pprof file.
 	cmd.Flags().Uint64(FlagHaltTime, 0, "Minimum block time (in Unix seconds) at which to gracefully halt the chain and shutdown the node")
 	cmd.Flags().String(flagCPUProfile, "", "Enable CPU profiling and write to the provided file")
 
+	cmd.Flags().String(FlagSubchain, "hsc", "subchain id")
+
 	// add support for all Tendermint-specific command line options
 	tcmd.AddNodeFlags(cmd)
 	return cmd
@@ -99,7 +102,7 @@ func startStandAlone(ctx *Context, appCreator AppCreator) error {
 		return err
 	}
 
-	app := appCreator(ctx.Logger, db, traceWriter)
+	app := appCreator(ctx.Logger, db, traceWriter, viper.GetString(FlagSubchain))
 
 	svr, err := server.NewServer(addr, "socket", app)
 	if err != nil {
@@ -139,7 +142,7 @@ func startInProcess(ctx *Context, appCreator AppCreator) (*node.Node, error) {
 		return nil, err
 	}
 
-	app := appCreator(ctx.Logger, db, traceWriter)
+	app := appCreator(ctx.Logger, db, traceWriter, viper.GetString(FlagSubchain))
 
 	nodeKey, err := p2p.LoadOrGenNodeKey(cfg.NodeKeyFile())
 	if err != nil {
