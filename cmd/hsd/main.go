@@ -13,20 +13,20 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/app"
+	"github.com/hschain/hschain/app"
 
-	"hschain/baseapp"
-	"hschain/client"
-	"hschain/server"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/genaccounts"
-	genaccscli "hschain/x/genaccounts/client/cli"
-	genutilcli "hschain/x/genutil/client/cli"
-	"hschain/x/staking"
+	"github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/genaccounts"
+	genaccscli "github.com/hschain/hschain/x/genaccounts/client/cli"
+	genutilcli "github.com/hschain/hschain/x/genutil/client/cli"
+	"github.com/hschain/hschain/x/staking"
 )
 
-// hsdd custom flags
+// hsd custom flags
 const flagInvCheckPeriod = "inv-check-period"
 
 var invCheckPeriod uint
@@ -34,10 +34,12 @@ var invCheckPeriod uint
 func main() {
 	cdc := app.MakeCodec()
 
-	config := sdk.GetConfig()
-	app.SetBech32AddressPrefixes(config)
-	app.SetBip44CoinType(config)
-	config.Seal()
+	/*
+		config := sdk.GetConfig()
+		app.SetBech32AddressPrefixes(config)
+		app.SetBip44CoinType(config)
+		config.Seal()
+	*/
 
 	ctx := server.NewDefaultContext()
 	cobra.EnableCommandSorting = false
@@ -62,13 +64,21 @@ func main() {
 	executor := cli.PrepareBaseCmd(rootCmd, "HSC", app.DefaultNodeHome)
 	rootCmd.PersistentFlags().UintVar(&invCheckPeriod, flagInvCheckPeriod,
 		0, "Assert registered invariants every N blocks")
+
 	err := executor.Execute()
 	if err != nil {
 		panic(err)
 	}
 }
 
-func newApp(logger log.Logger, db dbm.DB, traceStore io.Writer) abci.Application {
+func newApp(logger log.Logger, db dbm.DB, traceStore io.Writer, prefix string) abci.Application {
+	logger.Info("run with subchain " + prefix)
+	config := sdk.GetConfig()
+	app.SetBech32Prefix(prefix)
+	app.SetBech32AddressPrefixes(config)
+	app.SetBip44CoinType(config)
+	config.Seal()
+
 	return app.NewApp(
 		logger, db, traceStore, true, invCheckPeriod,
 		baseapp.SetPruning(store.NewPruningOptionsFromString(viper.GetString("pruning"))),

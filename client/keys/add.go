@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"sort"
 
-	"hschain/client/flags"
-	"hschain/client/input"
-	"hschain/crypto/keys"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/input"
+	"github.com/hschain/hschain/crypto/keys"
+	sdk "github.com/hschain/hschain/types"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

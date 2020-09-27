@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GenesisState - all slashing state that must be provided at genesis

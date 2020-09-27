@@ -6,11 +6,11 @@ import (
 	"math/rand"
 	"time"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/gov"
-	"hschain/x/params"
-	"hschain/x/simulation"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/simulation"
 )
 
 type simParamChange struct {

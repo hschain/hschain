@@ -3,8 +3,8 @@ package types
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/params"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 // Parameter store keys

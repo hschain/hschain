@@ -3,10 +3,10 @@ package keeper
 import (
 	"fmt"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	"hschain/x/params"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/params"
 
 	"github.com/tendermint/tendermint/libs/log"
 )

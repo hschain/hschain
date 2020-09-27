@@ -5,10 +5,10 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/supply/exported"
-	"hschain/x/supply/internal/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/exported"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // Keeper of the supply store

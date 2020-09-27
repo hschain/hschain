@@ -4,11 +4,11 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"hschain/store/dbadapter"
-	"hschain/store/gaskv"
-	"hschain/store/iavl"
-	"hschain/store/types"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/gaskv"
+	"github.com/hschain/hschain/store/iavl"
+	"github.com/hschain/hschain/store/types"
+	sdk "github.com/hschain/hschain/types"
 
 	"github.com/stretchr/testify/require"
 

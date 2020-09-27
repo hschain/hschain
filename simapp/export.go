@@ -7,11 +7,11 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/slashing"
-	"hschain/x/staking"
-	"hschain/x/staking/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/slashing"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // ExportAppStateAndValidators exports the state of the application for a genesis

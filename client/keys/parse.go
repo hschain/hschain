@@ -13,8 +13,8 @@ import (
 	"github.com/tendermint/tendermint/libs/bech32"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/client/flags"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var bech32Prefixes = []string{

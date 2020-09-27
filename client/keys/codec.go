@@ -1,7 +1,7 @@
 package keys
 
 import (
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 var cdc *codec.Codec

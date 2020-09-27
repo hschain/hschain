@@ -7,10 +7,10 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/params"
-	"hschain/x/slashing/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 // Keeper of the slashing store

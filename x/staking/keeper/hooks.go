@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // Implements StakingHooks interface

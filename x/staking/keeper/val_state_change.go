@@ -7,8 +7,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // Apply and return accumulated updates to the bonded validator set. Also,

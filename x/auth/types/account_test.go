@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/require"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

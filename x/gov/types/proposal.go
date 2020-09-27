@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // Proposal defines a struct used by the governance module to allow for voting

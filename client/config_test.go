@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"hschain/client/flags"
+	"github.com/hschain/hschain/client/flags"
 )
 
 // For https://hschain/issues/3899

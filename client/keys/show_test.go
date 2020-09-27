@@ -10,10 +10,10 @@ import (
 	"github.com/tendermint/tendermint/crypto/multisig"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"hschain/client/flags"
-	"hschain/crypto/keys"
-	"hschain/tests"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/crypto/keys"
+	"github.com/hschain/hschain/tests"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func Test_multiSigKey_Properties(t *testing.T) {

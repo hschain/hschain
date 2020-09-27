@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"io"
 
-	"hschain/store/cachekv"
-	"hschain/store/tracekv"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/cachekv"
+	"github.com/hschain/hschain/store/tracekv"
+	"github.com/hschain/hschain/store/types"
 )
 
 var _ types.KVStore = Store{}

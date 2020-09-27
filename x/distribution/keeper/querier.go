@@ -6,10 +6,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	"hschain/x/staking/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 func NewQuerier(k Keeper) sdk.Querier {

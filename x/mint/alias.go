@@ -6,8 +6,8 @@
 package mint
 
 import (
-	"hschain/x/mint/internal/keeper"
-	"hschain/x/mint/internal/types"
+	"github.com/hschain/hschain/x/mint/internal/keeper"
+	"github.com/hschain/hschain/x/mint/internal/types"
 )
 
 const (

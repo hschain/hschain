@@ -98,6 +98,7 @@ var _ yaml.Marshaler = ConsAddress{}
 type AccAddress []byte
 
 // AccAddressFromHex creates an AccAddress from a hex string.
+
 func AccAddressFromHex(address string) (addr AccAddress, err error) {
 	if len(address) == 0 {
 		return addr, errors.New("decoding Bech32 address failed: must provide an address")
@@ -132,7 +133,6 @@ func AccAddressFromBech32(address string) (addr AccAddress, err error) {
 	}
 
 	bech32PrefixAccAddr := GetConfig().GetBech32AccountAddrPrefix()
-
 	bz, err := GetFromBech32(address, bech32PrefixAccAddr)
 	if err != nil {
 		return nil, err

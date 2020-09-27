@@ -9,8 +9,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"hschain/client/flags"
-	"hschain/tests"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/tests"
 )
 
 func Test_runDeleteCmd(t *testing.T) {

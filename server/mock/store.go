@@ -5,7 +5,7 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var _ sdk.MultiStore = multiStore{}

@@ -3,10 +3,10 @@ package server
 import (
 	"fmt"
 
-	"hschain/crypto/keys"
+	"github.com/hschain/hschain/crypto/keys"
 
-	clkeys "hschain/client/keys"
-	sdk "hschain/types"
+	clkeys "github.com/hschain/hschain/client/keys"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GenerateCoinKey returns the address of a public key, along with the secret

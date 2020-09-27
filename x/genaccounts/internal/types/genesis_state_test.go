@@ -3,8 +3,8 @@ package types
 import (
 	"testing"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 )

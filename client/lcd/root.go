@@ -14,14 +14,14 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	rpcserver "github.com/tendermint/tendermint/rpc/lib/server"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	keybase "hschain/crypto/keys"
-	"hschain/server"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	keybase "github.com/hschain/hschain/crypto/keys"
+	"github.com/hschain/hschain/server"
 
 	// unnamed import of statik for swagger UI support
-	_ "hschain/client/lcd/statik"
+	_ "github.com/hschain/hschain/client/lcd/statik"
 )
 
 // RestServer represents the Light Client Rest server

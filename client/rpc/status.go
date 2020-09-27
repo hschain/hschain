@@ -9,11 +9,11 @@ import (
 
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	"hschain/types/rest"
-	"hschain/version"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/version"
 
 	"github.com/tendermint/tendermint/p2p"
 )

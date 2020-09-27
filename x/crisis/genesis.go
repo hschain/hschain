@@ -1,9 +1,9 @@
 package crisis
 
 import (
-	sdk "hschain/types"
-	"hschain/x/crisis/internal/keeper"
-	"hschain/x/crisis/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/crisis/internal/keeper"
+	"github.com/hschain/hschain/x/crisis/internal/types"
 )
 
 // new crisis genesis

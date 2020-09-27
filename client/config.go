@@ -11,7 +11,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"hschain/client/flags"
+	"github.com/hschain/hschain/client/flags"
 )
 
 const (

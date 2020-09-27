@@ -11,8 +11,8 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	yaml "gopkg.in/yaml.v2"
 
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

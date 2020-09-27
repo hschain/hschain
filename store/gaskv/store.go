@@ -3,7 +3,7 @@ package gaskv
 import (
 	"io"
 
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/types"
 )
 
 var _ types.KVStore = &Store{}

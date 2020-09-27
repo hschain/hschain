@@ -1,7 +1,7 @@
 package iavl
 
 import (
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 var cdc = codec.New()

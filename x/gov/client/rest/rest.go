@@ -7,12 +7,12 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/auth/client/utils"
-	gcutils "hschain/x/gov/client/utils"
-	"hschain/x/gov/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	gcutils "github.com/hschain/hschain/x/gov/client/utils"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 // REST Variable names

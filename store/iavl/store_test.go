@@ -11,8 +11,8 @@ import (
 	cmn "github.com/tendermint/tendermint/libs/common"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/errors"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/errors"
+	"github.com/hschain/hschain/store/types"
 )
 
 var (

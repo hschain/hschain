@@ -1,8 +1,8 @@
 package types
 
 import (
-	sdk "hschain/types"
-	authexported "hschain/x/auth/exported"
+	sdk "github.com/hschain/hschain/types"
+	authexported "github.com/hschain/hschain/x/auth/exported"
 )
 
 // AccountKeeper defines the expected account keeper (noalias)

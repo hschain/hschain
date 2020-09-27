@@ -6,8 +6,8 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	cmn "github.com/tendermint/tendermint/libs/common"
 
-	"hschain/crypto/keys/hd"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var _ Keybase = lazyKeybase{}

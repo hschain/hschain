@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	stakingtypes "hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	stakingtypes "github.com/hschain/hschain/x/staking/types"
 )
 
 // Wrapper struct

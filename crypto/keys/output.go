@@ -1,7 +1,7 @@
 package keys
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // KeyOutput defines a structure wrapping around an Info object used for output

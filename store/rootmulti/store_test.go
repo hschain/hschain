@@ -8,8 +8,8 @@ import (
 	"github.com/tendermint/tendermint/crypto/merkle"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/errors"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/errors"
+	"github.com/hschain/hschain/store/types"
 )
 
 func TestStoreType(t *testing.T) {

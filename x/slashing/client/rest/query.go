@@ -6,10 +6,10 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/slashing/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router) {

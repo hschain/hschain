@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"math/rand"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/simulation"
-	"hschain/x/slashing"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/simulation"
+	"github.com/hschain/hschain/x/slashing"
 )
 
 // SimulateMsgUnjail generates a MsgUnjail with random values

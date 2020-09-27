@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 type CodeType = sdk.CodeType

@@ -6,12 +6,12 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"hschain/client"
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 
-	"hschain/x/slashing/types"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

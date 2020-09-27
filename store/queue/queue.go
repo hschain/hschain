@@ -3,10 +3,10 @@ package store
 // TODO: make it independent from list
 /*
 import (
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 
-	"hschain/store/list"
+	"github.com/hschain/hschain/store/list"
 )
 
 // Key for the top element position in the queue

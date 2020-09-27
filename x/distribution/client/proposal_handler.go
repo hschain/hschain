@@ -1,9 +1,9 @@
 package client
 
 import (
-	"hschain/x/distribution/client/cli"
-	"hschain/x/distribution/client/rest"
-	govclient "hschain/x/gov/client"
+	"github.com/hschain/hschain/x/distribution/client/cli"
+	"github.com/hschain/hschain/x/distribution/client/rest"
+	govclient "github.com/hschain/hschain/x/gov/client"
 )
 
 // param change proposal handler

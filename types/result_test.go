@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 	"github.com/stretchr/testify/require"
 )
 

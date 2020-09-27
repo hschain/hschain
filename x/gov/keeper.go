@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"time"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/gov/types"
-	"hschain/x/params"
-	"hschain/x/supply/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/supply/exported"
 
 	"github.com/tendermint/tendermint/libs/log"
 )

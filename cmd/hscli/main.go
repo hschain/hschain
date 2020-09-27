@@ -5,17 +5,16 @@ import (
 	"os"
 	"path"
 
-	"hschain/client"
-	"hschain/client/keys"
-	"hschain/client/lcd"
-	"hschain/client/rpc"
-	sdk "hschain/types"
-	"hschain/version"
-	"hschain/x/auth"
-	authcmd "hschain/x/auth/client/cli"
-	authrest "hschain/x/auth/client/rest"
-	"hschain/x/bank"
-	bankcmd "hschain/x/bank/client/cli"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/client/lcd"
+	"github.com/hschain/hschain/client/rpc"
+	"github.com/hschain/hschain/version"
+	"github.com/hschain/hschain/x/auth"
+	authcmd "github.com/hschain/hschain/x/auth/client/cli"
+	authrest "github.com/hschain/hschain/x/auth/client/rest"
+	"github.com/hschain/hschain/x/bank"
+	bankcmd "github.com/hschain/hschain/x/bank/client/cli"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -23,7 +22,8 @@ import (
 	"github.com/tendermint/go-amino"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/app"
+	"github.com/hschain/hschain/app"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func main() {
@@ -33,11 +33,13 @@ func main() {
 	// Instantiate the codec for the command line application
 	cdc := app.MakeCodec()
 
-	// Read in the configuration file for the sdk
-	config := sdk.GetConfig()
-	app.SetBech32AddressPrefixes(config)
-	app.SetBip44CoinType(config)
-	config.Seal()
+	/*
+		// Read in the configuration file for the sdk
+		config := sdk.GetConfig()
+		app.SetBech32AddressPrefixes(config)
+		app.SetBip44CoinType(config)
+		config.Seal()
+	*/
 
 	// TODO: setup keybase, viper object, etc. to be passed into
 	// the below functions and eliminate global vars, like we do
@@ -50,6 +52,8 @@ func main() {
 
 	// Add --chain-id to persistent flags and mark it required
 	rootCmd.PersistentFlags().String(client.FlagChainID, "", "Chain ID of tendermint node")
+	rootCmd.PersistentFlags().String(client.FlagSubchain, "hsc", "subchain id")
+
 	rootCmd.PersistentPreRunE = func(_ *cobra.Command, _ []string) error {
 		return initConfig(rootCmd)
 	}
@@ -159,6 +163,15 @@ func initConfig(cmd *cobra.Command) error {
 			return err
 		}
 	}
+
+	// Read in the configuration file for the sdk
+	config := sdk.GetConfig()
+	prefix, _ := cmd.PersistentFlags().GetString(client.FlagSubchain)
+	app.SetBech32Prefix(prefix)
+	app.SetBech32AddressPrefixes(config)
+	app.SetBip44CoinType(config)
+	config.Seal()
+
 	if err := viper.BindPFlag(client.FlagChainID, cmd.PersistentFlags().Lookup(client.FlagChainID)); err != nil {
 		return err
 	}

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 	"github.com/tendermint/tendermint/crypto"
 	"gopkg.in/yaml.v2"
 

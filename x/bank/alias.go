@@ -5,8 +5,8 @@
 package bank
 
 import (
-	"hschain/x/bank/internal/keeper"
-	"hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/bank/internal/keeper"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 const (

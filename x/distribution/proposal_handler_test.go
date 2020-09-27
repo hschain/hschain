@@ -5,8 +5,8 @@ import (
 
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 	"github.com/stretchr/testify/require"
 )
 

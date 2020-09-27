@@ -3,8 +3,8 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 // HandleCommunityPoolSpendProposal is a handler for executing a passed community spend proposal

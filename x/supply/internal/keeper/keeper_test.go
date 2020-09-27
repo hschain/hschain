@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	sdk "hschain/types"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 func TestSupply(t *testing.T) {

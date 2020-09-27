@@ -1,7 +1,7 @@
 package auth
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // InitGenesis - Init store state from genesis data

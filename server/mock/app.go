@@ -10,9 +10,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	bam "hschain/baseapp"
-	"hschain/codec"
-	sdk "hschain/types"
+	bam "github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // NewApp creates a simple mock kvstore app for testing. It should work

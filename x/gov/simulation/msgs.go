@@ -6,10 +6,10 @@ import (
 	"math/rand"
 	"time"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/gov"
-	"hschain/x/simulation"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov"
+	"github.com/hschain/hschain/x/simulation"
 )
 
 // ContentSimulator defines a function type alias for generating random proposal

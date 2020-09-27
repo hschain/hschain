@@ -6,10 +6,10 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/client"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // creates a querier for staking REST endpoints

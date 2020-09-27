@@ -3,7 +3,7 @@ package baseapp
 import (
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 type queryRouter struct {

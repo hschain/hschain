@@ -3,9 +3,9 @@ package client
 import (
 	"github.com/spf13/cobra"
 
-	"hschain/client/context"
-	"hschain/codec"
-	"hschain/x/gov/client/rest"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/x/gov/client/rest"
 )
 
 // function to create the rest handler

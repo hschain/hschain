@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"hschain/x/params/subspace"
+	"github.com/hschain/hschain/x/params/subspace"
 )
 
 // DefaultParamspace defines the default auth module parameter subspace

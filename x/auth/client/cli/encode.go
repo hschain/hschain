@@ -5,10 +5,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	"hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/x/auth/client/utils"
 )
 
 // txEncodeRespStr implements a simple Stringer wrapper for a encoded tx.

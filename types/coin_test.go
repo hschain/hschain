@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

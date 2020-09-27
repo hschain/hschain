@@ -11,8 +11,8 @@ import (
 	tmcrypto "github.com/tendermint/tendermint/crypto"
 	tmsecp256k1 "github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"hschain/crypto/keys/hd"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

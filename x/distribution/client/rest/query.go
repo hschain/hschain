@@ -6,12 +6,12 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/x/distribution/client/common"
-	"hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/distribution/client/common"
+	"github.com/hschain/hschain/x/distribution/types"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
 )
 
 func registerQueryRoutes(cliCtx context.CLIContext, r *mux.Router, queryRoute string) {

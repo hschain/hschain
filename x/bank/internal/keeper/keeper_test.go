@@ -9,9 +9,9 @@ import (
 	cmn "github.com/tendermint/tendermint/libs/common"
 	tmtime "github.com/tendermint/tendermint/types/time"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 func TestKeeper(t *testing.T) {

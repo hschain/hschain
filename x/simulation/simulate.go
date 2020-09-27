@@ -13,8 +13,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // AppStateFn returns the app state json bytes, the genesis accounts, and the chain identifier

@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

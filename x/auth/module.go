@@ -8,13 +8,13 @@ import (
 	"github.com/spf13/cobra"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/types/module"
-	"hschain/x/auth/client/cli"
-	"hschain/x/auth/client/rest"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/module"
+	"github.com/hschain/hschain/x/auth/client/cli"
+	"github.com/hschain/hschain/x/auth/client/rest"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 var (

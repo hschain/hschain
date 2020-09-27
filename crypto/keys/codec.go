@@ -3,8 +3,8 @@ package keys
 import (
 	cryptoAmino "github.com/tendermint/tendermint/crypto/encoding/amino"
 
-	"hschain/codec"
-	"hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/crypto/keys/hd"
 )
 
 var cdc *codec.Codec

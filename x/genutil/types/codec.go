@@ -1,10 +1,10 @@
 package types
 
 import (
-	"hschain/codec"
-	sdk "hschain/types"
-	authtypes "hschain/x/auth/types"
-	stakingtypes "hschain/x/staking/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	stakingtypes "github.com/hschain/hschain/x/staking/types"
 )
 
 // ModuleCdc defines a generic sealed codec to be used throughout this module

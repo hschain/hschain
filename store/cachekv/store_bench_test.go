@@ -7,8 +7,8 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/cachekv"
-	"hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/cachekv"
+	"github.com/hschain/hschain/store/dbadapter"
 )
 
 func benchmarkCacheKVStoreIterator(numKVs int, b *testing.B) {

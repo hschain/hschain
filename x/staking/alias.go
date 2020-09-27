@@ -7,9 +7,9 @@
 package staking
 
 import (
-	"hschain/x/staking/exported"
-	"hschain/x/staking/keeper"
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/x/staking/exported"
+	"github.com/hschain/hschain/x/staking/keeper"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 const (

@@ -11,14 +11,14 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/codec"
-	"hschain/store"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/params"
-	"hschain/x/supply/internal/types"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/supply/internal/types"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // nolint: deadcode unused

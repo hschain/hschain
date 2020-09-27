@@ -6,9 +6,9 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	sdk "hschain/types"
-	"hschain/x/crisis/internal/types"
-	"hschain/x/params"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/crisis/internal/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 // Keeper - crisis keeper

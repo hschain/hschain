@@ -12,14 +12,14 @@ import (
 	"github.com/tendermint/tendermint/crypto/multisig"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/client/keys"
-	"hschain/codec"
-	crkeys "hschain/crypto/keys"
-	"hschain/version"
-	"hschain/x/auth/client/utils"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/codec"
+	crkeys "github.com/hschain/hschain/crypto/keys"
+	"github.com/hschain/hschain/version"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 // GetSignCommand returns the sign command

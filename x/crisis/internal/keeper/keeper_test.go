@@ -6,10 +6,10 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/crisis/internal/types"
-	"hschain/x/params"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/crisis/internal/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 func testPassingInvariant(_ sdk.Context) (string, bool) {

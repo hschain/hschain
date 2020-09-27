@@ -10,10 +10,10 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/dbadapter"
-	"hschain/store/prefix"
-	"hschain/store/tracekv"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/prefix"
+	"github.com/hschain/hschain/store/tracekv"
+	"github.com/hschain/hschain/store/types"
 )
 
 func bz(s string) []byte { return []byte(s) }

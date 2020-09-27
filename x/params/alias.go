@@ -6,8 +6,8 @@
 package params
 
 import (
-	"hschain/x/params/subspace"
-	"hschain/x/params/types"
+	"github.com/hschain/hschain/x/params/subspace"
+	"github.com/hschain/hschain/x/params/types"
 )
 
 const (

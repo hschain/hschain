@@ -3,9 +3,9 @@ package genutil
 import (
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/genutil/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/genutil/types"
 )
 
 // InitGenesis - initialize accounts and deliver genesis transactions

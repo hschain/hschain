@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"hschain/types"
+	"github.com/hschain/hschain/types"
 
 	bip39 "github.com/cosmos/go-bip39"
 	"github.com/stretchr/testify/assert"

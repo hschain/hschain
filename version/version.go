@@ -14,7 +14,7 @@
 //   -X hschain/version.ClientName=gaiacli \
 //   -X hschain/version.Version=1.0 \
 //   -X hschain/version.Commit=f0f7b7dab7e36c20b757cebce0e8f4fc5b95de60 \
-//   -X "hschain/version.BuildTags=linux darwin amd64"
+//   -X "github.com/hschain/hschain/version.BuildTags=linux darwin amd64"
 package version
 
 import (

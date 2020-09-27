@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"io/ioutil"
 
-	"hschain/client/input"
+	"github.com/hschain/hschain/client/input"
 	"github.com/spf13/cobra"
 )
 

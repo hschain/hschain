@@ -7,12 +7,12 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank/internal/types"
-	"hschain/x/params"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 type testInput struct {

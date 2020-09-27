@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/tests"
+	"github.com/hschain/hschain/tests"
 )
 
 func Test_openDB(t *testing.T) {

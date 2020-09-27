@@ -6,11 +6,11 @@ import (
 	"math/big"
 	"math/rand"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/auth/types"
-	"hschain/x/simulation"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/simulation"
 )
 
 // SimulateDeductFee

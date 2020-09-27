@@ -9,33 +9,36 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/x/mint"
+	"github.com/hschain/hschain/x/mint"
 
-	"hschain/x/supply"
+	"github.com/hschain/hschain/x/supply"
 
-	bam "hschain/baseapp"
-	"hschain/codec"
-	"hschain/simapp"
-	sdk "hschain/types"
-	"hschain/types/module"
-	"hschain/version"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/crisis"
-	distr "hschain/x/distribution"
-	"hschain/x/genaccounts"
-	"hschain/x/genutil"
-	"hschain/x/gov"
-	"hschain/x/params"
-	paramsclient "hschain/x/params/client"
-	"hschain/x/slashing"
-	"hschain/x/staking"
+	bam "github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/simapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/module"
+	"github.com/hschain/hschain/version"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/crisis"
+	distr "github.com/hschain/hschain/x/distribution"
+	"github.com/hschain/hschain/x/genaccounts"
+	"github.com/hschain/hschain/x/genutil"
+	"github.com/hschain/hschain/x/gov"
+	"github.com/hschain/hschain/x/params"
+	paramsclient "github.com/hschain/hschain/x/params/client"
+	"github.com/hschain/hschain/x/slashing"
+	"github.com/hschain/hschain/x/staking"
 )
 
 const (
-	appName          = "hsc"
+	appName       = "hsc"
+	Bip44CoinType = 532 // see https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+)
+
+var (
 	Bech32MainPrefix = "hsc"
-	Bip44CoinType    = 532 // see https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 )
 
 var (
@@ -270,6 +273,10 @@ func (app *App) ModuleAccountAddrs() map[string]bool {
 	}
 
 	return modAccAddrs
+}
+
+func SetBech32Prefix(prefix string) {
+	Bech32MainPrefix = prefix
 }
 
 // SetBech32AddressPrefixes sets the global prefix to be used when serializing addresses to bech32 strings.

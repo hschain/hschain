@@ -1,9 +1,9 @@
 package supply
 
 import (
-	sdk "hschain/types"
-	autypes "hschain/x/auth"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	autypes "github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // InitGenesis sets supply information for genesis.

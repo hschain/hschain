@@ -6,8 +6,8 @@ import (
 	"sort"
 	"time"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // Operation runs a state machine transition, and ensures the transition

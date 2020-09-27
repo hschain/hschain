@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"math/rand"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/simulation"
-	"hschain/x/staking"
-	"hschain/x/staking/keeper"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/simulation"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/staking/keeper"
 )
 
 // SimulateMsgCreateValidator generates a MsgCreateValidator with random values

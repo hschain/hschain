@@ -9,9 +9,9 @@ import (
 	"github.com/tendermint/tendermint/crypto/ed25519"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/supply"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/supply"
 )
 
 func TestGenesisAccountValidate(t *testing.T) {

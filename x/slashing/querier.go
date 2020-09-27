@@ -5,9 +5,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/client"
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // NewQuerier creates a new querier for slashing clients.

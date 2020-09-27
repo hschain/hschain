@@ -3,9 +3,9 @@ package common
 import (
 	"fmt"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 // QueryParams actually queries distribution params.

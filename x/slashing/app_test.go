@@ -7,14 +7,14 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/mock"
-	"hschain/x/staking"
-	"hschain/x/staking/types"
-	"hschain/x/supply"
-	supplyexported "hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/mock"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/staking/types"
+	"github.com/hschain/hschain/x/supply"
+	supplyexported "github.com/hschain/hschain/x/supply/exported"
 )
 
 var (

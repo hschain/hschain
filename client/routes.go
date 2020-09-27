@@ -3,7 +3,7 @@ package client
 import (
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
+	"github.com/hschain/hschain/client/context"
 )
 
 // Register routes

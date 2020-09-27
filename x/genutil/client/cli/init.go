@@ -13,12 +13,12 @@ import (
 	"github.com/tendermint/tendermint/libs/common"
 	"github.com/tendermint/tendermint/types"
 
-	"hschain/client"
-	"hschain/codec"
-	"hschain/server"
-	sdk "hschain/types"
-	"hschain/types/module"
-	"hschain/x/genutil"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/module"
+	"github.com/hschain/hschain/x/genutil"
 )
 
 const (
