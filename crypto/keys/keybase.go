@@ -9,11 +9,11 @@ import (
 
 	"github.com/pkg/errors"
 
-	"hschain/crypto"
-	"hschain/crypto/keys/hd"
-	"hschain/crypto/keys/keyerror"
-	"hschain/crypto/keys/mintkey"
-	"hschain/types"
+	"github.com/hschain/hschain/crypto"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/crypto/keys/keyerror"
+	"github.com/hschain/hschain/crypto/keys/mintkey"
+	"github.com/hschain/hschain/types"
 
 	bip39 "github.com/cosmos/go-bip39"
 

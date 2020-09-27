@@ -11,9 +11,9 @@ import (
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	keep "hschain/x/staking/keeper"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	keep "github.com/hschain/hschain/x/staking/keeper"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 func TestInitGenesis(t *testing.T) {

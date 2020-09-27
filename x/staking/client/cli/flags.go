@@ -3,7 +3,7 @@ package cli
 import (
 	flag "github.com/spf13/pflag"
 
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // nolint

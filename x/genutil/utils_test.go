@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"hschain/tests"
+	"github.com/hschain/hschain/tests"
 
 	"github.com/stretchr/testify/require"
 )

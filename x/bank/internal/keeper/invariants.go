@@ -3,8 +3,8 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/bank/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 // RegisterInvariants registers the bank module invariants

@@ -13,8 +13,8 @@ import (
 
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"hschain/store"
-	"hschain/types"
+	"github.com/hschain/hschain/store"
+	"github.com/hschain/hschain/types"
 )
 
 type MockLogger struct {

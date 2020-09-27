@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	sdk "hschain/types"
-	govtypes "hschain/x/gov/types"
+	sdk "github.com/hschain/hschain/types"
+	govtypes "github.com/hschain/hschain/x/gov/types"
 )
 
 const (

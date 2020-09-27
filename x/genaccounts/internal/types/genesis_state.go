@@ -6,7 +6,7 @@ import (
 	"sort"
 	"time"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 // State to Unmarshal

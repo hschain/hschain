@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/crypto/keys"
+	"github.com/hschain/hschain/crypto/keys"
 )
 
 type testCases struct {

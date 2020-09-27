@@ -3,10 +3,10 @@ package rest
 import (
 	"net/http"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/genutil/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/genutil/types"
 )
 
 // QueryGenesisTxs writes the genesis transactions to the response if no error

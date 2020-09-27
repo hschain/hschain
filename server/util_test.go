@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 func TestInsertKeyJSON(t *testing.T) {

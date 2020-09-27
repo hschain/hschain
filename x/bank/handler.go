@@ -3,9 +3,9 @@ package bank
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/bank/internal/keeper"
-	"hschain/x/bank/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/bank/internal/keeper"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 // NewHandler returns a handler for "bank" type messages.

@@ -7,8 +7,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/client/keys"
-	"hschain/server"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/server"
 )
 
 func TestGenerateCoinKey(t *testing.T) {

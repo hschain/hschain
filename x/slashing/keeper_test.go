@@ -7,9 +7,9 @@ import (
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	"hschain/x/slashing/types"
-	"hschain/x/staking"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/slashing/types"
+	"github.com/hschain/hschain/x/staking"
 )
 
 // Have to change these parameters for tests

@@ -3,9 +3,9 @@ package mint
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/mint/internal/keeper"
-	"hschain/x/mint/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/mint/internal/keeper"
+	"github.com/hschain/hschain/x/mint/internal/types"
 )
 
 // NewHandler returns a handler for "bank" type messages.

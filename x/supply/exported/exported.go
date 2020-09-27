@@ -1,9 +1,9 @@
 package exported
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 
-	"hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/auth/exported"
 )
 
 // ModuleAccountI defines an account interface for modules that hold tokens in an escrow

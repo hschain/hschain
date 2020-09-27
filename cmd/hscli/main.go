@@ -5,16 +5,16 @@ import (
 	"os"
 	"path"
 
-	"hschain/client"
-	"hschain/client/keys"
-	"hschain/client/lcd"
-	"hschain/client/rpc"
-	"hschain/version"
-	"hschain/x/auth"
-	authcmd "hschain/x/auth/client/cli"
-	authrest "hschain/x/auth/client/rest"
-	"hschain/x/bank"
-	bankcmd "hschain/x/bank/client/cli"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/client/lcd"
+	"github.com/hschain/hschain/client/rpc"
+	"github.com/hschain/hschain/version"
+	"github.com/hschain/hschain/x/auth"
+	authcmd "github.com/hschain/hschain/x/auth/client/cli"
+	authrest "github.com/hschain/hschain/x/auth/client/rest"
+	"github.com/hschain/hschain/x/bank"
+	bankcmd "github.com/hschain/hschain/x/bank/client/cli"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -22,8 +22,8 @@ import (
 	"github.com/tendermint/go-amino"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/app"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/app"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func main() {

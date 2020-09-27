@@ -8,8 +8,8 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	yaml "gopkg.in/yaml.v2"
 
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
 )
 
 //-----------------------------------------------------------------------------

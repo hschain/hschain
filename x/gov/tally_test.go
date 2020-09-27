@@ -8,8 +8,8 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	sdk "hschain/types"
-	"hschain/x/staking"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking"
 )
 
 func TestTallyNoOneVotes(t *testing.T) {

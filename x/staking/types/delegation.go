@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/staking/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // DVPair is struct that just has a delegator-validator pair with no other data.

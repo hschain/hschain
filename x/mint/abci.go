@@ -2,8 +2,9 @@ package mint
 
 import (
 	"fmt"
-	sdk "hschain/types"
-	"hschain/x/mint/internal/types"
+
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/mint/internal/types"
 )
 
 // BeginBlocker mints new tokens for the previous block.

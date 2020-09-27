@@ -7,9 +7,9 @@
 package distribution
 
 import (
-	"hschain/x/distribution/client"
-	"hschain/x/distribution/keeper"
-	"hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/distribution/client"
+	"github.com/hschain/hschain/x/distribution/keeper"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 const (

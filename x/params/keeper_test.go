@@ -6,8 +6,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/store/prefix"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/store/prefix"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestKeeper(t *testing.T) {

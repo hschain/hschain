@@ -1,8 +1,8 @@
 package slashing
 
 import (
-	sdk "hschain/types"
-	"hschain/x/slashing/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 // Stored by *validator* address (not operator address)

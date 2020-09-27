@@ -7,7 +7,7 @@ import (
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
 
-	"hschain/tests/mocks"
+	"github.com/hschain/hschain/tests/mocks"
 )
 
 var dummyError = errors.New("dummy")

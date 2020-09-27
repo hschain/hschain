@@ -8,9 +8,9 @@ import (
 	"github.com/spf13/cobra"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/codec"
-	"hschain/server"
-	"hschain/types/module"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/types/module"
 )
 
 // Validate genesis command takes

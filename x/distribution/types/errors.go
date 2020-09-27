@@ -2,7 +2,7 @@
 package types
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 type CodeType = sdk.CodeType

@@ -14,11 +14,11 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	bam "hschain/baseapp"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/params"
+	bam "github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/params"
 )
 
 const chainID = ""

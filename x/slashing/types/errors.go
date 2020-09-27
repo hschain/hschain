@@ -4,7 +4,7 @@ package types
 import (
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // Local code type

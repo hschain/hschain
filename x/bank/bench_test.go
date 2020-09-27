@@ -6,13 +6,13 @@ import (
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/bank/internal/keeper"
-	"hschain/x/bank/internal/types"
-	"hschain/x/mock"
-	"hschain/x/supply"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/bank/internal/keeper"
+	"github.com/hschain/hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/mock"
+	"github.com/hschain/hschain/x/supply"
 )
 
 var moduleAccAddr = sdk.AccAddress([]byte("moduleAcc"))

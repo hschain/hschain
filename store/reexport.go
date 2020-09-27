@@ -1,8 +1,8 @@
 package store
 
 import (
-	"hschain/store/types"
-	stypes "hschain/store/types"
+	"github.com/hschain/hschain/store/types"
+	stypes "github.com/hschain/hschain/store/types"
 )
 
 // Import cosmos-sdk/types/store.go for convenience.

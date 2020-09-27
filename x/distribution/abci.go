@@ -5,8 +5,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/keeper"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/keeper"
 	"log"
 )
 

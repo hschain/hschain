@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	sdk "hschain/types"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // Cache the amino decoding of validators, as it can be the case that repeated slashing calls

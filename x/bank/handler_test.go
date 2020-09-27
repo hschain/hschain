@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 	abci "github.com/tendermint/tendermint/abci/types"
 
 	"github.com/stretchr/testify/require"

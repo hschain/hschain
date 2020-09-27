@@ -1,10 +1,10 @@
 package genaccounts
 
 import (
-	"hschain/codec"
-	sdk "hschain/types"
-	authexported "hschain/x/auth/exported"
-	"hschain/x/genaccounts/internal/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	authexported "github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/genaccounts/internal/types"
 )
 
 // InitGenesis initializes accounts and deliver genesis transactions

@@ -1,9 +1,9 @@
 package types // noalias
 
 import (
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/staking/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // AccountKeeper expected account keeper

@@ -8,17 +8,17 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"hschain/client"
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/version"
-	"hschain/x/auth"
-	"hschain/x/auth/client/utils"
-	"hschain/x/gov"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/version"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/gov"
 
-	"hschain/x/distribution/client/common"
-	"hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/distribution/client/common"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 var (

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 )

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // Vote

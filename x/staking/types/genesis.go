@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GenesisState - all staking state that must be provided at genesis

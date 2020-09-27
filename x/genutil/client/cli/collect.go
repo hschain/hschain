@@ -9,11 +9,11 @@ import (
 	"github.com/tendermint/tendermint/libs/cli"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/client"
-	"hschain/codec"
-	"hschain/server"
-	"hschain/x/genutil"
-	"hschain/x/genutil/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/x/genutil"
+	"github.com/hschain/hschain/x/genutil/types"
 )
 
 const flagGenTxDir = "gentx-dir"

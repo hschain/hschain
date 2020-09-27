@@ -13,11 +13,11 @@ import (
 
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/types/rest"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
 )
 
 // TODO these next two functions feel kinda hacky based on their placement

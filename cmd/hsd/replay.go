@@ -17,12 +17,12 @@ import (
 	tmstore "github.com/tendermint/tendermint/store"
 	tm "github.com/tendermint/tendermint/types"
 
-	"hschain/app"
+	"github.com/hschain/hschain/app"
 
-	"hschain/baseapp"
-	"hschain/server"
-	"hschain/store"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func replayCmd() *cobra.Command {

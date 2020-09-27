@@ -5,9 +5,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 const (

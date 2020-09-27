@@ -5,7 +5,7 @@ import (
 
 	cmn "github.com/tendermint/tendermint/libs/common"
 
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/types"
 )
 
 // Gets the first item.

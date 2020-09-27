@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/types"
 )
 
 const (

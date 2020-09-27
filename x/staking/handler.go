@@ -8,9 +8,9 @@ import (
 	"github.com/tendermint/tendermint/libs/common"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	sdk "hschain/types"
-	"hschain/x/staking/keeper"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/keeper"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 func NewHandler(k keeper.Keeper) sdk.Handler {

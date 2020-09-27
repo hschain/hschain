@@ -9,9 +9,9 @@ import (
 	tmcrypto "github.com/tendermint/tendermint/crypto"
 	cryptoAmino "github.com/tendermint/tendermint/crypto/encoding/amino"
 
-	"hschain/crypto/keys/hd"
-	"hschain/tests"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/tests"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestLedgerErrorHandling(t *testing.T) {

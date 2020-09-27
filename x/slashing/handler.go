@@ -3,8 +3,8 @@ package slashing
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/slashing/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 func NewHandler(k Keeper) sdk.Handler {

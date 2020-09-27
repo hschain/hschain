@@ -1,9 +1,9 @@
 package slashing
 
 import (
-	sdk "hschain/types"
-	"hschain/x/slashing/types"
-	"hschain/x/staking/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/slashing/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // InitGenesis initialize default parameters

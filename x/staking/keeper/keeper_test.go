@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 func TestParams(t *testing.T) {

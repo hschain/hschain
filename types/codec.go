@@ -1,6 +1,6 @@
 package types
 
-import "hschain/codec"
+import "github.com/hschain/hschain/codec"
 
 // Register the sdk message type
 func RegisterCodec(cdc *codec.Codec) {

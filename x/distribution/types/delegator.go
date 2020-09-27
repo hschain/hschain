@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // starting info for a delegator reward period

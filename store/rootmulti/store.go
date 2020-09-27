@@ -10,13 +10,13 @@ import (
 	"github.com/tendermint/tendermint/crypto/tmhash"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/cachemulti"
-	"hschain/store/dbadapter"
-	"hschain/store/errors"
-	"hschain/store/iavl"
-	"hschain/store/tracekv"
-	"hschain/store/transient"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/cachemulti"
+	"github.com/hschain/hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/errors"
+	"github.com/hschain/hschain/store/iavl"
+	"github.com/hschain/hschain/store/tracekv"
+	"github.com/hschain/hschain/store/transient"
+	"github.com/hschain/hschain/store/types"
 )
 
 const (

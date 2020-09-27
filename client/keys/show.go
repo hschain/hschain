@@ -11,10 +11,10 @@ import (
 	"github.com/tendermint/tendermint/crypto/multisig"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/client/flags"
-	"hschain/crypto"
-	"hschain/crypto/keys"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/crypto"
+	"github.com/hschain/hschain/crypto/keys"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

@@ -13,17 +13,17 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/app"
+	"github.com/hschain/hschain/app"
 
-	"hschain/baseapp"
-	"hschain/client"
-	"hschain/server"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/genaccounts"
-	genaccscli "hschain/x/genaccounts/client/cli"
-	genutilcli "hschain/x/genutil/client/cli"
-	"hschain/x/staking"
+	"github.com/hschain/hschain/baseapp"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/genaccounts"
+	genaccscli "github.com/hschain/hschain/x/genaccounts/client/cli"
+	genutilcli "github.com/hschain/hschain/x/genutil/client/cli"
+	"github.com/hschain/hschain/x/staking"
 )
 
 // hsd custom flags

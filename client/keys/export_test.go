@@ -6,8 +6,8 @@ import (
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 
-	"hschain/client/flags"
-	"hschain/tests"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/tests"
 )
 
 func Test_runExportCmd(t *testing.T) {

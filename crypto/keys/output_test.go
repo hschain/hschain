@@ -3,7 +3,7 @@ package keys
 import (
 	"testing"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/multisig"

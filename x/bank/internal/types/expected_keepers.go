@@ -1,8 +1,8 @@
 package types
 
 import (
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
 )
 
 // AccountKeeper defines the account contract that must be fulfilled when

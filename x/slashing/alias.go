@@ -5,7 +5,7 @@
 package slashing
 
 import (
-	"hschain/x/slashing/types"
+	"github.com/hschain/hschain/x/slashing/types"
 )
 
 const (

@@ -6,10 +6,10 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/params"
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 const aminoCacheSize = 500

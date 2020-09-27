@@ -21,10 +21,10 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	pvm "github.com/tendermint/tendermint/privval"
 
-	"hschain/client/flags"
-	"hschain/codec"
-	"hschain/server/config"
-	"hschain/version"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server/config"
+	"github.com/hschain/hschain/version"
 )
 
 // server context

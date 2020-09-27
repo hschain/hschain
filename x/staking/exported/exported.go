@@ -1,7 +1,7 @@
 package exported
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 	"github.com/tendermint/tendermint/crypto"
 )
 

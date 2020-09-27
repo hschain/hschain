@@ -15,15 +15,15 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/mint/internal/types"
-	"hschain/x/params"
-	"hschain/x/staking"
-	"hschain/x/supply"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/mint/internal/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/supply"
 )
 
 type testInput struct {

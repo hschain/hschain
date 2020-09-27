@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

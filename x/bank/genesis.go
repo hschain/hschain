@@ -1,7 +1,7 @@
 package bank
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GenesisState is the bank state that must be provided at genesis.

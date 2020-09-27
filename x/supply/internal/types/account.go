@@ -7,9 +7,9 @@ import (
 
 	"github.com/tendermint/tendermint/crypto"
 
-	sdk "hschain/types"
-	authtypes "hschain/x/auth/types"
-	"hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 var _ exported.ModuleAccountI = (*ModuleAccount)(nil)

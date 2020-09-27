@@ -3,9 +3,9 @@ package cli
 import (
 	"github.com/spf13/cobra"
 
-	"hschain/client"
-	"hschain/codec"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 // GetTxCmd returns the transaction commands for this module

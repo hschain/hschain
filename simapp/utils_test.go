@@ -9,20 +9,20 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 	cmn "github.com/tendermint/tendermint/libs/common"
 
-	"hschain/x/auth"
-	"hschain/x/distribution"
-	distr "hschain/x/distribution"
-	"hschain/x/gov"
-	"hschain/x/mint"
-	"hschain/x/slashing"
-	"hschain/x/staking"
-	"hschain/x/supply"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/distribution"
+	distr "github.com/hschain/hschain/x/distribution"
+	"github.com/hschain/hschain/x/gov"
+	"github.com/hschain/hschain/x/mint"
+	"github.com/hschain/hschain/x/slashing"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/supply"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

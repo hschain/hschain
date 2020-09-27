@@ -15,8 +15,8 @@ import (
 	pvm "github.com/tendermint/tendermint/privval"
 	tversion "github.com/tendermint/tendermint/version"
 
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // ShowNodeIDCmd - ported from Tendermint, dump node ID to stdout

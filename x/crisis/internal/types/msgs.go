@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // MsgVerifyInvariant - message struct to verify a particular invariance

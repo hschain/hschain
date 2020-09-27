@@ -1,7 +1,7 @@
 package types
 
 import (
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 // module codec

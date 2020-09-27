@@ -7,10 +7,10 @@ import (
 
 	"github.com/spf13/viper"
 
-	"hschain/client/flags"
-	"hschain/client/keys"
-	crkeys "hschain/crypto/keys"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/keys"
+	crkeys "github.com/hschain/hschain/crypto/keys"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // TxBuilder implements a transaction context created in SDK modules.

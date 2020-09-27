@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/mint/internal/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/mint/internal/types"
 
 	"github.com/gorilla/mux"
 )

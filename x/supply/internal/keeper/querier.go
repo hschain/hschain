@@ -5,9 +5,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/client"
-	sdk "hschain/types"
-	"hschain/x/supply/internal/types"
+	"github.com/hschain/hschain/client"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // NewQuerier creates a querier for supply REST endpoints

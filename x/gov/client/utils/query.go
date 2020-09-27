@@ -3,10 +3,10 @@ package utils
 import (
 	"fmt"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/x/auth/client/utils"
-	"hschain/x/gov/types"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 const (

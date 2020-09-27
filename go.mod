@@ -1,4 +1,4 @@
-module hschain
+module github.com/hschain/hschain
 
 go 1.15
 

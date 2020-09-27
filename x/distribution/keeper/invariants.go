@@ -3,9 +3,9 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	"hschain/x/staking/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // register all distribution invariants

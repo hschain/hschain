@@ -1,9 +1,9 @@
 package gov
 
 import (
-	sdk "hschain/types"
-	"hschain/x/gov/types"
-	"hschain/x/staking/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // validatorGovInfo used for tallying

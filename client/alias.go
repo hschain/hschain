@@ -13,12 +13,12 @@
 package client
 
 import (
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/client/input"
-	"hschain/client/keys"
-	"hschain/client/lcd"
-	"hschain/client/rpc"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/input"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/client/lcd"
+	"github.com/hschain/hschain/client/rpc"
 )
 
 const (

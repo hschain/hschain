@@ -10,9 +10,9 @@ import (
 	"github.com/tendermint/tendermint/libs/cli"
 	"gopkg.in/yaml.v2"
 
-	"hschain/client/flags"
-	"hschain/client/input"
-	"hschain/crypto/keys"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/input"
+	"github.com/hschain/hschain/crypto/keys"
 )
 
 // available output formats.

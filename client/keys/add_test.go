@@ -8,8 +8,8 @@ import (
 
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/client/flags"
-	"hschain/tests"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/tests"
 )
 
 func Test_runAddCmdBasic(t *testing.T) {

@@ -1,7 +1,7 @@
 package types
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // QueryBalanceParams defines the params for querying an account balance.

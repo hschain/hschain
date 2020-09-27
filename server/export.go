@@ -12,9 +12,9 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/client/flags"
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

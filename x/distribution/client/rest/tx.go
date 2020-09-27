@@ -5,13 +5,13 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	"hschain/x/auth/client/utils"
-	"hschain/x/distribution/client/common"
-	"hschain/x/distribution/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/distribution/client/common"
+	"github.com/hschain/hschain/x/distribution/types"
 
-	sdk "hschain/types"
-	"hschain/types/rest"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
 )
 
 func registerTxRoutes(cliCtx context.CLIContext, r *mux.Router, queryRoute string) {

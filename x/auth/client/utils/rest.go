@@ -4,11 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 // WriteGenerateStdTxResponse writes response for the generate only mode.

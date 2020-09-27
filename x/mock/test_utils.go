@@ -5,14 +5,14 @@ import (
 	"math/rand"
 	"testing"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 	"github.com/tendermint/tendermint/crypto"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // BigInterval is a representation of the interval [lo, hi), where

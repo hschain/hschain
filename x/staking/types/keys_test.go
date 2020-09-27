@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

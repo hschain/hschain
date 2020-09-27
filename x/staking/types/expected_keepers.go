@@ -1,10 +1,10 @@
 package types
 
 import (
-	sdk "hschain/types"
-	authexported "hschain/x/auth/exported"
-	stakingexported "hschain/x/staking/exported"
-	supplyexported "hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	authexported "github.com/hschain/hschain/x/auth/exported"
+	stakingexported "github.com/hschain/hschain/x/staking/exported"
+	supplyexported "github.com/hschain/hschain/x/supply/exported"
 )
 
 // DistributionKeeper expected distribution keeper (noalias)

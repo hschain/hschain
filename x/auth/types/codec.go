@@ -1,8 +1,8 @@
 package types
 
 import (
-	"hschain/codec"
-	"hschain/x/auth/exported"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/x/auth/exported"
 )
 
 // RegisterCodec registers concrete types on the codec

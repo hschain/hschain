@@ -10,13 +10,13 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/viper"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/client/input"
-	"hschain/client/keys"
-	"hschain/codec"
-	sdk "hschain/types"
-	authtypes "hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/input"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	authtypes "github.com/hschain/hschain/x/auth/types"
 )
 
 // GasEstimateResponse defines a response definition for tx gas estimation.

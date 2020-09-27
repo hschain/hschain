@@ -2,8 +2,8 @@ package keeper
 
 import (
 	"fmt"
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 	"time"
 )
 

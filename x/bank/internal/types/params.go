@@ -1,7 +1,7 @@
 package types
 
 import (
-	"hschain/x/params"
+	"github.com/hschain/hschain/x/params"
 )
 
 const (

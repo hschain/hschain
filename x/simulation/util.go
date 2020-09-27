@@ -8,8 +8,8 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // assertAll asserts the all invariants against application state

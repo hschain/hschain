@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/require"
 
-	"hschain/client"
+	"github.com/hschain/hschain/client"
 )
 
 func TestValidateCmd(t *testing.T) {

@@ -19,9 +19,9 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // Key to store the consensus params in the main store.

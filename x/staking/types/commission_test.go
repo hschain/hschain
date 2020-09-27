@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestCommissionValidate(t *testing.T) {

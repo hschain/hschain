@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // DefaultCodespace from the supply module

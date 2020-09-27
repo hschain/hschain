@@ -3,7 +3,7 @@ package context
 import (
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // ErrInvalidAccount returns a standardized error reflecting that a given

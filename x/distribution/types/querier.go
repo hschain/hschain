@@ -1,6 +1,6 @@
 package types
 
-import sdk "hschain/types"
+import sdk "github.com/hschain/hschain/types"
 
 // querier keys
 const (

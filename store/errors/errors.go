@@ -1,7 +1,7 @@
 package errors
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // nolint - reexport

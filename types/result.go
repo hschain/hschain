@@ -7,7 +7,7 @@ import (
 	"math"
 	"strings"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 )

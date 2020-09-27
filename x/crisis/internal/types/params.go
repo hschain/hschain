@@ -1,8 +1,8 @@
 package types
 
 import (
-	sdk "hschain/types"
-	"hschain/x/params"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 // Default parameter namespace

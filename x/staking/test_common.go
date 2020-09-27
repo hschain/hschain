@@ -4,9 +4,9 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // nolint: deadcode unused

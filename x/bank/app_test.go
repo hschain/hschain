@@ -3,10 +3,10 @@ package bank_test
 import (
 	"testing"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank/internal/types"
-	"hschain/x/mock"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/mock"
 
 	"github.com/stretchr/testify/require"
 

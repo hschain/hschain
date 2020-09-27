@@ -3,7 +3,7 @@ package auth
 import (
 	"testing"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func BenchmarkAccountMapperGetAccountFound(b *testing.B) {

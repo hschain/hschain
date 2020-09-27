@@ -8,10 +8,10 @@ import (
 	"github.com/stretchr/testify/require"
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/crisis"
-	distr "hschain/x/distribution"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/crisis"
+	distr "github.com/hschain/hschain/x/distribution"
 )
 
 var (

@@ -6,9 +6,9 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	"hschain/types/rest"
-	"hschain/x/supply/internal/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // RegisterRoutes registers staking-related REST handlers to a router

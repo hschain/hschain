@@ -8,10 +8,10 @@ import (
 
 	ctypes "github.com/tendermint/tendermint/rpc/core/types"
 
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 // QueryTxsByEvents performs a search for transactions for a given set of events

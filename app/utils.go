@@ -7,9 +7,9 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/staking"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking"
 )
 
 var (

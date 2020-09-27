@@ -6,10 +6,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/spf13/cobra"
 
-	"hschain/client/context"
-	"hschain/codec"
-	"hschain/types/module"
-	"hschain/x/params/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/types/module"
+	"github.com/hschain/hschain/x/params/types"
 )
 
 var (

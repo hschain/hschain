@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/supply/exported"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/exported"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // GetModuleAddress returns an address based on the module name

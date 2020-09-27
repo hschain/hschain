@@ -11,9 +11,9 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	yaml "gopkg.in/yaml.v2"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/staking/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // nolint

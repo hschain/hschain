@@ -3,7 +3,7 @@ package types
 import (
 	"encoding/binary"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

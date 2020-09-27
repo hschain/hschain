@@ -6,10 +6,10 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
-	"hschain/x/bank/internal/types"
-	"hschain/x/params"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 var _ Keeper = (*BaseKeeper)(nil)

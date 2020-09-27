@@ -6,11 +6,11 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
-	"hschain/x/auth/types"
-	"hschain/x/params/subspace"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/params/subspace"
 )
 
 // AccountKeeper encodes/decodes accounts using the go-amino (binary)

@@ -5,7 +5,7 @@ import (
 	"bytes"
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // An sdk.Tx which is its own sdk.Msg.

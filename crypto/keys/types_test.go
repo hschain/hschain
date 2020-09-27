@@ -7,8 +7,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"hschain/crypto/keys/hd"
-	"hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/types"
 )
 
 func Test_writeReadLedgerInfo(t *testing.T) {

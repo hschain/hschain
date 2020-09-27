@@ -1,8 +1,8 @@
 package rootmulti
 
 import (
-	"hschain/store/dbadapter"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/types"
 )
 
 var commithash = []byte("FAKE_HASH")

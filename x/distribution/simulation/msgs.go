@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"math/rand"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/distribution"
-	"hschain/x/gov"
-	govsim "hschain/x/gov/simulation"
-	"hschain/x/simulation"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/distribution"
+	"github.com/hschain/hschain/x/gov"
+	govsim "github.com/hschain/hschain/x/gov/simulation"
+	"github.com/hschain/hschain/x/simulation"
 )
 
 // SimulateMsgSetWithdrawAddress generates a MsgSetWithdrawAddress with random values.

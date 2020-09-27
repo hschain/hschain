@@ -3,10 +3,10 @@ package params
 import (
 	"fmt"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/params/subspace"
-	"hschain/x/params/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params/subspace"
+	"github.com/hschain/hschain/x/params/types"
 
 	"github.com/tendermint/tendermint/libs/log"
 )

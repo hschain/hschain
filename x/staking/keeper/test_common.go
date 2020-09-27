@@ -16,14 +16,14 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/params"
-	"hschain/x/staking/types"
-	"hschain/x/supply"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/staking/types"
+	"github.com/hschain/hschain/x/supply"
 )
 
 // dummy addresses used for testing

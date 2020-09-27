@@ -3,8 +3,8 @@ package gov
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/gov/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 // EndBlocker called every block, process inflation, update validator set.
