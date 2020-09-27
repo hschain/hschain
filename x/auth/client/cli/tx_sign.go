@@ -9,12 +9,12 @@ import (
 	"github.com/spf13/viper"
 	"github.com/tendermint/tendermint/crypto/multisig"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/auth/client/utils"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 const (

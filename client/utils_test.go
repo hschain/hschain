@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/client"
+	"github.com/hschain/hschain/client"
 )
 
 func TestPaginate(t *testing.T) {

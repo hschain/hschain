@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"hschain/client/input"
+	"github.com/hschain/hschain/client/input"
 )
 
 func updateKeyCommand() *cobra.Command {

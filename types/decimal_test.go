@@ -8,7 +8,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 )
 
 // create a decimal from a decimal string (ex. "1234.5678")

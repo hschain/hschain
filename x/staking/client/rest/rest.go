@@ -3,7 +3,7 @@ package rest
 import (
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
+	"github.com/hschain/hschain/client/context"
 )
 
 // RegisterRoutes registers staking-related REST handlers to a router

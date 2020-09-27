@@ -3,9 +3,9 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // RegisterInvariants register all supply invariants

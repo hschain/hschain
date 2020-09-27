@@ -35,9 +35,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 //__________________________________________________________________________________________

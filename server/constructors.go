@@ -11,7 +11,7 @@ import (
 	tmtypes "github.com/tendermint/tendermint/types"
 	dbm "github.com/tendermint/tm-db"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 type (

@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/params"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/params"
 )
 
 type (

@@ -14,14 +14,14 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/auth"
-	"hschain/x/bank"
-	"hschain/x/params"
-	"hschain/x/staking"
-	"hschain/x/supply"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	"github.com/hschain/hschain/x/bank"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/supply"
 )
 
 // TODO remove dependencies on staking (should only refer to validator set type from sdk)

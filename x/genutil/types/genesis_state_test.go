@@ -8,9 +8,9 @@ import (
 	"github.com/stretchr/testify/require"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	sdk "hschain/types"
-	authtypes "hschain/x/auth/types"
-	stakingtypes "hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	stakingtypes "github.com/hschain/hschain/x/staking/types"
 )
 
 var (

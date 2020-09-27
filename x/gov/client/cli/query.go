@@ -8,13 +8,13 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"hschain/client"
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/version"
-	gcutils "hschain/x/gov/client/utils"
-	"hschain/x/gov/types"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/version"
+	gcutils "github.com/hschain/hschain/x/gov/client/utils"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

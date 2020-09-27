@@ -5,9 +5,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	authexported "hschain/x/auth/exported"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	authexported "github.com/hschain/hschain/x/auth/exported"
 )
 
 // StakingKeeper defines the expected staking keeper (noalias)

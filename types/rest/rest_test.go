@@ -15,10 +15,10 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	"hschain/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/types"
 )
 
 type mockResponseWriter struct{}

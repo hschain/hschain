@@ -8,9 +8,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	sdk "hschain/types"
-	authtypes "hschain/x/auth/types"
-	"hschain/x/bank/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/bank/internal/types"
 )
 
 func TestBalances(t *testing.T) {

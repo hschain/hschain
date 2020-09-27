@@ -6,8 +6,8 @@ import (
 
 	"github.com/spf13/viper"
 
-	"hschain/client/input"
-	"hschain/crypto/keys"
+	"github.com/hschain/hschain/client/input"
+	"github.com/hschain/hschain/crypto/keys"
 
 	"github.com/spf13/cobra"
 )

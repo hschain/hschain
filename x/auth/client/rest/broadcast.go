@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"hschain/client/context"
-	"hschain/types/rest"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 // BroadcastReq defines a tx broadcasting request.

@@ -6,7 +6,7 @@ import (
 	"math/rand"
 	"time"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (

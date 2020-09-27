@@ -9,12 +9,12 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/codec"
-	"hschain/store"
-	sdk "hschain/types"
-	"hschain/x/params"
-	"hschain/x/params/subspace"
-	"hschain/x/params/types"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/params/subspace"
+	"github.com/hschain/hschain/x/params/types"
 )
 
 type testInput struct {

@@ -3,8 +3,8 @@ package types
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/auth/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth/exported"
 )
 
 // NodeQuerier is an interface that is satisfied by types that provide the QueryWithData method

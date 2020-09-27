@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	sdk "hschain/types"
-	"hschain/x/staking"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking"
 )
 
 func TestCalculateRewardsBasic(t *testing.T) {

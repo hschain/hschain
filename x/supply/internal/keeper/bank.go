@@ -3,8 +3,8 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/supply/internal/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 // SendCoinsFromModuleToAccount transfers coins from a ModuleAccount to an AccAddress

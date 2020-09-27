@@ -3,7 +3,7 @@ package cachekv
 import (
 	"bytes"
 
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/types"
 )
 
 // cacheMergeIterator merges a parent Iterator and a cache Iterator.

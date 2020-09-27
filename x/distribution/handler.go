@@ -3,10 +3,10 @@ package distribution
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/keeper"
-	"hschain/x/distribution/types"
-	govtypes "hschain/x/gov/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/keeper"
+	"github.com/hschain/hschain/x/distribution/types"
+	govtypes "github.com/hschain/hschain/x/gov/types"
 )
 
 func NewHandler(k keeper.Keeper) sdk.Handler {

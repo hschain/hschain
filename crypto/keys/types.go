@@ -6,8 +6,8 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/multisig"
 
-	"hschain/crypto/keys/hd"
-	"hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/types"
 )
 
 // Keybase exposes operations on a generic keystore

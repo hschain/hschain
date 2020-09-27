@@ -3,9 +3,9 @@ package keeper
 import (
 	"time"
 
-	sdk "hschain/types"
-	"hschain/x/params"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/params"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // Default parameter namespace

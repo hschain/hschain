@@ -3,8 +3,8 @@ package gov
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/gov/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 // GetDeposit gets the deposit of a specific depositor on a specific proposal

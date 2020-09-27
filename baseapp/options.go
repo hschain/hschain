@@ -6,8 +6,8 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/store"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // File for storing in-package BaseApp optional functions,

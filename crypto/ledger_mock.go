@@ -14,9 +14,9 @@ import (
 
 	bip39 "github.com/cosmos/go-bip39"
 
-	"hschain/crypto/keys/hd"
-	"hschain/tests"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/tests"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // If ledger support (build tag) has been enabled, which implies a CGO dependency,

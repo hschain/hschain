@@ -7,7 +7,7 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestStore(t *testing.T) {

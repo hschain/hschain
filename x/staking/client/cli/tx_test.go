@@ -10,8 +10,8 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/server"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/server"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestPrepareFlagsForTxCreateValidator(t *testing.T) {

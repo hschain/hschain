@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/staking/types"
-	"hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/types"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 // GetBondedPool returns the bonded tokens pool's module account

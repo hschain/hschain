@@ -5,10 +5,10 @@ import (
 
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/mint/internal/types"
-	"hschain/x/params"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/mint/internal/types"
+	"github.com/hschain/hschain/x/params"
 )
 
 // Keeper of the mint store

@@ -10,9 +10,9 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	"hschain/crypto/keys/hd"
-	"hschain/crypto/keys/mintkey"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/crypto/keys/mintkey"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func init() {

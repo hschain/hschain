@@ -3,7 +3,7 @@ package keys
 import (
 	"github.com/spf13/cobra"
 
-	"hschain/client/flags"
+	"github.com/hschain/hschain/client/flags"
 )
 
 // Commands registers a sub-tree of commands to interact with

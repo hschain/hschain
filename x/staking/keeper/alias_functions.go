@@ -3,9 +3,9 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/staking/exported"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/exported"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 //_______________________________________________________________________

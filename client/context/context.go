@@ -17,11 +17,11 @@ import (
 	tmliteProxy "github.com/tendermint/tendermint/lite/proxy"
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 
-	"hschain/client/flags"
-	"hschain/client/keys"
-	"hschain/codec"
-	cryptokeys "hschain/crypto/keys"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/codec"
+	cryptokeys "github.com/hschain/hschain/crypto/keys"
+	sdk "github.com/hschain/hschain/types"
 )
 
 var (

@@ -6,12 +6,12 @@ import (
 
 	"github.com/tendermint/tendermint/crypto"
 
-	"hschain/baseapp"
-	sdk "hschain/types"
-	"hschain/x/bank/internal/keeper"
-	"hschain/x/bank/internal/types"
-	"hschain/x/mock"
-	"hschain/x/simulation"
+	"github.com/hschain/hschain/baseapp"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/bank/internal/keeper"
+	"github.com/hschain/hschain/x/bank/internal/types"
+	"github.com/hschain/hschain/x/mock"
+	"github.com/hschain/hschain/x/simulation"
 )
 
 // SendTx tests and runs a single msg send where both

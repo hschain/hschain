@@ -3,8 +3,8 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	types "hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	types "github.com/hschain/hschain/x/staking/types"
 )
 
 // Slash a validator for an infraction committed at a known height

@@ -1,8 +1,8 @@
 package types // noalias
 
 import (
-	sdk "hschain/types"
-	"hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 // SupplyKeeper defines the expected supply keeper

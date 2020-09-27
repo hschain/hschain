@@ -8,12 +8,12 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/auth/client/utils"
-	"hschain/x/auth/types"
-	genutilrest "hschain/x/genutil/client/rest"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/auth/types"
+	genutilrest "github.com/hschain/hschain/x/genutil/client/rest"
 )
 
 // query accountREST Handler

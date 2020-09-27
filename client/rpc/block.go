@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
-	"hschain/client/context"
-	"hschain/client/flags"
-	"hschain/codec"
-	"hschain/types/rest"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/client/flags"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/types/rest"
 
 	tmliteProxy "github.com/tendermint/tendermint/lite/proxy"
 )

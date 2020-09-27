@@ -5,8 +5,8 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	sdk "hschain/types"
-	"hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 // Implements Delegation interface

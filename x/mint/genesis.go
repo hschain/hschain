@@ -1,7 +1,7 @@
 package mint
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GenesisState - minter state

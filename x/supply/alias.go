@@ -6,8 +6,8 @@
 package supply
 
 import (
-	"hschain/x/supply/internal/keeper"
-	"hschain/x/supply/internal/types"
+	"github.com/hschain/hschain/x/supply/internal/keeper"
+	"github.com/hschain/hschain/x/supply/internal/types"
 )
 
 const (

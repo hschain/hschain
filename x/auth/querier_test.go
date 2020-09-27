@@ -8,7 +8,7 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 func Test_queryAccount(t *testing.T) {

@@ -5,8 +5,8 @@
 package auth
 
 import (
-	"hschain/x/auth/exported"
-	"hschain/x/auth/types"
+	"github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/auth/types"
 )
 
 const (

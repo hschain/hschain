@@ -7,8 +7,8 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/iavl"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/iavl"
+	"github.com/hschain/hschain/store/types"
 )
 
 func TestVerifyIAVLStoreQueryProof(t *testing.T) {

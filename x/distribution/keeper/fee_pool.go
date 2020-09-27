@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 // DistributeFromFeePool distributes funds from the distribution module account to

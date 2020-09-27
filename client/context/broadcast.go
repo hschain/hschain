@@ -3,8 +3,8 @@ package context
 import (
 	"fmt"
 
-	"hschain/client/flags"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/client/flags"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // BroadcastTx broadcasts a transactions either synchronously or asynchronously

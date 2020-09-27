@@ -3,8 +3,8 @@ package params
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	govtypes "hschain/x/gov/types"
+	sdk "github.com/hschain/hschain/types"
+	govtypes "github.com/hschain/hschain/x/gov/types"
 )
 
 func NewParamChangeProposalHandler(k Keeper) govtypes.Handler {

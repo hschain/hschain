@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"strings"
 
-	sdk "hschain/types"
-	"hschain/x/auth"
-	authexported "hschain/x/auth/exported"
-	"hschain/x/supply"
-	supplyexported "hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/auth"
+	authexported "github.com/hschain/hschain/x/auth/exported"
+	"github.com/hschain/hschain/x/supply"
+	supplyexported "github.com/hschain/hschain/x/supply/exported"
 )
 
 // GenesisAccount is a struct for account initialization used exclusively during genesis

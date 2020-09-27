@@ -11,14 +11,14 @@ import (
 	cfg "github.com/tendermint/tendermint/config"
 	"github.com/tendermint/tendermint/crypto"
 
-	"hschain/client/context"
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/types/module"
-	authtypes "hschain/x/auth/types"
-	"hschain/x/staking/client/cli"
-	"hschain/x/staking/client/rest"
-	"hschain/x/staking/types"
+	"github.com/hschain/hschain/client/context"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/module"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/staking/client/cli"
+	"github.com/hschain/hschain/x/staking/client/rest"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 var (

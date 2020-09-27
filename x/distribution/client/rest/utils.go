@@ -1,8 +1,8 @@
 package rest
 
 import (
-	sdk "hschain/types"
-	"hschain/types/rest"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
 )
 
 type (

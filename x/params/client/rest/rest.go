@@ -3,14 +3,14 @@ package rest
 import (
 	"net/http"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/auth/client/utils"
-	"hschain/x/gov"
-	govrest "hschain/x/gov/client/rest"
-	"hschain/x/params"
-	paramscutils "hschain/x/params/client/utils"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/gov"
+	govrest "github.com/hschain/hschain/x/gov/client/rest"
+	"github.com/hschain/hschain/x/params"
+	paramscutils "github.com/hschain/hschain/x/params/client/utils"
 )
 
 // ProposalRESTHandler returns a ProposalRESTHandler that exposes the param

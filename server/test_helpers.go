@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"hschain/client/flags"
+	"github.com/hschain/hschain/client/flags"
 
 	"github.com/spf13/viper"
 	"github.com/stretchr/testify/require"

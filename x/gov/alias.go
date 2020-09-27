@@ -5,7 +5,7 @@
 package gov
 
 import (
-	"hschain/x/gov/types"
+	"github.com/hschain/hschain/x/gov/types"
 )
 
 const (

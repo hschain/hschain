@@ -5,13 +5,13 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"hschain/client/context"
-	sdk "hschain/types"
-	"hschain/types/rest"
-	"hschain/x/auth/client/utils"
-	"hschain/x/distribution/types"
-	"hschain/x/gov"
-	govrest "hschain/x/gov/client/rest"
+	"github.com/hschain/hschain/client/context"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/rest"
+	"github.com/hschain/hschain/x/auth/client/utils"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/gov"
+	govrest "github.com/hschain/hschain/x/gov/client/rest"
 )
 
 // RegisterRoutes register distribution REST routes.

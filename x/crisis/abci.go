@@ -1,7 +1,7 @@
 package crisis
 
 import (
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // check all registered invariants

@@ -6,9 +6,9 @@ import (
 	abci "github.com/tendermint/tendermint/abci/types"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	sdk "hschain/types"
-	"hschain/x/staking/exported"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/staking/exported"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 // InitGenesis sets the pool and parameters for the provided keeper.  For each

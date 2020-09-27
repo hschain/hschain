@@ -12,9 +12,9 @@ import (
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	sdk "hschain/types"
-	keep "hschain/x/staking/keeper"
-	"hschain/x/staking/types"
+	sdk "github.com/hschain/hschain/types"
+	keep "github.com/hschain/hschain/x/staking/keeper"
+	"github.com/hschain/hschain/x/staking/types"
 )
 
 //______________________________________________________________________

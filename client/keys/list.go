@@ -1,7 +1,7 @@
 package keys
 
 import (
-	"hschain/client/flags"
+	"github.com/hschain/hschain/client/flags"
 	"github.com/spf13/cobra"
 )
 

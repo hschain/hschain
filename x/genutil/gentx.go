@@ -8,12 +8,12 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	authexported "hschain/x/auth/exported"
-	authtypes "hschain/x/auth/types"
-	"hschain/x/genutil/types"
-	stakingtypes "hschain/x/staking/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	authexported "github.com/hschain/hschain/x/auth/exported"
+	authtypes "github.com/hschain/hschain/x/auth/types"
+	"github.com/hschain/hschain/x/genutil/types"
+	stakingtypes "github.com/hschain/hschain/x/staking/types"
 )
 
 // SetGenTxsInAppGenesisState - sets the genesis transactions in the app genesis state

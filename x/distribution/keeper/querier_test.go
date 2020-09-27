@@ -8,11 +8,11 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"hschain/codec"
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	"hschain/x/staking"
-	"hschain/x/supply"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/staking"
+	"github.com/hschain/hschain/x/supply"
 )
 
 const custom = "custom"

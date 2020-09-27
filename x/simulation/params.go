@@ -5,8 +5,8 @@ import (
 	"math/rand"
 	"time"
 
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // nolint

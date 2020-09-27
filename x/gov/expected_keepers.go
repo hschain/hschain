@@ -1,9 +1,9 @@
 package gov
 
 import (
-	sdk "hschain/types"
-	stakingexported "hschain/x/staking/exported"
-	supplyexported "hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	stakingexported "github.com/hschain/hschain/x/staking/exported"
+	supplyexported "github.com/hschain/hschain/x/supply/exported"
 )
 
 // SupplyKeeper defines the supply Keeper for module accounts

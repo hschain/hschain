@@ -3,8 +3,8 @@ package distribution
 import (
 	"fmt"
 
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
 )
 
 // InitGenesis sets distribution information for genesis

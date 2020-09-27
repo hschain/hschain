@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/yaml.v2"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 
 	"github.com/stretchr/testify/require"
 )

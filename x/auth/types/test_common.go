@@ -5,7 +5,7 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/secp256k1"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func NewTestMsg(addrs ...sdk.AccAddress) *sdk.TestMsg {

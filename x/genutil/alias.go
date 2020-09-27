@@ -5,7 +5,7 @@
 package genutil
 
 import (
-	"hschain/x/genutil/types"
+	"github.com/hschain/hschain/x/genutil/types"
 )
 
 const (

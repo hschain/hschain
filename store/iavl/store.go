@@ -5,10 +5,10 @@ import (
 	"io"
 	"sync"
 
-	"hschain/store/cachekv"
-	serrors "hschain/store/errors"
-	"hschain/store/tracekv"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/cachekv"
+	serrors "github.com/hschain/hschain/store/errors"
+	"github.com/hschain/hschain/store/tracekv"
+	"github.com/hschain/hschain/store/types"
 
 	"github.com/pkg/errors"
 	"github.com/tendermint/iavl"

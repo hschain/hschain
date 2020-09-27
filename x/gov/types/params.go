@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	sdk "hschain/types"
-	params "hschain/x/params/subspace"
+	sdk "github.com/hschain/hschain/types"
+	params "github.com/hschain/hschain/x/params/subspace"
 )
 
 // Parameter store key

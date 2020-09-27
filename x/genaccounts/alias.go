@@ -5,7 +5,7 @@
 package genaccounts
 
 import (
-	"hschain/x/genaccounts/internal/types"
+	"github.com/hschain/hschain/x/genaccounts/internal/types"
 )
 
 const (

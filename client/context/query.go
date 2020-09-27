@@ -14,8 +14,8 @@ import (
 	rpcclient "github.com/tendermint/tendermint/rpc/client"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"hschain/store/rootmulti"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/store/rootmulti"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // GetNode returns an RPC client. If the context's client is not defined, an

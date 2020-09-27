@@ -5,8 +5,8 @@
 package crisis
 
 import (
-	"hschain/x/crisis/internal/keeper"
-	"hschain/x/crisis/internal/types"
+	"github.com/hschain/hschain/x/crisis/internal/keeper"
+	"github.com/hschain/hschain/x/crisis/internal/types"
 )
 
 const (

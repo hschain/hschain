@@ -14,14 +14,14 @@ import (
 	"github.com/tendermint/tendermint/libs/cli"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"hschain/client"
-	"hschain/codec"
-	"hschain/server"
-	"hschain/server/mock"
-	"hschain/tests"
-	sdk "hschain/types"
-	"hschain/types/module"
-	"hschain/x/genutil"
+	"github.com/hschain/hschain/client"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server"
+	"github.com/hschain/hschain/server/mock"
+	"github.com/hschain/hschain/tests"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/types/module"
+	"github.com/hschain/hschain/x/genutil"
 )
 
 var testMbm = module.NewBasicManager(genutil.AppModuleBasic{})

@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strconv"
 
-	"hschain/codec"
+	"github.com/hschain/hschain/codec"
 
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/types"
 )
 
 // Key for the length of the list

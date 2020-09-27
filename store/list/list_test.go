@@ -11,9 +11,9 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"hschain/codec"
-	"hschain/store/rootmulti"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/store/rootmulti"
+	sdk "github.com/hschain/hschain/types"
 )
 
 type TestStruct struct {

@@ -1,8 +1,8 @@
 package types
 
 import (
-	"hschain/codec"
-	"hschain/x/supply/exported"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 // RegisterCodec registers the account types and interface

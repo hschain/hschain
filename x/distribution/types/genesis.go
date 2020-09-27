@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 )
 
 // the address for where distributions rewards are withdrawn to by default

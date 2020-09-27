@@ -8,9 +8,9 @@ import (
 	"github.com/tendermint/tendermint/crypto"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 
-	"hschain/crypto/keys/hd"
-	"hschain/tests"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/crypto/keys/hd"
+	"github.com/hschain/hschain/tests"
+	sdk "github.com/hschain/hschain/types"
 )
 
 func TestNew(t *testing.T) {

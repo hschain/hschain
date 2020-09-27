@@ -8,7 +8,7 @@ import (
 	bip39 "github.com/bartekn/go-bip39"
 	"github.com/spf13/cobra"
 
-	"hschain/client/input"
+	"github.com/hschain/hschain/client/input"
 )
 
 const (

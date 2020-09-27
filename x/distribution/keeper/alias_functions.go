@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	sdk "hschain/types"
-	"hschain/x/distribution/types"
-	"hschain/x/supply/exported"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/supply/exported"
 )
 
 // get outstanding rewards

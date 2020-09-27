@@ -4,10 +4,10 @@ import (
 	"errors"
 	"reflect"
 
-	"hschain/codec"
-	sdk "hschain/types"
+	"github.com/hschain/hschain/codec"
+	sdk "github.com/hschain/hschain/types"
 
-	"hschain/store/prefix"
+	"github.com/hschain/hschain/store/prefix"
 )
 
 const (

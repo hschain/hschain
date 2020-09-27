@@ -8,9 +8,9 @@ import (
 	cmn "github.com/tendermint/tendermint/libs/common"
 	dbm "github.com/tendermint/tm-db"
 
-	"hschain/store/cachekv"
-	"hschain/store/dbadapter"
-	"hschain/store/types"
+	"github.com/hschain/hschain/store/cachekv"
+	"github.com/hschain/hschain/store/dbadapter"
+	"github.com/hschain/hschain/store/types"
 )
 
 func newCacheKVStore() types.CacheKVStore {

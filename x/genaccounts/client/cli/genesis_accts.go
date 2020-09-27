@@ -7,12 +7,12 @@ import (
 	"github.com/spf13/viper"
 	"github.com/tendermint/tendermint/libs/cli"
 
-	"hschain/client/keys"
-	"hschain/codec"
-	"hschain/server"
-	sdk "hschain/types"
-	"hschain/x/genaccounts"
-	"hschain/x/genutil"
+	"github.com/hschain/hschain/client/keys"
+	"github.com/hschain/hschain/codec"
+	"github.com/hschain/hschain/server"
+	sdk "github.com/hschain/hschain/types"
+	"github.com/hschain/hschain/x/genaccounts"
+	"github.com/hschain/hschain/x/genutil"
 )
 
 const (

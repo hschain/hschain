@@ -3,10 +3,10 @@ package keeper
 import (
 	"fmt"
 
-	sdk "hschain/types"
+	sdk "github.com/hschain/hschain/types"
 
-	"hschain/x/distribution/types"
-	"hschain/x/staking/exported"
+	"github.com/hschain/hschain/x/distribution/types"
+	"github.com/hschain/hschain/x/staking/exported"
 )
 
 // initialize rewards for a new validator
