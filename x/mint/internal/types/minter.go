@@ -3,8 +3,9 @@ package types
 import (
 	"fmt"
 
-	sdk "github.com/hschain/hschain/types"
 	"math"
+
+	sdk "github.com/hschain/hschain/types"
 )
 
 const (
@@ -22,10 +23,11 @@ type MintPlan struct {
 }
 
 type Status struct {
-	TotalMintedSupply       sdk.Int   `json:"total_minted_supply" yaml:"total_minted_supply"`
-	TotalMintingSupply      sdk.Int   `json:"total_minting_supply" yaml:"total_minting_supply"`
-	TotalDistrSupply        sdk.Int   `json:"total_distr_supply" yaml:"total_distr_supply"`
-	StatBurnCoins           sdk.Coins `json:"stat_burn_coins" yaml:"stat_burn_coins"`
+	TotalMintedSupply      sdk.Int `json:"total_minted_supply" yaml:"total_minted_supply"`
+	TotalMintingSupply     sdk.Int `json:"total_minting_supply" yaml:"total_minting_supply"`
+	TotalDistrSupply       sdk.Int `json:"total_distr_supply" yaml:"total_distr_supply"`
+	TotalCirculationSupply sdk.Int `json:"total_circulation_supply" yaml:"total_circulation_supply"`
+	//StatBurnCoins           sdk.Coins `json:"stat_burn_coins" yaml:"stat_burn_coins"`
 	CurrentDayProvisions    sdk.Dec   `json:"current_day_provisions" yaml:"current_day_provisions"`
 	NextPeriodDayProvisions sdk.Dec   `json:"next_period_day_provisions" yaml:"next_period_day_provisions"`
 	NextPeroidStartTime     int64     `json:"next_peroid_startTime" yaml:"next_peroid_startTime"`
@@ -39,7 +41,6 @@ type Status struct {
 type Minter struct {
 	MintPlans []MintPlan `json:"mint_plans" yaml:"mint_plans"` // mint plan
 	Status    Status     `json:"status" yaml:"status"`         // mint status
-
 }
 
 //DefaultMintPlans create

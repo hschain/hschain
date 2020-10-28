@@ -2,6 +2,7 @@ package mint
 
 import (
 	"fmt"
+	"time"
 
 	sdk "github.com/hschain/hschain/types"
 	"github.com/hschain/hschain/x/mint/internal/types"
@@ -16,20 +17,19 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	totalMintedSupply := k.MintedTokenSupply(ctx)
 
 	// mint coins, update supply
+
 	mintedCoin := minter.BlockProvision(params, totalMintedSupply)
 
 	if mintedCoin.IsZero() {
 		ctx.Logger().Info("no coins mint")
 		return
 	}
-
 	mintedCoins := sdk.NewCoins(mintedCoin)
 
 	err := k.MintCoins(ctx, mintedCoins)
 	if err != nil {
 		panic(err)
 	}
-
 	// send the minted coins to the fee collector account
 	err = k.AddMintingCoins(ctx, mintedCoins)
 	if err != nil {
@@ -41,6 +41,23 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	totalMintingSupply := k.MintingTokenSupply(ctx)
 
 	BurnAmount := k.BurnTokenSupply(ctx)
+
+	now := ctx.BlockTime().Add(8 * time.Hour) //change to shanghai timezone
+
+	LastDistributeTime := k.GetLastDistributeTime(ctx)
+
+	fmt.Println("time:==========================> ", now, LastDistributeTime)
+
+	if (now.Year() != LastDistributeTime.Year() || now.YearDay() != LastDistributeTime.YearDay()) && now.Hour() == 10 {
+
+		amt := k.DistrTokenSupply(ctx)
+		if amt.Int64() > 0 {
+			coin := sdk.NewCoins(sdk.NewCoin(params.MintDenom, amt))
+			k.MintingCoinsIssueAddress(ctx, coin)
+			k.SetLastDistributeTime(ctx, now)
+		}
+
+	}
 
 	ctx.Logger().Info(fmt.Sprintf("mint:TotalSupply:%s, TotalMintingSupply: %s, DistrTokenSupply:%s, CurrentDayProvisions:%s, NextPeroidStartTime:%d, NextPeriodDayProvisions:%s, mintedCoin: %s, BurnAmount: %s",
 		totalMintedSupply.String(),

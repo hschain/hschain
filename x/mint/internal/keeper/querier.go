@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"encoding/json"
 	"fmt"
 
 	abci "github.com/tendermint/tendermint/abci/types"
@@ -23,6 +24,8 @@ func NewQuerier(k Keeper) sdk.Querier {
 		case types.QueryBonus:
 			return queryBonus(ctx, k, string(query.Data))
 
+		case types.QueryPermissions:
+			return queryPermissions(ctx, k, query.Data)
 		default:
 			return nil, sdk.ErrUnknownRequest(fmt.Sprintf("unknown minting query endpoint: %s", path[0]))
 		}
@@ -48,7 +51,11 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter.Status.TotalMintedSupply = k.MintedTokenSupply(ctx)
 	minter.Status.TotalMintingSupply = k.MintingTokenSupply(ctx)
 	minter.Status.TotalDistrSupply = k.DistrTokenSupply(ctx)
-	minter.Status.StatBurnCoins = k.BurnTokenSupply(ctx)
+
+	minter.Status.TotalCirculationSupply = k.MintedTokenSupply(ctx).Sub(k.MintingTokenSupply(ctx)).Sub(k.DistrTokenSupply(ctx))
+	minter.Status.TotalCirculationSupply = minter.Status.TotalCirculationSupply.Sub(k.BurnTokenSupply(ctx).AmountOf(params.MintDenom))
+	minter.Status.TotalCirculationSupply = minter.Status.TotalCirculationSupply.Sub(k.DestoryTokenSupply(ctx).AmountOf(params.MintDenom))
+
 	minter.Status.CurrentDayProvisions = minter.CurrentDayProvisions(minter.Status.TotalMintedSupply.Sub(minter.Status.TotalMintingSupply))
 	minter.Status.NextPeriodDayProvisions = minter.NextPeriodDayProvisions(minter.Status.TotalMintedSupply)
 	minter.Status.NextPeroidStartTime = minter.NextPeroidStartTime(params, minter.Status.TotalMintedSupply)
@@ -75,4 +82,32 @@ func queryBonus(ctx sdk.Context, k Keeper, height string) ([]byte, sdk.Error) {
 	}
 
 	return res, nil
+}
+
+func queryPermissions(ctx sdk.Context, k Keeper, key []byte) ([]byte, sdk.Error) {
+
+	//log.Printf("query bonus at height %s", height)
+	var addressPermissions types.MsgAddressPermissions
+	if err := json.Unmarshal(key, &addressPermissions); err != nil {
+		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
+	}
+
+	status := k.GetPermissions(ctx, addressPermissions.Address, addressPermissions.Command)
+	if status != 1 {
+		addressPermissions.Status = status
+	}
+
+	res, err := codec.MarshalJSONIndent(k.cdc, addressPermissions)
+	if err != nil {
+		return nil, sdk.ErrInternal(sdk.AppendMsgToErr("failed to marshal JSON", err.Error()))
+	}
+
+	return res, nil
+}
+
+func querySysAddress(ctx sdk.Context, k Keeper, cmd string) ([]byte, sdk.Error) {
+
+	//log.Printf("query bonus at height %s", height)
+	address := k.GetSysAddress(ctx, cmd)
+	return address, nil
 }

@@ -8,6 +8,7 @@ import (
 
 // RegisterRoutes registers the auth module REST routes.
 func RegisterRoutes(cliCtx context.CLIContext, r *mux.Router, storeName string) {
+	r.Use(mux.CORSMethodMiddleware(r))
 	r.HandleFunc(
 		"/auth/accounts/{address}", QueryAccountRequestHandlerFn(storeName, cliCtx),
 	).Methods("GET")
