@@ -8,10 +8,11 @@ require (
 	github.com/btcsuite/btcd v0.0.0-20190523000118-16327141da8c
 	github.com/cosmos/go-bip39 v0.0.0-20180819234021-555e2067c45d
 	github.com/cosmos/ledger-cosmos-go v0.11.1
+	github.com/gin-gonic/gin v1.6.3
 	github.com/gogo/protobuf v1.3.1
 	github.com/golang/mock v1.3.1
 	github.com/gorilla/mux v1.7.3
-	github.com/mattn/go-isatty v0.0.8
+	github.com/mattn/go-isatty v0.0.12
 	github.com/onsi/ginkgo v1.8.0 // indirect
 	github.com/onsi/gomega v1.5.0 // indirect
 	github.com/otiai10/copy v1.0.2
@@ -36,6 +37,5 @@ require (
 	github.com/tendermint/tm-db v0.2.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4 // indirect
 	golang.org/x/net v0.0.0-20190724013045-ca1201d0de80 // indirect
-	golang.org/x/text v0.3.2 // indirect
-	gopkg.in/yaml.v2 v2.2.7
+	gopkg.in/yaml.v2 v2.2.8
 )

@@ -31,6 +31,8 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		burnCmd,
 		IssueTxCmd(cdc),
 		DestoryTxCmd(cdc),
+		PermissionsTxCmd(cdc),
+		AddSysAddressTxCmd(cdc),
 	)
 	return txCmd
 }
@@ -79,6 +81,69 @@ func ConversionRateTxCmd(cdc *codec.Codec) *cobra.Command {
 
 			// build and sign the transaction, then broadcast to Tendermint
 			msg := types.NewMsgConversionRate(cliCtx.GetFromAddress(), coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+func PermissionsTxCmd(cdc *codec.Codec) *cobra.Command {
+
+	cmd := &cobra.Command{
+		Use:   "permissions [command] [to_address] [bool] --from=[name]",
+		Short: "Add or remove permissions for the operation [command] for the [to_address]",
+		Args:  cobra.ExactArgs(3),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			to, err := sdk.AccAddressFromBech32(args[1])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			command := args[0]
+
+			status := 0
+			if args[2] == "true" {
+				status = 1
+			}
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgPermissions(cliCtx.GetFromAddress(), to, command, status)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+func AddSysAddressTxCmd(cdc *codec.Codec) *cobra.Command {
+
+	cmd := &cobra.Command{
+		Use:   "system-address [command] [to_address] --from=[name]",
+		Short: "Add a system address [to_address] for [command]]",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			to, err := sdk.AccAddressFromBech32(args[1])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			command := args[0]
+
+			// build and sign the transaction, then broadcast to Tendermint
+
+			msg := types.NewMsgAddSysAddress(cliCtx.GetFromAddress(), to, command)
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}

@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/spf13/cobra"
@@ -27,6 +28,8 @@ func GetQueryCmd(cdc *codec.Codec) *cobra.Command {
 			GetCmdQueryParams(cdc),
 			GetCmdQueryStatus(cdc),
 			GetCmdQueryBonus(cdc),
+			GetCmdQueryPermissions(cdc),
+			GetCmdQuerySysAddress(cdc),
 		)...,
 	)
 
@@ -107,6 +110,57 @@ func GetCmdQueryBonus(cdc *codec.Codec) *cobra.Command {
 			}
 
 			return cliCtx.PrintOutput(coin)
+		},
+	}
+}
+
+func GetCmdQueryPermissions(cdc *codec.Codec) *cobra.Command {
+	return &cobra.Command{
+		Use:   "Permissions [address] [command]",
+		Short: "Query address have permission to operate command",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			to, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QueryPermissions)
+			addressPermissions := types.MsgAddressPermissions{Address: to, Command: args[1], Status: 0}
+			allstudentjson, _ := json.Marshal(addressPermissions)
+			res, _, err := cliCtx.QueryWithData(route, allstudentjson)
+			if err != nil {
+				return err
+			}
+
+			if err := cdc.UnmarshalJSON(res, &addressPermissions); err != nil {
+				return err
+			}
+
+			return cliCtx.PrintOutput(addressPermissions)
+		},
+	}
+}
+
+func GetCmdQuerySysAddress(cdc *codec.Codec) *cobra.Command {
+	return &cobra.Command{
+		Use:   "system-address [command]",
+		Short: "Query the system address of [command]",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			route := fmt.Sprintf("custom/%s/%s", types.QuerierRoute, types.QuerySysAddress)
+			res, _, err := cliCtx.QueryWithData(route, []byte(args[0]))
+			if err != nil {
+				return err
+			}
+
+			data := fmt.Sprintf("{address:%s}", string(res))
+			cliCtx.Codec.MarshalJSON(data)
+			return nil
 		},
 	}
 }

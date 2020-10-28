@@ -26,6 +26,11 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgConversionRate:
 			return handleMsgConversionRate(ctx, k, msg)
 
+		case types.MsgPermissions:
+			return handleMsgPermissions(ctx, k, msg)
+
+		case types.MsgAddSysAddress:
+			return handleMsgAddSysAddress(ctx, k, msg)
 		default:
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
@@ -35,6 +40,7 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 
 // handleMsgBurn MsgBurn.
 func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Result {
+
 	err := k.BurnCoins(ctx, msg.FromAddress, msg.Amount)
 	if err != nil {
 		return err.Result()
@@ -50,12 +56,56 @@ func handleMsgBurn(ctx sdk.Context, k keeper.Keeper, msg types.MsgBurn) sdk.Resu
 	return sdk.Result{Events: ctx.EventManager().Events()}
 }
 
+// handleMsgBurn MsgBurn.
+func handleMsgPermissions(ctx sdk.Context, k keeper.Keeper, msg types.MsgPermissions) sdk.Result {
+
+	if k.GetBalance(ctx, msg.FromAddress).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	k.SetPermissions(ctx, msg.Permissions.Address, msg.Permissions.Command, msg.Permissions.Status)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+// handleMsgBurn MsgBurn.
+func handleMsgAddSysAddress(ctx sdk.Context, k keeper.Keeper, msg types.MsgAddSysAddress) sdk.Result {
+
+	if k.GetBalance(ctx, msg.FromAddress).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	k.SetSysAddress(ctx, msg.Command, msg.Address)
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
 // MsgConversionRate MsgConversionRate.
 func handleMsgConversionRate(ctx sdk.Context, k keeper.Keeper, msg types.MsgConversionRate) sdk.Result {
 
-	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
-		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
-		return sdk.ErrUnknownRequest(errMsg).Result()
+	if k.GetBalance(ctx, msg.Fromaddress).AmountOf(k.BondDenom(ctx)).IsZero() {
+
+		status := k.GetPermissions(ctx, msg.Fromaddress, "conversion-rate")
+		if status != 1 {
+			errMsg := fmt.Sprintf("from address not permissions")
+			return sdk.ErrUnknownRequest(errMsg).Result()
+		}
 	}
 
 	params := k.GetParams(ctx)
@@ -98,8 +148,12 @@ func handleMsgDestory(ctx sdk.Context, k keeper.Keeper, msg types.MsgDestory) sd
 func handleMsgIssue(ctx sdk.Context, k keeper.Keeper, msg types.MsgIssue) sdk.Result {
 
 	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
-		errMsg := fmt.Sprintf("sender must hold %s", k.BondDenom(ctx))
-		return sdk.ErrUnknownRequest(errMsg).Result()
+
+		status := k.GetPermissions(ctx, msg.Sender, "issue")
+		if status != 1 {
+			errMsg := fmt.Sprintf("from address not permissions")
+			return sdk.ErrUnknownRequest(errMsg).Result()
+		}
 	}
 
 	if msg.Amount.Empty() {

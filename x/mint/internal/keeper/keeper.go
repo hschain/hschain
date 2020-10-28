@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -85,6 +86,55 @@ func (k Keeper) GetBonus(ctx sdk.Context, height string) (coin sdk.Coin) {
 	return
 }
 
+func (k Keeper) SetLastDistributeTime(ctx sdk.Context, lasttime time.Time) {
+	store := ctx.KVStore(k.storeKey)
+	b := k.cdc.MustMarshalBinaryLengthPrefixed(lasttime)
+	store.Set([]byte("last_distribute_time"), b)
+}
+
+func (k Keeper) GetLastDistributeTime(ctx sdk.Context) (lasttime time.Time) {
+	store := ctx.KVStore(k.storeKey)
+	b := store.Get([]byte("last_distribute_time"))
+	if b == nil {
+		t2, _ := time.Parse("2006-01-02 15:04:05", "2016-07-27 08:46:15")
+		return t2
+	}
+	k.cdc.MustUnmarshalBinaryLengthPrefixed(b, &lasttime)
+	return
+}
+
+func (k Keeper) SetPermissions(ctx sdk.Context, address sdk.AccAddress, cmd string, Status int) {
+	store := ctx.KVStore(k.storeKey)
+	b := k.cdc.MustMarshalBinaryLengthPrefixed(Status)
+	store.Set([]byte(fmt.Sprintf("%s_%s", cmd, address.String())), b)
+}
+
+func (k Keeper) GetPermissions(ctx sdk.Context, address sdk.AccAddress, cmd string) (Status int) {
+	store := ctx.KVStore(k.storeKey)
+	b := store.Get([]byte(fmt.Sprintf("%s_%s", cmd, address.String())))
+	if b == nil {
+		return 0
+	}
+	k.cdc.MustUnmarshalBinaryLengthPrefixed(b, &Status)
+	return
+}
+
+func (k Keeper) SetSysAddress(ctx sdk.Context, cmd string, address sdk.AccAddress) {
+	store := ctx.KVStore(k.storeKey)
+	b := k.cdc.MustMarshalBinaryLengthPrefixed(address)
+	store.Set([]byte(fmt.Sprintf("%s_sysaddress", cmd)), b)
+}
+
+func (k Keeper) GetSysAddress(ctx sdk.Context, cmd string) (address sdk.AccAddress) {
+	store := ctx.KVStore(k.storeKey)
+	b := store.Get([]byte(fmt.Sprintf("%s_sysaddress", cmd)))
+	if b == nil {
+		return nil
+	}
+	k.cdc.MustUnmarshalBinaryLengthPrefixed(b, &address)
+	return
+}
+
 func (k Keeper) SetBonus(ctx sdk.Context, height int64, coin sdk.Coin) {
 	store := ctx.KVStore(k.storeKey)
 	b := k.cdc.MustMarshalBinaryLengthPrefixed(coin)
@@ -146,6 +196,16 @@ func (k Keeper) DistrTokenSupply(ctx sdk.Context) sdk.Int {
 	return coinsDistributorAcc.GetCoins().AmountOf(k.GetParams(ctx).MintDenom)
 }
 
+//将已挖等待分配分配到指定地址
+func (k Keeper) MintingCoinsIssueAddress(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+
+	address := k.GetSysAddress(ctx, "mintingcoins")
+	if address == nil {
+		return sdk.ErrInternal(sdk.AppendMsgToErr("failed to no find address", "minting coins issue error"))
+	}
+	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, k.coinsCollectorName, address, amt)
+}
+
 //已燃烧
 func (k Keeper) BurnTokenSupply(ctx sdk.Context) sdk.Coins {
 	coinsBurnerAcc := k.supplyKeeper.GetModuleAccount(ctx, k.coinsBurnerName)
@@ -203,6 +263,7 @@ func (k Keeper) DestoryCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.C
 // AddMintingCoins implements an alias call to the underlying supply keeper's
 // AddMintingCoins to be used in BeginBlocker.
 func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, amt)
 }
 

@@ -24,7 +24,9 @@ const (
 	QuerierRoute = StoreKey
 
 	// Query endpoints supported by the minting querier
-	QueryParameters = "parameters"
-	QueryStatus     = "status"
-	QueryBonus      = "bonus"
+	QueryParameters  = "parameters"
+	QueryStatus      = "status"
+	QueryBonus       = "bonus"
+	QueryPermissions = "permissions"
+	QuerySysAddress  = "system-address"
 )
