@@ -33,6 +33,7 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		DestoryTxCmd(cdc),
 		PermissionsTxCmd(cdc),
 		AddSysAddressTxCmd(cdc),
+		SupplementTxCmd(cdc),
 	)
 	return txCmd
 }
@@ -203,6 +204,33 @@ func IssueTxCmd(cdc *codec.Codec) *cobra.Command {
 
 			// build and sign the transaction, then broadcast to Tendermint
 			msg := types.NewMsgIssue(cliCtx.GetFromAddress(), to, coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+//IssueTxCmd will ipo new coins if no exist
+func SupplementTxCmd(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "supplement  [amount] --from=[name]",
+		Short: "Create and sign a issue tx",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[0])
+			if err != nil {
+				return err
+			}
+
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgSupplement(cliCtx.GetFromAddress(), coins)
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}

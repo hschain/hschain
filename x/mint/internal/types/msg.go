@@ -282,3 +282,47 @@ func (msg MsgAddSysAddress) GetSignBytes() []byte {
 func (msg MsgAddSysAddress) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.FromAddress}
 }
+
+// MsgIssue - high level transaction of the coin module
+type MsgSupplement struct {
+	Sender sdk.AccAddress `json:"sender" yaml:"sender"`
+	Amount sdk.Coins      `json:"amount" yaml:"amount"`
+}
+
+var _ sdk.Msg = MsgIssue{}
+
+// NewMsgIssue - construct arbitrary multi-in, multi-out issue msg.
+func NewMsgSupplement(sender sdk.AccAddress, amount sdk.Coins) MsgSupplement {
+	return MsgSupplement{Sender: sender, Amount: amount}
+}
+
+// Route Implements Msg.
+func (msg MsgSupplement) Route() string { return RouterKey }
+
+// Type Implements Msg.
+func (msg MsgSupplement) Type() string { return "issue" }
+
+// ValidateBasic Implements Msg.
+func (msg MsgSupplement) ValidateBasic() sdk.Error {
+	if msg.Sender.Empty() {
+		return sdk.ErrInvalidAddress("missing sender address")
+	}
+
+	if !msg.Amount.IsValid() {
+		return sdk.ErrInvalidCoins("send amount is invalid: " + msg.Amount.String())
+	}
+	if !msg.Amount.IsAllPositive() {
+		return sdk.ErrInsufficientCoins("send amount must be positive")
+	}
+	return nil
+}
+
+// GetSignBytes Implements Msg.
+func (msg MsgSupplement) GetSignBytes() []byte {
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
+}
+
+// GetSigners Implements Msg.
+func (msg MsgSupplement) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{msg.Sender}
+}

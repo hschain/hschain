@@ -46,17 +46,18 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 
 	LastDistributeTime := k.GetLastDistributeTime(ctx)
 
-	fmt.Println("time:==========================> ", now, LastDistributeTime)
-
-	if (now.Year() != LastDistributeTime.Year() || now.YearDay() != LastDistributeTime.YearDay()) && now.Hour() == 10 {
+	if now.Year() != LastDistributeTime.Year() || now.YearDay() != LastDistributeTime.YearDay() && now.Hour() >= 10 {
 
 		amt := k.DistrTokenSupply(ctx)
 		if amt.Int64() > 0 {
 			coin := sdk.NewCoins(sdk.NewCoin(params.MintDenom, amt))
-			k.MintingCoinsIssueAddress(ctx, coin)
-			k.SetLastDistributeTime(ctx, now)
+			err := k.MintingCoinsIssueAddress(ctx, coin)
+			if err != nil {
+				fmt.Println(err)
+			} else {
+				k.SetLastDistributeTime(ctx, now)
+			}
 		}
-
 	}
 
 	ctx.Logger().Info(fmt.Sprintf("mint:TotalSupply:%s, TotalMintingSupply: %s, DistrTokenSupply:%s, CurrentDayProvisions:%s, NextPeroidStartTime:%d, NextPeriodDayProvisions:%s, mintedCoin: %s, BurnAmount: %s",
