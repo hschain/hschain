@@ -52,7 +52,7 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter.Status.TotalMintingSupply = k.MintingTokenSupply(ctx)
 	minter.Status.TotalDistrSupply = k.DistrTokenSupply(ctx)
 
-	minter.Status.TotalCirculationSupply = k.MintedTokenSupply(ctx).Sub(k.MintingTokenSupply(ctx)).Sub(k.DistrTokenSupply(ctx))
+	minter.Status.TotalCirculationSupply = k.MintedTokenSupply(ctx).Sub(k.MintingTokenSupply(ctx))
 	minter.Status.TotalCirculationSupply = minter.Status.TotalCirculationSupply.Sub(k.BurnTokenSupply(ctx).AmountOf(params.MintDenom))
 	minter.Status.TotalCirculationSupply = minter.Status.TotalCirculationSupply.Sub(k.DestoryTokenSupply(ctx).AmountOf(params.MintDenom))
 

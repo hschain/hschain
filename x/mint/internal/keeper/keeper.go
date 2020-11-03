@@ -203,7 +203,7 @@ func (k Keeper) MintingCoinsIssueAddress(ctx sdk.Context, amt sdk.Coins) sdk.Err
 	if address == nil {
 		return sdk.ErrInternal(sdk.AppendMsgToErr("failed to no find address", "minting coins issue error"))
 	}
-	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, k.coinsCollectorName, address, amt)
+	return k.supplyKeeper.SendCoinsFromModuleToAccount(ctx, k.coinsDistributorName, address, amt)
 }
 
 //已燃烧
@@ -265,6 +265,16 @@ func (k Keeper) DestoryCoins(ctx sdk.Context, fromAddr sdk.AccAddress, amt sdk.C
 func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsCollectorName, amt)
+}
+
+func (k Keeper) SupplementCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+
+	err := k.MintCoins(ctx, amt)
+	if err != nil {
+		return err
+	}
+
+	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsDistributorName, amt)
 }
 
 //IssueCoins
