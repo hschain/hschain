@@ -269,12 +269,18 @@ func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 
 func (k Keeper) SupplementCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 
-	err := k.MintCoins(ctx, amt)
-	if err != nil {
+	if err := k.MintCoins(ctx, amt); err != nil {
 		return err
 	}
 
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsDistributorName, amt)
+}
+
+func (k Keeper) VanishCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+	if err := k.supplyKeeper.SendCoinsFromModuleToModule(ctx, k.coinsDistributorName, types.ModuleName, amt); err != nil {
+		return err
+	}
+	return k.supplyKeeper.BurnCoins(ctx, types.ModuleName, amt)
 }
 
 //IssueCoins

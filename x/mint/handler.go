@@ -33,7 +33,11 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 			return handleMsgAddSysAddress(ctx, k, msg)
 		case types.MsgSupplement:
 			return handleMsgSupplement(ctx, k, msg)
+
+		case types.MsgVanish:
+			return handleMsgVanish(ctx, k, msg)
 		default:
+
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
 		}
@@ -192,12 +196,39 @@ func handleMsgSupplement(ctx sdk.Context, k keeper.Keeper, msg types.MsgSuppleme
 
 	}
 	if msg.Amount.Empty() {
-		// skip as no coins need to be issue
+		// skip as no coins need to be supplement
 		errMsg := fmt.Sprintf("no denom found")
 		return sdk.ErrUnknownRequest(errMsg).Result()
 	}
 
 	if err := k.SupplementCoins(ctx, msg.Amount); err != nil {
+		return err.Result()
+	}
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+func handleMsgVanish(ctx sdk.Context, k keeper.Keeper, msg types.MsgVanish) sdk.Result {
+
+	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("from address not permissions")
+		return sdk.ErrUnknownRequest(errMsg).Result()
+
+	}
+	if msg.Amount.Empty() {
+		// skip as no coins need to be vanish
+		errMsg := fmt.Sprintf("no denom found")
+		return sdk.ErrUnknownRequest(errMsg).Result()
+	}
+
+	if err := k.VanishCoins(ctx, msg.Amount); err != nil {
 		return err.Result()
 	}
 
