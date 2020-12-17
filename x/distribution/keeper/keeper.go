@@ -172,3 +172,11 @@ func (k Keeper) GetTotalRewards(ctx sdk.Context) (totalRewards sdk.DecCoins) {
 	)
 	return totalRewards
 }
+
+func (k Keeper) GetBalance(ctx sdk.Context, acc sdk.AccAddress) sdk.Coins {
+	return k.supplyKeeper.GetBalance(ctx, acc)
+}
+
+func (k Keeper) BondDenom(ctx sdk.Context) string {
+	return k.stakingKeeper.BondDenom(ctx)
+}

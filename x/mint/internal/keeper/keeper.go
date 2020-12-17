@@ -231,6 +231,7 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {
 func (k Keeper) BurnCoins(ctx sdk.Context, sender sdk.AccAddress, amt sdk.Coins) sdk.Error {
 
 	params := k.GetParams(ctx)
+
 	if amt.AmountOf(params.MintDenom).IsZero() {
 		errMsg := fmt.Sprintf("sender must hold %s", params.MintDenom)
 		return sdk.ErrUnknownRequest(errMsg)

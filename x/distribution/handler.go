@@ -39,8 +39,14 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 
 // These functions assume everything has been authenticated (ValidateBasic passed, and signatures checked)
 func handleMsgModifyDistrAddress(ctx sdk.Context, msg types.MsgSetDistrAddress, k keeper.Keeper) sdk.Result {
-	err := k.ModifyDistrAddr(ctx, msg.DistrAddress)
-	if err != nil {
+
+	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
+		errMsg := fmt.Sprintf("from address not permissions")
+		return sdk.ErrUnknownRequest(errMsg).Result()
+
+	}
+
+	if err := k.ModifyDistrAddr(ctx, msg.DistrAddress); err != nil {
 		return err.Result()
 	}
 
