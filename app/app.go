@@ -72,7 +72,7 @@ var (
 		auth.CoinsCollectorName:   nil,
 		auth.CoinsDistributorName: nil,
 		auth.CoinsBurnerName:      nil,
-		auth.CoinsDestoryerName:  nil,
+		auth.CoinsDestoryerName:   nil,
 		distr.ModuleName:          nil,
 		mint.ModuleName:           {supply.Minter},
 		staking.BondedPoolName:    {supply.Burner, supply.Staking},

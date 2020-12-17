@@ -49,12 +49,9 @@ func BeginBlocker(ctx sdk.Context, k Keeper) {
 	if now.Year() != LastDistributeTime.Year() || now.YearDay() != LastDistributeTime.YearDay() && now.Hour() >= 10 {
 
 		amt := k.DistrTokenSupply(ctx)
-		if amt.Int64() > 0 {
+		if !amt.IsZero() {
 			coin := sdk.NewCoins(sdk.NewCoin(params.MintDenom, amt))
-			err := k.MintingCoinsIssueAddress(ctx, coin)
-			if err != nil {
-				fmt.Println(err)
-			} else {
+			if err := k.MintingCoinsIssueAddress(ctx, coin); err == nil {
 				k.SetLastDistributeTime(ctx, now)
 			}
 		}

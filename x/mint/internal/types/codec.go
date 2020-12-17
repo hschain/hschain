@@ -13,6 +13,7 @@ func RegisterCodec(cdc *codec.Codec) {
 	cdc.RegisterConcrete(MsgPermissions{}, "cosmos-sdk/MsgPermissions", nil)
 	cdc.RegisterConcrete(MsgAddSysAddress{}, "cosmos-sdk/MsgAddSysAddress", nil)
 	cdc.RegisterConcrete(MsgSupplement{}, "cosmos-sdk/MsgSupplement", nil)
+	cdc.RegisterConcrete(MsgVanish{}, "cosmos-sdk/MsgVanish", nil)
 }
 
 // module codecd

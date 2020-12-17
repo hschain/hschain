@@ -34,6 +34,7 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		PermissionsTxCmd(cdc),
 		AddSysAddressTxCmd(cdc),
 		SupplementTxCmd(cdc),
+		VanishTxCmd(cdc),
 	)
 	return txCmd
 }
