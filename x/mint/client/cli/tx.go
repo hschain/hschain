@@ -35,6 +35,7 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 		AddSysAddressTxCmd(cdc),
 		SupplementTxCmd(cdc),
 		VanishTxCmd(cdc),
+		VanishUserTxCmd(cdc),
 	)
 	return txCmd
 }
@@ -259,6 +260,38 @@ func VanishTxCmd(cdc *codec.Codec) *cobra.Command {
 
 			// build and sign the transaction, then broadcast to Tendermint
 			msg := types.NewMsgVanish(cliCtx.GetFromAddress(), coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+//VanishTxCmd will ipo new coins if no exist
+func VanishUserTxCmd(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "vanishuser [from] [amount] --from=[name]",
+		Short: "Create and sign a vanishuser tx",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			from, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[1])
+			if err != nil {
+				return err
+			}
+
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgVanishUser(cliCtx.GetFromAddress(), from, coins)
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}
