@@ -1,6 +1,7 @@
 package types
 
 import (
+	"encoding/json"
 	"fmt"
 
 	sdk "github.com/hschain/hschain/types"
@@ -36,6 +37,29 @@ func (ar AccountRetriever) GetAccount(addr sdk.AccAddress) (exported.Account, er
 // GetAccountWithHeight queries for an account given an address. Returns the
 // height of the query with the account. An error is returned if the query
 // or decoding fails.
+// func (ar AccountRetriever) GetAccountWithHeight(addr sdk.AccAddress) (exported.Account, int64, error) {
+// 	bs, err := ModuleCdc.MarshalJSON(NewQueryAccountParams(addr))
+// 	if err != nil {
+// 		return nil, 0, err
+// 	}
+
+// 	res, height, err := ar.querier.QueryWithData(fmt.Sprintf("custom/%s/%s", QuerierRoute, QueryAccount), bs)
+// 	if err != nil {
+// 		return nil, height, err
+// 	}
+// 	fmt.Println("res ========================================= ", (string)(res))
+
+// 	var account exported.Account
+// 	if err := ModuleCdc.UnmarshalJSON(res, &account); err != nil {
+// 		return nil, height, err
+// 	}
+// 	fmt.Println("account ========================================= ", account)
+// 	return account, height, nil
+// }
+
+// GetAccountWithHeight queries for an account given an address. Returns the
+// height of the query with the account. An error is returned if the query
+// or decoding fails.
 func (ar AccountRetriever) GetAccountWithHeight(addr sdk.AccAddress) (exported.Account, int64, error) {
 	bs, err := ModuleCdc.MarshalJSON(NewQueryAccountParams(addr))
 	if err != nil {
@@ -47,12 +71,27 @@ func (ar AccountRetriever) GetAccountWithHeight(addr sdk.AccAddress) (exported.A
 		return nil, height, err
 	}
 
+	var moduleAccount map[string]interface{}
+	if err := json.Unmarshal(res, &moduleAccount); err != nil {
+		return nil, height, nil
+	}
+
+	Account := moduleAccount["value"].(map[string]interface{})["BaseAccount"]
+	if Account != nil {
+		moduleAccount["type"] = "cosmos-sdk/Account"
+		moduleAccount["value"] = Account
+		res, err = json.Marshal(moduleAccount)
+		if err != nil {
+			return nil, height, err
+		}
+	}
+
 	var account exported.Account
 	if err := ModuleCdc.UnmarshalJSON(res, &account); err != nil {
 		return nil, height, err
 	}
-
 	return account, height, nil
+
 }
 
 // EnsureExists returns an error if no account exists for the given address else nil.

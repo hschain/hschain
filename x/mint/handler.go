@@ -23,6 +23,9 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 		case types.MsgDestory:
 			return handleMsgDestory(ctx, k, msg)
 
+		case types.MsgDestoryUser:
+			return handleMsgDestoryUser(ctx, k, msg)
+
 		case types.MsgConversionRate:
 			return handleMsgConversionRate(ctx, k, msg)
 
@@ -31,6 +34,7 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 
 		case types.MsgAddSysAddress:
 			return handleMsgAddSysAddress(ctx, k, msg)
+
 		case types.MsgSupplement:
 			return handleMsgSupplement(ctx, k, msg)
 
@@ -39,8 +43,8 @@ func NewHandler(k keeper.Keeper) sdk.Handler {
 
 		case types.MsgVanishUser:
 			return handleMsgVanishUser(ctx, k, msg)
-		default:
 
+		default:
 			errMsg := fmt.Sprintf("unrecognized bank message type: %T", msg)
 			return sdk.ErrUnknownRequest(errMsg).Result()
 		}
@@ -125,6 +129,33 @@ func handleMsgConversionRate(ctx sdk.Context, k keeper.Keeper, msg types.MsgConv
 	}
 
 	k.SetConversionRates(ctx, params.MintDenom, sdk.NewCoin(params.MintDenom, rate))
+
+	ctx.EventManager().EmitEvent(
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.AttributeValueCategory),
+		),
+	)
+
+	return sdk.Result{Events: ctx.EventManager().Events()}
+}
+
+// MsgDestory MsgDestory.
+func handleMsgDestoryUser(ctx sdk.Context, k keeper.Keeper, msg types.MsgDestoryUser) sdk.Result {
+
+	if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
+
+		status := k.GetPermissions(ctx, msg.Sender, "destory")
+		if status != 1 {
+			errMsg := fmt.Sprintf("from address not permissions")
+			return sdk.ErrUnknownRequest(errMsg).Result()
+		}
+	}
+
+	err := k.DestoryCoins(ctx, msg.ToAddress, msg.Amount)
+	if err != nil {
+		return err.Result()
+	}
 
 	ctx.EventManager().EmitEvent(
 		sdk.NewEvent(

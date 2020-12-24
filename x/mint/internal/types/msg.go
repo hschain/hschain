@@ -99,6 +99,53 @@ func (msg MsgIssue) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{msg.Sender}
 }
 
+// MsgIssue - high level transaction of the coin module
+type MsgDestoryUser struct {
+	Sender    sdk.AccAddress `json:"sender" yaml:"sender"`
+	ToAddress sdk.AccAddress `json:"to_address" yaml:"to_address"`
+	Amount    sdk.Coins      `json:"amount" yaml:"amount"`
+}
+
+var _ sdk.Msg = MsgDestoryUser{}
+
+// NewMsgIssue - construct arbitrary multi-in, multi-out issue msg.
+func NewMsgDestoryUser(sender sdk.AccAddress, toAddr sdk.AccAddress, amount sdk.Coins) MsgDestoryUser {
+	return MsgDestoryUser{Sender: sender, ToAddress: toAddr, Amount: amount}
+}
+
+// Route Implements Msg.
+func (msg MsgDestoryUser) Route() string { return RouterKey }
+
+// Type Implements Msg.
+func (msg MsgDestoryUser) Type() string { return "destory_user" }
+
+// ValidateBasic Implements Msg.
+func (msg MsgDestoryUser) ValidateBasic() sdk.Error {
+	if msg.Sender.Empty() {
+		return sdk.ErrInvalidAddress("missing sender address")
+	}
+	if msg.ToAddress.Empty() {
+		return sdk.ErrInvalidAddress("missing to address")
+	}
+	if !msg.Amount.IsValid() {
+		return sdk.ErrInvalidCoins("send amount is invalid: " + msg.Amount.String())
+	}
+	if !msg.Amount.IsAllPositive() {
+		return sdk.ErrInsufficientCoins("send amount must be positive")
+	}
+	return nil
+}
+
+// GetSignBytes Implements Msg.
+func (msg MsgDestoryUser) GetSignBytes() []byte {
+	return sdk.MustSortJSON(ModuleCdc.MustMarshalJSON(msg))
+}
+
+// GetSigners Implements Msg.
+func (msg MsgDestoryUser) GetSigners() []sdk.AccAddress {
+	return []sdk.AccAddress{msg.Sender}
+}
+
 // MsgDistory - high level transaction of the coin module
 type MsgDestory struct {
 	FromAddress sdk.AccAddress `json:"from_address" yaml:"from_address"`

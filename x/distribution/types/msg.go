@@ -146,10 +146,10 @@ func (msg MsgSetDistrAddress) GetSignBytes() []byte {
 
 // quick validity check
 func (msg MsgSetDistrAddress) ValidateBasic() sdk.Error {
-	if msg.Sender.String() != ROOTUSER {
-		errMsg := "only root user can set distr address"
-		return sdk.ErrUnknownRequest(errMsg)
-	}
+	// if msg.Sender.String() != ROOTUSER {
+	// 	errMsg := "only root user can set distr address"
+	// 	return sdk.ErrUnknownRequest(errMsg)
+	// }
 	if msg.Sender.Empty() {
 		return ErrNilDelegatorAddr(DefaultCodespace)
 	}
