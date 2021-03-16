@@ -43,6 +43,8 @@ type StakingKeeper interface {
 	GetLastValidatorPower(ctx sdk.Context, valAddr sdk.ValAddress) int64
 
 	GetAllSDKDelegations(ctx sdk.Context) []staking.Delegation
+
+	BondDenom(ctx sdk.Context) string
 }
 
 // StakingHooks event hooks for staking validator object (noalias)
@@ -67,4 +69,6 @@ type SupplyKeeper interface {
 	SendCoinsFromModuleToModule(ctx sdk.Context, senderModule string, recipientModule string, amt sdk.Coins) sdk.Error
 	SendCoinsFromModuleToAccount(ctx sdk.Context, senderModule string, recipientAddr sdk.AccAddress, amt sdk.Coins) sdk.Error
 	SendCoinsFromAccountToModule(ctx sdk.Context, senderAddr sdk.AccAddress, recipientModule string, amt sdk.Coins) sdk.Error
+
+	GetBalance(sdk.Context, sdk.AccAddress) sdk.Coins
 }

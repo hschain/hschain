@@ -3,6 +3,8 @@ package keeper
 import (
 	"fmt"
 
+	"github.com/hschain/hschain/x/mint"
+
 	sdk "github.com/hschain/hschain/types"
 	"github.com/hschain/hschain/x/supply/internal/types"
 )
@@ -125,8 +127,12 @@ func (k Keeper) BurnCoins(ctx sdk.Context, moduleName string, amt sdk.Coins) sdk
 		return sdk.ErrUnknownAddress(fmt.Sprintf("module account %s does not exist", moduleName))
 	}
 
-	if !acc.HasPermission(types.Burner) {
-		panic(fmt.Sprintf("module account %s does not have permissions to burn tokens", moduleName))
+	if moduleName == mint.ModuleName {
+		//mainnet can burn after 814640 by module mint
+	} else {
+		if !acc.HasPermission(types.Burner) {
+			panic(fmt.Sprintf("module account %s does not have permissions to burn tokens", moduleName))
+		}
 	}
 
 	_, err := k.bk.SubtractCoins(ctx, acc.GetAddress(), amt)

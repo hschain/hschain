@@ -48,5 +48,6 @@ type (
 	Params            = types.Params
 	MsgBurn           = types.MsgBurn
 	MsgDestory        = types.MsgDestory
+	MsgDestoryUser    = types.MsgDestoryUser
 	MsgConversionRate = types.MsgConversionRate
 )
