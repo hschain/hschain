@@ -64,6 +64,12 @@ func handleMsgModifyDistrAddress(ctx sdk.Context, msg types.MsgSetDistrAddress, 
 func handleMsgDistrCoins(ctx sdk.Context, msg types.MsgDistrCoins, k keeper.Keeper) sdk.Result {
 
 	if !msg.Sender.Equals(k.GetDistrAddr(ctx)) {
+
+		if ctx.BlockHeight() <= 948760 {
+			errMsg := fmt.Sprintf("distr tx send must be: %s", k.GetDistrAddr(ctx).String())
+			return sdk.ErrUnknownRequest(errMsg).Result()
+		}
+
 		if k.GetBalance(ctx, msg.Sender).AmountOf(k.BondDenom(ctx)).IsZero() {
 			errMsg := fmt.Sprintf("distr tx send must be: %s", k.GetDistrAddr(ctx).String())
 			return sdk.ErrUnknownRequest(errMsg).Result()
