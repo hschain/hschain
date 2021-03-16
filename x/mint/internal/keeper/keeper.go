@@ -23,12 +23,13 @@ type Keeper struct {
 	coinsDistributorName string
 	coinsBurnerName      string
 	coinsDestoryerName   string
+	coinsVanisherName    string
 }
 
 // NewKeeper creates a new mint Keeper instance
 func NewKeeper(
 	cdc *codec.Codec, key sdk.StoreKey, paramSpace params.Subspace,
-	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName, coinsDestoryerName string) Keeper {
+	sk types.StakingKeeper, supplyKeeper types.SupplyKeeper, coinsCollectorName, coinsDistributorName, coinsBurnerName, coinsDestoryerName, coinsVanisherName string) Keeper {
 
 	// ensure mint module account is set
 	if addr := supplyKeeper.GetModuleAddress(types.ModuleName); addr == nil {
@@ -45,6 +46,7 @@ func NewKeeper(
 		coinsDistributorName: coinsDistributorName,
 		coinsBurnerName:      coinsBurnerName,
 		coinsDestoryerName:   coinsDestoryerName,
+		coinsVanisherName:    coinsVanisherName,
 	}
 }
 
@@ -231,6 +233,7 @@ func (k Keeper) MintCoins(ctx sdk.Context, newCoins sdk.Coins) sdk.Error {
 func (k Keeper) BurnCoins(ctx sdk.Context, sender sdk.AccAddress, amt sdk.Coins) sdk.Error {
 
 	params := k.GetParams(ctx)
+
 	if amt.AmountOf(params.MintDenom).IsZero() {
 		errMsg := fmt.Sprintf("sender must hold %s", params.MintDenom)
 		return sdk.ErrUnknownRequest(errMsg)
@@ -269,12 +272,25 @@ func (k Keeper) AddMintingCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 
 func (k Keeper) SupplementCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
 
-	err := k.MintCoins(ctx, amt)
-	if err != nil {
+	if err := k.MintCoins(ctx, amt); err != nil {
 		return err
 	}
 
 	return k.supplyKeeper.SendCoinsFromModuleToModule(ctx, types.ModuleName, k.coinsDistributorName, amt)
+}
+
+func (k Keeper) VanishCoins(ctx sdk.Context, amt sdk.Coins) sdk.Error {
+	if err := k.supplyKeeper.SendCoinsFromModuleToModule(ctx, k.coinsDistributorName, k.coinsVanisherName, amt); err != nil {
+		return err
+	}
+	return k.supplyKeeper.BurnCoins(ctx, k.coinsVanisherName, amt)
+}
+
+func (k Keeper) VanishUCoins(ctx sdk.Context, fromAddress sdk.AccAddress, amt sdk.Coins) sdk.Error {
+	if err := k.supplyKeeper.SendCoinsFromAccountToModule(ctx, fromAddress, k.coinsVanisherName, amt); err != nil {
+		return err
+	}
+	return k.supplyKeeper.BurnCoins(ctx, k.coinsVanisherName, amt)
 }
 
 //IssueCoins

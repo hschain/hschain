@@ -30,10 +30,13 @@ func GetTxCmd(cdc *codec.Codec) *cobra.Command {
 	txCmd.AddCommand(
 		burnCmd,
 		IssueTxCmd(cdc),
-		DestoryTxCmd(cdc),
+		DestroyTxCmd(cdc),
+		DestroyUserTxCmd(cdc),
 		PermissionsTxCmd(cdc),
 		AddSysAddressTxCmd(cdc),
 		SupplementTxCmd(cdc),
+		VanishTxCmd(cdc),
+		VanishUserTxCmd(cdc),
 	)
 	return txCmd
 }
@@ -154,11 +157,11 @@ func AddSysAddressTxCmd(cdc *codec.Codec) *cobra.Command {
 	return cmd
 }
 
-// DestoryTxCmd will create a send tx and sign it with the given key.
-func DestoryTxCmd(cdc *codec.Codec) *cobra.Command {
+// DestroyTxCmd will create a send tx and sign it with the given key.
+func DestroyTxCmd(cdc *codec.Codec) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "destory [from_key_or_address] [amount]",
-		Short: "Create and sign a destory tx",
+		Use:   "destroy [from_key_or_address] [amount]",
+		Short: "Create and sign a destroy tx",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
@@ -172,6 +175,37 @@ func DestoryTxCmd(cdc *codec.Codec) *cobra.Command {
 
 			// build and sign the transaction, then broadcast to Tendermint
 			msg := types.NewMsgDestory(cliCtx.GetFromAddress(), coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+func DestroyUserTxCmd(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "destroy-user [to_address] [amount] --from=[name] ",
+		Short: "Create and sign a destroy user tx",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			to, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[1])
+			if err != nil {
+				return err
+			}
+
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgDestoryUser(cliCtx.GetFromAddress(), to, coins)
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}
@@ -213,11 +247,11 @@ func IssueTxCmd(cdc *codec.Codec) *cobra.Command {
 	return cmd
 }
 
-//IssueTxCmd will ipo new coins if no exist
+//SupplementTxCmd will ipo new coins if no exist
 func SupplementTxCmd(cdc *codec.Codec) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "supplement  [amount] --from=[name]",
-		Short: "Create and sign a issue tx",
+		Short: "Create and sign a supplement tx",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
@@ -231,6 +265,65 @@ func SupplementTxCmd(cdc *codec.Codec) *cobra.Command {
 
 			// build and sign the transaction, then broadcast to Tendermint
 			msg := types.NewMsgSupplement(cliCtx.GetFromAddress(), coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+//VanishTxCmd will ipo new coins if no exist
+func VanishTxCmd(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "vanish  [amount] --from=[name]",
+		Short: "Create and sign a vanish tx",
+		Args:  cobra.ExactArgs(1),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[0])
+			if err != nil {
+				return err
+			}
+
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgVanish(cliCtx.GetFromAddress(), coins)
+			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
+		},
+	}
+
+	cmd = client.PostCommands(cmd)[0]
+
+	return cmd
+}
+
+//VanishTxCmd will ipo new coins if no exist
+func VanishUserTxCmd(cdc *codec.Codec) *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "vanishuser [from] [amount] --from=[name]",
+		Short: "Create and sign a vanishuser tx",
+		Args:  cobra.ExactArgs(2),
+		RunE: func(cmd *cobra.Command, args []string) error {
+			txBldr := auth.NewTxBuilderFromCLI().WithTxEncoder(utils.GetTxEncoder(cdc))
+			cliCtx := context.NewCLIContext().WithCodec(cdc)
+
+			from, err := sdk.AccAddressFromBech32(args[0])
+			if err != nil {
+				return err
+			}
+
+			// parse coins trying to be sent
+			coins, err := sdk.ParseCoins(args[1])
+			if err != nil {
+				return err
+			}
+
+			// build and sign the transaction, then broadcast to Tendermint
+			msg := types.NewMsgVanishUser(cliCtx.GetFromAddress(), from, coins)
 			return utils.GenerateOrBroadcastMsgs(cliCtx, txBldr, []sdk.Msg{msg})
 		},
 	}

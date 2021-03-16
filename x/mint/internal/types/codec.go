@@ -9,10 +9,13 @@ func RegisterCodec(cdc *codec.Codec) {
 	cdc.RegisterConcrete(MsgBurn{}, "cosmos-sdk/MsgBurn", nil)
 	cdc.RegisterConcrete(MsgConversionRate{}, "cosmos-sdk/MsgConversionRate", nil)
 	cdc.RegisterConcrete(MsgDestory{}, "cosmos-sdk/MsgDestory", nil)
+	cdc.RegisterConcrete(MsgDestoryUser{}, "cosmos-sdk/MsgDestoryUser", nil)
 	cdc.RegisterConcrete(MsgIssue{}, "cosmos-sdk/MsgIssue", nil)
 	cdc.RegisterConcrete(MsgPermissions{}, "cosmos-sdk/MsgPermissions", nil)
 	cdc.RegisterConcrete(MsgAddSysAddress{}, "cosmos-sdk/MsgAddSysAddress", nil)
 	cdc.RegisterConcrete(MsgSupplement{}, "cosmos-sdk/MsgSupplement", nil)
+	cdc.RegisterConcrete(MsgVanish{}, "cosmos-sdk/MsgVanish", nil)
+	cdc.RegisterConcrete(MsgVanishUser{}, "cosmos-sdk/MsgVanishUser", nil)
 }
 
 // module codecd
