@@ -47,7 +47,6 @@ func queryStatus(ctx sdk.Context, k Keeper) ([]byte, sdk.Error) {
 	minter := k.GetMinter(ctx)
 
 	params := k.GetParams(ctx)
-
 	//height := 2186143
 	height := 2331716
 	if ctx.BlockHeight() < (int64)(height) {
