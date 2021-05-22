@@ -118,7 +118,7 @@ func GetCmdQueryPermissions(cdc *codec.Codec) *cobra.Command {
 	return &cobra.Command{
 		Use:   "Permissions [address] [command]",
 		Short: "Query address have permission to operate command",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			cliCtx := context.NewCLIContext().WithCodec(cdc)
 
